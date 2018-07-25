@@ -8,7 +8,8 @@ new WebpackDevServer(webpack(config), {
       aggregateTimeout: 300,
       poll: 1000,
       ignored: /node_modules/
-    }
+    },
+    historyApiFallback: true
   })
   .listen(3000, '0.0.0.0', function (err, result) {
     if (err) {
