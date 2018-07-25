@@ -3,6 +3,12 @@ import Main from './Main.jsx';
 import NavBar from './Components/NavBar.jsx';
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      message: 'this is app state'
+    }
+  }
 
   componentDidMount() {
     this.socket = new WebSocket("ws://0.0.0.0:3001");
@@ -15,7 +21,7 @@ class App extends Component {
     return (
       <div>
         <NavBar />
-        <Main />
+        <Main message={this.state.message} />
       </div>
     )
   }

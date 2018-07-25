@@ -8,6 +8,7 @@ export default class Room extends Component {
   render() {
     return (
       <div>
+        <h1>{this.props.message}</h1>
         <h1>This is a room.</h1>
         <SketchField />
       </div>
