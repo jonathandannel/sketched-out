@@ -1,26 +1,30 @@
 import React, { Component } from 'react';
 // import './Login.css';
-import AuthService from "./AuthService.jsx";
+import AuthService from "../AuthService.jsx";
 
 class Login extends Component {
   constructor() {
     super();
+
     this.handleChange = this.handleChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.Auth = new AuthService();
   }
 
   componentWillMount() {
-    if (this.Auth.loggedIn())
+    console.log(this.props.history);
+    if (this.Auth.loggedIn()){
+      console.log("redirecting!")
       this.props.history.replace('/');
+    }
   }
-  
+
   render() {
     return (
       <div className="center">
         <div className="card">
           <h1>Login</h1>
-          <form>
+          <form onSubmit={this.handleFormSubmit}>
             <input
               className="form-item"
               placeholder="Username goes here..."
@@ -44,6 +48,14 @@ class Login extends Component {
         </div>
       </div>
     );
+  }
+
+  handleChange(e) {
+    this.setState(
+      {
+        [e.target.name]: e.target.value
+      }
+    )
   }
 
   handleFormSubmit(e) {

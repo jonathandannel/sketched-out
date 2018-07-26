@@ -1,4 +1,6 @@
 import decode from 'jwt-decode';
+
+
 export default class AuthService {
   // Initializing important variables
   constructor(domain) {
@@ -24,7 +26,7 @@ export default class AuthService {
 
   loggedIn() {
     // Checks if there is a saved token and it's still valid
-    const token = this.getToken() // GEtting token from localstorage
+    const token = this.getToken() // Getting token from localstorage
     return !!token && !this.isTokenExpired(token) // handwaiving here
   }
 
@@ -62,6 +64,10 @@ export default class AuthService {
     return decode(this.getToken());
   }
 
+  handleLogout() {
+    Auth.logout()
+    this.props.history.replace('/login');
+  }
 
   fetch(url, options) {
     // performs api calls sending the required authentication headers
