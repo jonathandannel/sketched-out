@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
 import { Switch, Route } from 'react-router-dom'
-import Home from './Pages/Home.jsx';
-import Room from './Pages/Room.jsx';
-import Button from '@material-ui/core/Button';
+import Home     from './Pages/Home.jsx';
+import Room     from './Pages/Room.jsx';
+import Button   from '@material-ui/core/Button';
+import Login    from './Pages/Login.jsx';
+import Register from './Pages/Register.jsx';
+
 
 class Main extends Component {
 
@@ -11,9 +14,12 @@ class Main extends Component {
       <main>
         <Switch>
           <Route exact path='/' component={Home} />
+          <Route exact path='/login' component={Login} />
+          <Route exact path='/register' component={Register} />
           <Route exact path='/room' render={(props) => (
-            <Room socket={this.props.socket} />
+              <Room socket={this.props.socket} />
           )} />
+
         </Switch>
       </main>
     )

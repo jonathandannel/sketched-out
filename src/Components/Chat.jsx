@@ -1,15 +1,22 @@
 import React, {Component} from 'react';
 
 export default class Chat extends Component {
+
   render() {
     return (
         <div>
           <table>
-          <thead colspan="2">Take a guess!</thead>
-            <th></th>
-            <th></th>
+          <thead colSpan="2"></thead>
           <tbody>
-            // {chatMessages}
+            <tr>
+              <td>There are chat messages here!</td>
+            </tr>
+            <tr>
+              <td>There are chat messages here!</td>
+            </tr>
+            <tr>
+              <input type="text" id="chat-input" name="chat-input-bar" />
+            </tr>
           </tbody>
           </table>
         </div>

@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
 import {SketchField, Tools} from "react-sketch";
+import Button  from '@material-ui/core/Button';
+import Brushes from '../Components/Brushes.jsx';
+import Chat    from '../Components/Chat.jsx';
+import Timer   from '../Components/Timer.jsx';
 // import Chat from './Components/Chat.jsx';
-import Button from '@material-ui/core/Button';
 
 
 export default class Room extends Component {
@@ -23,8 +26,13 @@ export default class Room extends Component {
     return (
       <div>
         <h1>This is a room.</h1>
+        <Timer />
         <button onClick={() => {this.sendMessage(this.socket)}}>click</button>
-        <SketchField />
+        <span>
+          <SketchField />
+          <Chat />
+        </span>
+        <Brushes />
       </div>
     )
   }
