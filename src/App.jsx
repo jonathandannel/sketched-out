@@ -16,7 +16,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      message: 'this is app state'
+      messages: []
     }
   }
 
@@ -25,6 +25,16 @@ class App extends Component {
     this.socket = new WebSocket("ws://0.0.0.0:3001");
     this.socket.onopen = (e) => {
       console.log('==> Socket connection started!')
+    }
+
+    this.socket.onmessage = (e) => {
+      let incomingMessage = e.data
+      console.log(incomingMessage)
+      let updatedMessages = this.state.messages.slice();
+      updatedMessages.push(incomingMessage);
+      this.setState({
+        messages: updatedMessages
+      })
     }
   }
 
@@ -36,7 +46,9 @@ class App extends Component {
     return (
       <div>
         <NavBar />
-        <Main sendMessage={this.sendMessage} />
+        <Main
+          messages={this.state.messages} sendMessage={this.sendMessage}
+        />
       </div>
     )
   }

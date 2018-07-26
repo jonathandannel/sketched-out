@@ -12,7 +12,8 @@ class Main extends Component {
         <Switch>
           <Route exact path='/' component={Home} />
           <Route exact path='/room' render={(props) => (
-            <Room sendMessage={this.props.sendMessage} />
+            <Room 
+              messages={this.props.messages} sendMessage={this.props.sendMessage} />
           )} />
         </Switch>
       </main>
