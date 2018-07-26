@@ -8,24 +8,40 @@ export default class Timer extends Component {
   constructor(props) {
     super(props);
     this.timerRef = React.createRef();
+    // secondsLeft = this.timer.value();
   }
 
   componentDidMount() {
     this.timer = new ProgressBar.Circle(this.timerRef.current, {
       color: 'purple',
       duration: 30000,
-      // easing: 'easeOut'
+      trailWidth: 10,
+      strokeWidth: 10
     })
 
-    setTimeout(() => {
-      this.timer.animate(1);
-    }, 1000);
+    // setTimeout(() => {
+    //   this.timer.animate(1);
+    // }, 1000);
 
+    if (this.props.shouldAnimate){
+      this.timer.animate(1);
+      console.log(this.timer.value())
+    }
+
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.shouldAnimate !== prevProps.shouldAnimate && this.props.shouldAnimate) {
+      this.timer.animate(1);
+    } else {
+      this.timer.stop();
+      this.timer.set(0);
+    }
   }
 
   render() {
     return (
-      <svg width="100" height="100" ref={this.timerRef} id="timer">
+      <svg width="50" height="50" ref={this.timerRef} id="timer">
       </svg>
     )
   }

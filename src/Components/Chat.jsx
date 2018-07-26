@@ -14,11 +14,14 @@ export default class Chat extends Component {
             <tr>
               <td>There are chat messages here!</td>
             </tr>
-            <tr>
-              <input type="text" id="chat-input" name="chat-input-bar" />
-            </tr>
           </tbody>
           </table>
+              <input type="text"
+                id="chat-input"
+                name="chat-input-bar"
+                placeholder="Take a guess!"
+              />
+
         </div>
     )
   }
