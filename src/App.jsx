@@ -21,7 +21,7 @@ class App extends Component {
       messages: []
     }
   }
-  
+
   componentDidMount() {
     this.Auth = new AuthService();
     // const user = this.Auth.getProfile()
