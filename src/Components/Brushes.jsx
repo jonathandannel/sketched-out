@@ -10,4 +10,3 @@ export default class Brushes extends Component {
   }
 }
 
-export Brushes;

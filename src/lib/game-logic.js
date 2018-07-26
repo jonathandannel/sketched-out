@@ -1,5 +1,6 @@
 import moment from 'moment'
 import clues from './clues'
+import Timer from '../Component/Timer.jsx'
 
 const correctGuess = false;
 const roomPlayers = ['a', 'b', 'c'];

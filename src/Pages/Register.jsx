@@ -22,4 +22,3 @@ export default class Register extends Component {
   }
 }
 
-export Register;
