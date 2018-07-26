@@ -12,7 +12,7 @@ class Main extends Component {
         <Switch>
           <Route exact path='/' component={Home} />
           <Route exact path='/room' render={(props) => (
-            <Room socket={this.props.socket} />
+            <Room sendMessage={this.props.sendMessage} />
           )} />
         </Switch>
       </main>

@@ -21,17 +21,22 @@ class App extends Component {
   }
 
   componentDidMount() {
+
     this.socket = new WebSocket("ws://0.0.0.0:3001");
     this.socket.onopen = (e) => {
       console.log('==> Socket connection started!')
     }
   }
 
+  sendMessage = message => {
+    this.socket.send(message)
+  }
+
   render() {
     return (
       <div>
         <NavBar />
-        <Main socket={this.socket} />
+        <Main sendMessage={this.sendMessage} />
       </div>
     )
   }
