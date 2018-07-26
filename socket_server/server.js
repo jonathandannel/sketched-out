@@ -5,8 +5,11 @@ const PORT = 3001;
 const jwt = require('jsonwebtoken');
 const exjwt = require('express-jwt');
 const bodyParser = require('body-parser')
+const http = require('http');
 
-const server = express()
+
+const server = express();
+const httpServer = http.createServer(server);
 
 server.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
@@ -68,7 +71,7 @@ server.use(function(err, req, res, next) {
   }
 });
 
-const wss = new SocketServer({ server });
+const wss = new SocketServer({ server: httpServer });
 wss.on('connection', (ws, req) => {
   console.log('==> User connected!')
 
@@ -83,4 +86,5 @@ wss.on('connection', (ws, req) => {
   ws.on('close', () => console.log('Client disconnected'));
 });
 
-server.listen(PORT, '0.0.0.0', 'localhost', () => console.log(`==> Sketched Out websocket server listening on ${ PORT }`));
+
+httpServer.listen(PORT, '0.0.0.0', 'localhost', () => console.log(`==> Sketched Out websocket server listening on ${ PORT }`));
