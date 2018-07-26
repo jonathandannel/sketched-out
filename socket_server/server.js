@@ -1,7 +1,7 @@
 const express = require('express');
 const SocketServer = require('ws').Server;
 const uuid = require('uuid/v1');
-const PORT = 3001;
+const PORT = 8080;
 const jwt = require('jsonwebtoken');
 const exjwt = require('express-jwt');
 const bodyParser = require('body-parser')
@@ -12,7 +12,7 @@ const server = express();
 const httpServer = http.createServer(server);
 
 server.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
   res.setHeader('Access-Control-Allow-Headers', 'Content-type,Authorization');
   next();
 });
