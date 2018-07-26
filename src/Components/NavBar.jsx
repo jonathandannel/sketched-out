@@ -7,3 +7,5 @@ export default class NavBar extends Component {
     )
   }
 }
+
+export Navbar;

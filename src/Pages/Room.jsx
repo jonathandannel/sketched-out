@@ -11,3 +11,5 @@ export default class Room extends Component {
     )
   }
 }
+
+export Room;
