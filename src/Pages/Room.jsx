@@ -9,6 +9,9 @@ export default class Room extends Component {
     super(props)
     this.sketchRef = React.createRef()
     this.renderMessages = this.renderMessages.bind(this)
+    this.state = {
+      isPainting: false
+    }
   }
 
   renderMessages = () => {
@@ -20,6 +23,26 @@ export default class Room extends Component {
     return messages;
   }
 
+  getCoordinates = (e) => {
+    if (this.state.isPainting) {
+      console.log(e);
+      console.log('X => ', e.screenX);
+      console.log('Y => ', e.screenY);
+    }
+  }
+
+  onPainting = () => {
+    this.setState({
+      isPainting: true
+    })
+  }
+
+  stopPainting = () => {
+    this.setState({
+      isPainting: false
+    })
+  }
+
   render() {
     return (
       <div>
@@ -27,7 +50,9 @@ export default class Room extends Component {
         <h2>Messages:</h2>
         {this.renderMessages()}
         <button onClick={() => {this.props.sendMessage('hi')}}>click</button>
-        <SketchField ref={this.sketchRef} />
+        <div id="canvas-container" onMouseDown={this.onPainting} onMouseMove={this.getCoordinates} onMouseUp={this.stopPainting}>
+          <SketchField ref={this.sketchRef} />
+        </div>
       </div>
     )
   }
