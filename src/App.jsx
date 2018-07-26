@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import Leaderboard from './Components/Leaderboard.jsx';
-import moment      from 'moment'
+// import moment      from 'moment'
 import Main        from './Main.jsx';
 import NavBar      from './Components/NavBar.jsx';
+import AuthService from "./AuthService.jsx";
 // import Brushes  from './Components/Brushes.jsx';
 // import Chat     from './Components/Chat.jsx';
 // import Footer   from './Components/Footer.jsx';
@@ -12,6 +13,7 @@ import NavBar      from './Components/NavBar.jsx';
 // import Room     from './Pages/Room.jsx';
 
 
+
 class App extends Component {
   constructor(props) {
     super(props)
@@ -19,9 +21,11 @@ class App extends Component {
       messages: []
     }
   }
-
+  
   componentDidMount() {
-
+    this.Auth = new AuthService();
+    // const user = this.Auth.getProfile()
+    // console.log(user)
     this.socket = new WebSocket("ws://0.0.0.0:3001");
     this.socket.onopen = (e) => {
       console.log('==> Socket connection started!')
