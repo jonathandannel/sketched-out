@@ -12,7 +12,7 @@ class Main extends Component {
         <Switch>
           <Route exact path='/' component={Home} />
           <Route exact path='/room' render={(props) => (
-            <Room message={this.props.message} />
+            <Room socket={this.props.socket} />
           )} />
         </Switch>
       </main>
@@ -22,3 +22,5 @@ class Main extends Component {
 }
 
 export default Main;
+
+/* This is how you pass props through router, anon function */

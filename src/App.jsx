@@ -21,7 +21,7 @@ class App extends Component {
     return (
       <div>
         <NavBar />
-        <Main message={this.state.message} />
+        <Main socket={this.socket} />
       </div>
     )
   }
