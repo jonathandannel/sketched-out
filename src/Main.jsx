@@ -4,19 +4,19 @@ import Home from './Pages/Home.jsx';
 import Room from './Pages/Room.jsx';
 import Button from '@material-ui/core/Button';
 import Login from './Pages/Login.jsx'
+import Register from './Pages/Register.jsx';
 
 class Main extends Component {
 
   render() {
-    return (
-      <main>
+    return <main>
         <Switch>
-          <Route exact path='/' component={Home} />
-          <Route exact path='/room' component={Room} />
-          <Route exact path='/login' component={Login} />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/room" component={Room} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path='/register' component={Register} />
         </Switch>
-      </main>
-    )
+      </main>;
   }
 
 }
