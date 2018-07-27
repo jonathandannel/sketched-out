@@ -132,7 +132,7 @@ export default class Room extends Component {
             <MainCanvas
               sendMessage={this.props.sendMessage}
               lineColor={this.state.lineColor}
-              line={this.props.messages}/>
+              userLines={this.props.messages}/>
           </div>
           <button type="button"
               onClick={this._undo}>

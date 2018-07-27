@@ -95,6 +95,7 @@ export default class MainCanvas extends Component {
 
       this.latestLineIndex = this.userLines.length - 1
     }
+    this.userStrokeStyle = this.props.lineColor
 
     return (
         <div>
