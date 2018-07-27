@@ -76,7 +76,6 @@ wss.on('connection', (ws, req) => {
   console.log('==> User connected!')
 
   ws.on('message', (data) => {
-    console.log('********* ONE MESSAGE =>>>> ', data);
     let parsedData = JSON.parse(data);
     wss.clients.forEach((client) => {
       client.send(JSON.stringify(parsedData));
