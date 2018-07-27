@@ -43,7 +43,7 @@ class App extends Component {
   }
 
   sendMessage = message => {
-    this.socket.send(message)
+    this.socket.send(JSON.stringify(message))
   }
 
   render() {

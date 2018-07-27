@@ -77,7 +77,7 @@ wss.on('connection', (ws, req) => {
 
   ws.on('message', (data) => {
     console.log(data);
-    let parsedData = data;
+    let parsedData = JSON.parse(data);
     wss.clients.forEach((client) => {
       client.send(JSON.stringify(parsedData));
     })
