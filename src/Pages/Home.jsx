@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import SimpleModalWrapped from '../Components/NewRoomModal.jsx';
 
 //For testing purposes only
 const rooms = [
@@ -33,8 +34,8 @@ export default class Home extends Component {
           {this.displayRooms()}
         </span>
         <div>
-          <button>Create a Private Room</button>
         </div>
+        <SimpleModalWrapped />
       </div>
     )
   }

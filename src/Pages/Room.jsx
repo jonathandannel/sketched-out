@@ -6,6 +6,7 @@ import Button    from '@material-ui/core/Button';
 import Brushes   from '../Components/Brushes.jsx';
 import Chat      from '../Components/Chat.jsx';
 import Timer     from '../Components/Timer.jsx';
+import Modal     from '@material-ui/core/Modal';
 // import Chat   from './Components/Chat.jsx';
 
 
@@ -139,8 +140,10 @@ export default class Room extends Component {
 
   render() {
     return (
-      <div>
+      <div className="room-container">
         <h1>This is a room.</h1>
+          <h3 className="drawer-points"> </h3>
+          <h3 className="guesser-points"> </h3>
         <Timer shouldAnimate={this.state.gameStarted} />
         <button onClick={() => {this.sendMessage(this.socket)}}>click</button>
         <br />
@@ -153,8 +156,8 @@ export default class Room extends Component {
               onClick={this._undo}>
           Undo
           </button>
-        <Chat />
-        <Brushes lineColor={this.state.lineColor} onChange={this.changeColor} />
+        <Chat className="chat-container" />
+        <Brushes className="brushes" lineColor={this.state.lineColor} onChange={this.changeColor} />
       </div>
     )
   }
