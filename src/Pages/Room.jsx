@@ -27,24 +27,7 @@ export default class Room extends Component {
     this.state = {
       gameStarted: false,
       currentClue: null,
-      currentlyDrawing: roomPlayers[0],
-      drawingState: {
-            lineColor: 'black',
-            lineWidth: 7,
-            fillColor: 'green',
-            backgroundColor: 'transparent',
-            background: 'blue',
-            shadowWidth: 0,
-            shadowOffset: 0,
-            tool: Tools.Pencil,
-            canUndo: true,
-            controlledSize: false,
-            stretched: true,
-            stretchedX: false,
-            stretchedY: false,
-            originX: 'left',
-            originY: 'top'
-          }
+      currentlyDrawing: roomPlayers[0]
       }
     }
 
@@ -162,10 +145,11 @@ export default class Room extends Component {
         <button onClick={() => {this.sendMessage(this.socket)}}>click</button>
         <br />
         <p>Your clue is: <b>{this.state.currentClue}</b></p>
-        <SketchField {...this.state.drawingState}
-        ref={(c) => this._sketch = c}
-        onChange={this._onSketchChange}
-         />
+        <MainCanvas
+            sendMessage={this.props.sendMessage}
+            line={this.props.messages}
+          />
+
           <button type="button"
               onClick={this._undo}>
           Undo
@@ -173,8 +157,6 @@ export default class Room extends Component {
           <Chat className="chat-container" />
           <Brushes className="brushes" lineColor={this.state.lineColor} onChange={this.changeColor} />
         </div>
-      </div>
     )
   }
 };
-
