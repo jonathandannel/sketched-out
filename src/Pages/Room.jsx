@@ -7,7 +7,6 @@ import Brushes   from '../Components/Brushes.jsx';
 import Chat      from '../Components/Chat.jsx';
 import Timer     from '../Components/Timer.jsx';
 import Modal     from '@material-ui/core/Modal';
-// import Chat   from './Components/Chat.jsx';
 
 // Not good practice to have variables assigned here ----------------------------
 // Mo will try to fix it
@@ -15,8 +14,8 @@ var newDrawPoints   = 0;
 var newGuessPoints  = 0;
 var correctGuess    = false;
 var roomPlayers     = ['PaintyGuy', 'Van Gogh', 'Yo Mama'];
-var currentlyDrawing = roomPlayers[0];
 var correctGuesser  = roomPlayers[1];
+var currentlyDrawing = roomPlayers[0];
 
 export default class Room extends Component {
   constructor(props) {
