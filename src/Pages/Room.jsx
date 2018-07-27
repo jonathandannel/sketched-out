@@ -9,9 +9,13 @@ import Timer     from '../Components/Timer.jsx';
 import Modal     from '@material-ui/core/Modal';
 // import Chat   from './Components/Chat.jsx';
 
-
-const correctGuess = false;
-const roomPlayers = ['a', 'b', 'c'];
+// Not good practice to have variables assigned here ----------------------------
+// Mo will try to fix it
+var newDrawPoints = 0;
+var newGuessPoints = 0;
+var correctGuess = false;
+var roomPlayers = ['PaintyGuy', 'Van Gogh', 'Yo Mama'];
+var currentlyDrawing = roomPlayers[0];
 
 export default class Room extends Component {
   constructor(props) {
@@ -90,19 +94,30 @@ export default class Room extends Component {
   }
 
   drawerPoints = (timeRemaining) => {
-    let newDrawPoints = 150 - ((30 - timeRemaining) * 4);
+    newDrawPoints = 150 - ((30 - timeRemaining) * 4);
     console.log("Drawer points", newDrawPoints);
+    setTimeout(function() {
+      $("#drawer-points-display").fadeIn("slow", function() {
+        setTimeout(function() {
+          $("#drawer-points-display").fadeOut('fast')
+        }, 1000)
+      })
+    }, 500)
     return newDrawPoints;
     //add points to db
-    //display new points on screen
   }
 
+  // make the message display guesser's name ------------------------------
   guesserPoints = (timeRemaining) => {
-    let newGuessPoints = 100 - ((30 - timeRemaining) * 3);
+    newGuessPoints = 100 - ((30 - timeRemaining) * 3);
     console.log("Guesser points", newGuessPoints);
+    $("#guesser-points-display").fadeIn("slow", function() {
+        setTimeout(function() {
+          $("#guesser-points-display").fadeOut('fast')
+        }, 1000)
+    });
     return newGuessPoints;
     // add points to db
-    // display new points on screen
   }
 
   setClue = () => {
@@ -142,8 +157,8 @@ export default class Room extends Component {
     return (
       <div className="room-container">
         <h1>This is a room.</h1>
-          <h3 className="drawer-points"> </h3>
-          <h3 className="guesser-points"> </h3>
+          <h3 id="drawer-points-display"> {currentlyDrawing} won {newDrawPoints} points! </h3>
+          <h3 id="guesser-points-display"> The guesser won {newGuessPoints} points! </h3>
         <Timer shouldAnimate={this.state.gameStarted} />
         <button onClick={() => {this.sendMessage(this.socket)}}>click</button>
         <br />
