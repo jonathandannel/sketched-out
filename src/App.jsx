@@ -33,12 +33,13 @@ class App extends Component {
 
     this.socket.onmessage = (e) => {
       let incomingMessage = e.data
-      console.log(incomingMessage)
-      let updatedMessages = this.state.messages.slice();
-      updatedMessages.push(incomingMessage);
+
+      let parsedMessage = JSON.parse(incomingMessage);
+
       this.setState({
-        messages: updatedMessages
-      })
+        messages: parsedMessage
+      });
+
     }
   }
 

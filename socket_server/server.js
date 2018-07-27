@@ -26,7 +26,7 @@ const jwtMW = exjwt({
 
 const users = [
   {
-    id: 1,
+  id: 1,
     username: 'test',
     password: 'test'
   },
@@ -44,13 +44,13 @@ server.post('/login', (req, res) => {
   for (let user of users) {
     if (username == user.username && password == user.password) {
       let token = jwt.sign({ id: user.id, username: user.username }, 'secretkey', { expiresIn: 129600 })
-      res.json({
-        success: true,
-        err: null,
-        token
-      })
-      return;
-    }
+    res.json({
+      success: true,
+      err: null,
+      token
+    })
+    return;
+  }
   }
   res.status(401).json({
     success: false,
@@ -76,7 +76,7 @@ wss.on('connection', (ws, req) => {
   console.log('==> User connected!')
 
   ws.on('message', (data) => {
-    console.log(data);
+    console.log('********* ONE MESSAGE =>>>> ', data);
     let parsedData = JSON.parse(data);
     wss.clients.forEach((client) => {
       client.send(JSON.stringify(parsedData));

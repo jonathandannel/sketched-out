@@ -8,10 +8,13 @@ export default class MainCanvas extends Component {
     this.stopPainting = this.stopPainting.bind(this)
   }
 
-  isPainting = false;
-  line = []
-  prevPos = { offsetX: 0, offsetY: 0}
-  userStrokeStyle = '#EE92C2';
+    isPainting = false;
+    line = null;
+    prevPos = { offsetX: 0, offsetY: 0}
+    userStrokeStyle = '#EE92C2';
+
+
+
 
   componentDidMount() {
     this.canvas.width = 1000;
@@ -19,7 +22,17 @@ export default class MainCanvas extends Component {
     this.ctx = this.canvas.getContext('2d');
     this.ctx.lineJoin = 'round';
     this.ctx.lineCap = 'round';
-    this.ctx.lineWidth = 5
+    this.ctx.lineWidth = 10
+    //
+    // setTimeout(() => {
+    //   const testDraw = {
+    //     offsetX: 50,
+    //     offsetY: 50
+    //   };
+    //   this.paint(this.prevPos, testDraw, this.userStrokeStyle);
+    //   this.paint(this.prevPos, {offsetX: 50, offsetY: 100}, this.userStrokeStyle);
+    //   console.log(this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height));
+    // }, 2000)
   }
 
 
@@ -39,8 +52,14 @@ export default class MainCanvas extends Component {
         stop: {...offsetData}
       };
 
-      this.line = this.line.concat(positionData);
+      this.line = {
+        prevPos: this.prevPos,
+        currPos: offsetData,
+        strokeStyle: this.userStrokeStyle
+      }
+
       this.paint(this.prevPos, offsetData, this.userStrokeStyle);
+      this.sendPaintData()
     }
   }
 
@@ -60,10 +79,7 @@ export default class MainCanvas extends Component {
   }
 
   sendPaintData = () => {
-    const message = {
-      line: this.line,
-    }
-    this.props.sendMessage(message)
+    this.props.sendMessage(this.line)
   }
 
   stopPainting = (e) => {
@@ -71,6 +87,9 @@ export default class MainCanvas extends Component {
   }
 
   render() {
+    if (this.props.line.prevPos) {
+      this.paint(this.props.line.prevPos, this.props.line.currPos, this.props.line.strokeStyle)
+    }
     return (
         <div>
           <canvas
