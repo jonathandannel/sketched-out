@@ -20,7 +20,6 @@ export default class MainCanvas extends Component {
     this.ctx.lineJoin = 'round';
     this.ctx.lineCap = 'round';
     this.ctx.lineWidth = 10
-    //
     // setTimeout(() => {
     //   const testDraw = {
     //     offsetX: 50,
