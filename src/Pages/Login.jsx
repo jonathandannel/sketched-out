@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 
 export default class Login extends Component {
+
   render() {
     return (
       <div>
@@ -9,6 +10,7 @@ export default class Login extends Component {
             <label for="username">Username: </label>
             <input type="text" id="username" name="user-name" />
           </div>
+          <br />
           <div>
             <label for="password">Password: </label>
             <input type="text" id="password" name="password" />
@@ -20,5 +22,6 @@ export default class Login extends Component {
       </div>
     )
   }
+
 }
 

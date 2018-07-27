@@ -9,14 +9,17 @@ const rooms = [
 
 export default class Home extends Component {
 
-  componentDidMount() {
-    rooms.map(room => {
+  displayRooms = () => {
+    const roomDivs = rooms.map(room => {
       return (
-        <div>
-        {room.name}, {room.playerTotal} players
+        <div className="room-thumbnail">
+          <b>{room.name}</b>
+        <br />
+          {room.playerTotal} players
         </div>
       )
     })
+    return roomDivs;
   }
 
   render() {
@@ -25,6 +28,13 @@ export default class Home extends Component {
         <h1>This is the home page!</h1>
         <div>Div 1</div>
         <div>Div 2</div>
+        <span className="room-thumbnail-container">
+          <h3>Active Games</h3>
+          {this.displayRooms()}
+        </span>
+        <div>
+          <button>Create a Private Room</button>
+        </div>
       </div>
     )
   }

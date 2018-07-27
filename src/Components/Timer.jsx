@@ -2,13 +2,11 @@ import React, {Component} from 'react';
 import ProgressBar from 'progressbar.js';
 
 
-
 export default class Timer extends Component {
 
   constructor(props) {
     super(props);
     this.timerRef = React.createRef();
-    // secondsLeft = this.timer.value();
   }
 
   componentDidMount() {
@@ -18,10 +16,6 @@ export default class Timer extends Component {
       trailWidth: 10,
       strokeWidth: 10
     })
-
-    // setTimeout(() => {
-    //   this.timer.animate(1);
-    // }, 1000);
 
     if (this.props.shouldAnimate){
       this.timer.animate(1);
@@ -45,5 +39,6 @@ export default class Timer extends Component {
       </svg>
     )
   }
+
 }
 
