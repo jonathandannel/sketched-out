@@ -15,7 +15,8 @@ class Main extends Component {
           <Route exact path='/room' render={(props) => (
             <Room
               messages={this.props.messages}
-              sendMessage={this.props.sendMessage} />
+              sendMessage={this.props.sendMessage}
+            />
           )} />
           <Route exact path="/login" component={Login} />
           <Route exact path='/register' component={Register} />
