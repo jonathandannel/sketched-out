@@ -17,7 +17,7 @@ class App extends Component {
     this.Auth = new AuthService();
     // const user = this.Auth.getProfile()
     // console.log(user)
-    this.socket = new WebSocket("ws://localhost:8080");
+    this.socket = new WebSocket(`ws://localhost:8080`);
     this.socket.onopen = (e) => {
       console.log('==> Socket connection started!')
     }

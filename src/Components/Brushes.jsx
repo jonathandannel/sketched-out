@@ -5,7 +5,7 @@ export default class Brushes extends Component {
 
   constructor(props) {
     super(props);
-    // this.lineColor = "black";
+    this.lineColor = this.props.lineColor;
   }
 
   render() {

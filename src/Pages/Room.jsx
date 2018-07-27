@@ -26,7 +26,7 @@ export default class Room extends Component {
       gameStarted: false,
       currentClue: null,
       currentlyDrawing: roomPlayers[0],
-
+      lineColor: 'white'
       }
     }
 
@@ -43,26 +43,10 @@ export default class Room extends Component {
 // Drawing Functions
 
   changeColor = (color) => {
-    let newDrawState = this.state.drawingState;
-    newDrawState.lineColor = color.hex;
-    this.setState({drawingState: newDrawState})
+    console.log("old colour", this.state.lineColor)
+    this.setState({lineColor: color.hex})
+    console.log("new colour", this.state.lineColor)
   }
-
-  _undo = () => {
-    this._sketch.undo();
-    this.setState({
-        canUndo: this._sketch.canUndo(),
-        canRedo: this._sketch.canRedo()
-    })
-  };
-
-  _onSketchChange = () => {
-    let prev = this.state.canUndo;
-    let now = this._sketch.canUndo();
-    if (prev !== now) {
-        this.setState({canUndo: now});
-    }
-  };
 
 
 // Game Logic Functions
@@ -147,6 +131,7 @@ export default class Room extends Component {
           <div id="canvas-container">
             <MainCanvas
               sendMessage={this.props.sendMessage}
+              lineColor={this.state.lineColor}
               line={this.props.messages}/>
           </div>
           <button type="button"

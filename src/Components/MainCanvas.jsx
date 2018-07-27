@@ -11,7 +11,7 @@ export default class MainCanvas extends Component {
     isPainting = false;
     line = null;
     prevPos = { offsetX: 0, offsetY: 0}
-    userStrokeStyle = '#EE92C2';
+    userStrokeStyle = this.props.lineColor;
 
   componentDidMount() {
     this.canvas.width = 1000;
