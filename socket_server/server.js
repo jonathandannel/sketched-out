@@ -1,32 +1,20 @@
-<<<<<<< HEAD
 const express           = require("express");
+const PORT = 8080;
 const SocketServer      = require("ws").Server;
 const uuid              = require("uuid/v1");
-const PORT              = 3001;
 const jwt               = require("jsonwebtoken");
 const exjwt             = require("express-jwt");
 const bodyParser        = require("body-parser");
 const http              = require("http");
 const randomstring      = require("randomstring");
-const bcrypt            = require("bcrypt");
-=======
-const express = require('express');
-const SocketServer = require('ws').Server;
-const uuid = require('uuid/v1');
-const PORT = 8080;
-const jwt = require('jsonwebtoken');
-const exjwt = require('express-jwt');
-const bodyParser = require('body-parser')
-const http = require('http');
+const bcrypt            = require("bcryptjs");
 const WebSocket = require('ws');
-
->>>>>>> jonathan/drawing2
 
 const server = express();
 const httpServer = http.createServer(server);
 
 server.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
   res.setHeader("Access-Control-Allow-Headers", "Content-type,Authorization");
   next();
 });
