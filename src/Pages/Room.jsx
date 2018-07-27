@@ -1,57 +1,39 @@
 import React, {Component} from 'react';
 import {SketchField, Tools} from "react-sketch";
-// import Chat from './Components/Chat.jsx';
-import Button from '@material-ui/core/Button';
-
 
 export default class Room extends Component {
   constructor(props) {
     super(props)
     this.sketchRef = React.createRef()
-    this.renderMessages = this.renderMessages.bind(this)
-    this.state = {
-      isPainting: false
+  }
+
+  isPainting = false;
+
+  getCoordinates = e => {
+    if (this.isPainting) {
+      let x = e.screenX;
+      let y = e.screenY;
+      console.log('X => ', x, 'Y => ', y);
     }
   }
 
-  renderMessages = () => {
-    const messages = this.props.messages.map((message) => {
-      return (
-        <div>{message}</div>
-      )
-    })
-    return messages;
+  startPainting = e => {
+    this.isPainting = true;
   }
 
-  getCoordinates = (e) => {
-    if (this.state.isPainting) {
-      console.log(e);
-      console.log('X => ', e.screenX);
-      console.log('Y => ', e.screenY);
-    }
-  }
-
-  onPainting = () => {
-    this.setState({
-      isPainting: true
-    })
-  }
-
-  stopPainting = () => {
-    this.setState({
-      isPainting: false
-    })
+  stopPainting = e => {
+    this.isPainting = false;
   }
 
   render() {
     return (
       <div>
         <h1>This is a room.</h1>
-        <h2>Messages:</h2>
-        {this.renderMessages()}
-        <button onClick={() => {this.props.sendMessage('hi')}}>click</button>
-        <div id="canvas-container" onMouseDown={this.onPainting} onMouseMove={this.getCoordinates} onMouseUp={this.stopPainting}>
-          <SketchField ref={this.sketchRef} />
+        <div id="canvas-container"
+          onMouseDown={this.startPainting}
+          onMouseMove={this.getCoordinates}
+          onMouseUp={this.stopPainting}>
+          <SketchField />
         </div>
       </div>
     )
