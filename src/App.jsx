@@ -24,7 +24,7 @@ class App extends Component {
 
     this.socket.onmessage = (e) => {
       let incomingMessage = e.data
-
+      console.log(e.data)
       let parsedMessage = JSON.parse(incomingMessage);
 
       this.setState({

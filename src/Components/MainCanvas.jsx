@@ -10,6 +10,10 @@ export default class MainCanvas extends Component {
 
     isPainting = false;
     line = null;
+
+    userLines = []
+    latestLineIndex = 0
+
     prevPos = { offsetX: 0, offsetY: 0}
     userStrokeStyle = '#EE92C2';
 
@@ -20,17 +24,11 @@ export default class MainCanvas extends Component {
     this.ctx.lineJoin = 'round';
     this.ctx.lineCap = 'round';
     this.ctx.lineWidth = 10
-    // setTimeout(() => {
-    //   const testDraw = {
-    //     offsetX: 50,
-    //     offsetY: 50
-    //   };
-    //   this.paint(this.prevPos, testDraw, this.userStrokeStyle);
-    //   this.paint(this.prevPos, {offsetX: 50, offsetY: 100}, this.userStrokeStyle);
-    //   console.log(this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height));
-    // }, 2000)
-  }
 
+    setInterval(() => {
+      this.props.sendMessage(this.userLines)
+    }, 250)
+  }
 
   handleMouseDown = ({ nativeEvent })=> {
     const { offsetX, offsetY } = nativeEvent;
@@ -76,7 +74,9 @@ export default class MainCanvas extends Component {
 
   //make message into an object with options
   sendPaintData = () => {
-    this.props.sendMessage(this.line)
+    this.userLines.push(this.line)
+    this.props.sendMessage(this.userLines)
+    this.latestLineIndex = this.userLines.length - 1
   }
 
   stopPainting = (e) => {
@@ -84,8 +84,16 @@ export default class MainCanvas extends Component {
   }
 
   render() {
-    if (this.props.line.prevPos) {
-      this.paint(this.props.line.prevPos, this.props.line.currPos, this.props.line.strokeStyle)
+    if (this.props.userLines.length > 0) {
+      console.log(this.props.userLines)
+
+      this.props.userLines
+      .slice(this.latestLineIndex)
+      .forEach((line) => {
+        this.paint(line.prevPos, line.currPos, line.strokeStyle)
+      });
+
+      this.latestLineIndex = this.userLines.length - 1
     }
 
     return (

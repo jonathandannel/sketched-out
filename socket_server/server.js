@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const express           = require("express");
 const SocketServer      = require("ws").Server;
 const uuid              = require("uuid/v1");
@@ -8,6 +9,18 @@ const bodyParser        = require("body-parser");
 const http              = require("http");
 const randomstring      = require("randomstring");
 const bcrypt            = require("bcrypt");
+=======
+const express = require('express');
+const SocketServer = require('ws').Server;
+const uuid = require('uuid/v1');
+const PORT = 8080;
+const jwt = require('jsonwebtoken');
+const exjwt = require('express-jwt');
+const bodyParser = require('body-parser')
+const http = require('http');
+const WebSocket = require('ws');
+
+>>>>>>> jonathan/drawing2
 
 const server = express();
 const httpServer = http.createServer(server);
@@ -128,10 +141,11 @@ wss.on("connection", (ws, req) => {
   console.log("==> User connected!");
 
   ws.on('message', (data) => {
-    let parsedData = JSON.parse(data);
+    console.log(data)
     wss.clients.forEach((client) => {
-      client.send(JSON.stringify(parsedData));
-    });
+      if (client!== ws && client.readyState === WebSocket.OPEN)
+      client.send(data);
+    })
   });
 
   ws.on("close", () => console.log("Client disconnected"));

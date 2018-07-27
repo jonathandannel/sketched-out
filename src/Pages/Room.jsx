@@ -147,6 +147,7 @@ export default class Room extends Component {
         <MainCanvas
             sendMessage={this.props.sendMessage}
             line={this.props.messages}
+            userLines={this.props.messages}/>
           />
 
           <button type="button"
