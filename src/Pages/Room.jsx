@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import MainCanvas from '../Components/MainCanvas.jsx';
-// import {SketchField, Tools} from "react-sketch";
+import {SketchField, Tools} from "react-sketch";
 import clueArray from '../lib/clues'
 import moment    from 'moment'
 import Button    from '@material-ui/core/Button';
@@ -8,6 +7,7 @@ import Brushes   from '../Components/Brushes.jsx';
 import Chat      from '../Components/Chat.jsx';
 import Timer     from '../Components/Timer.jsx';
 import Modal     from '@material-ui/core/Modal';
+import MainCanvas from '../Components/MainCanvas.jsx';
 
 // Not good practice to have variables assigned here ----------------------------
 // Mo will try to fix it
@@ -22,11 +22,11 @@ export default class Room extends Component {
   constructor(props) {
     super(props);
     this.socket = props.socket
-    this.sketchRef = React.createRef()
     this.state = {
       gameStarted: false,
       currentClue: null,
-      currentlyDrawing: roomPlayers[0]
+      currentlyDrawing: roomPlayers[0],
+
       }
     }
 
@@ -144,18 +144,20 @@ export default class Room extends Component {
         <button onClick={() => {this.sendMessage(this.socket)}}>click</button>
         <br />
         <p>Your clue is: <b>{this.state.currentClue}</b></p>
-        <MainCanvas
-            sendMessage={this.props.sendMessage}
-            line={this.props.messages}
-          />
-
+          <div id="canvas-container">
+            <MainCanvas
+              sendMessage={this.props.sendMessage}
+              line={this.props.messages}/>
+          </div>
           <button type="button"
               onClick={this._undo}>
           Undo
           </button>
-          <Chat className="chat-container" />
-          <Brushes className="brushes" lineColor={this.state.lineColor} onChange={this.changeColor} />
-        </div>
+        <Chat className="chat-container" />
+        <Brushes className="brushes" lineColor={this.state.lineColor} onChange={this.changeColor} />
+      </div>
     )
   }
 };
+
+
