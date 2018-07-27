@@ -24,8 +24,11 @@ export default class MainCanvas extends Component {
     this.ctx.lineJoin = 'round';
     this.ctx.lineCap = 'round';
     this.ctx.lineWidth = 10
-  }
 
+    setInterval(() => {
+      this.props.sendMessage(this.userLines)
+    }, 250)
+  }
 
   handleMouseDown = ({ nativeEvent })=> {
     const { offsetX, offsetY } = nativeEvent;
@@ -73,7 +76,6 @@ export default class MainCanvas extends Component {
   sendPaintData = () => {
     this.userLines.push(this.line)
     this.props.sendMessage(this.userLines)
-
     this.latestLineIndex = this.userLines.length - 1
   }
 
