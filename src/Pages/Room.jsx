@@ -11,11 +11,12 @@ import Modal     from '@material-ui/core/Modal';
 
 // Not good practice to have variables assigned here ----------------------------
 // Mo will try to fix it
-var newDrawPoints = 0;
-var newGuessPoints = 0;
-var correctGuess = false;
-var roomPlayers = ['PaintyGuy', 'Van Gogh', 'Yo Mama'];
+var newDrawPoints   = 0;
+var newGuessPoints  = 0;
+var correctGuess    = false;
+var roomPlayers     = ['PaintyGuy', 'Van Gogh', 'Yo Mama'];
 var currentlyDrawing = roomPlayers[0];
+var correctGuesser  = roomPlayers[1];
 
 export default class Room extends Component {
   constructor(props) {
@@ -130,9 +131,6 @@ export default class Room extends Component {
     console.log("starting round!")
     this.setClue();
     this.setState({gameStarted: true, startTime: moment()});
-    // setTimeout(function() {
-    //   console.log("running time remaining", this.getTimeRemaining)
-    // }, 3000)
     setTimeout(() => {
       this.endRound();
     }, 30000)
@@ -157,8 +155,8 @@ export default class Room extends Component {
     return (
       <div className="room-container">
         <h1>This is a room.</h1>
-          <h3 id="drawer-points-display"> {currentlyDrawing} won {newDrawPoints} points! </h3>
-          <h3 id="guesser-points-display"> The guesser won {newGuessPoints} points! </h3>
+          <h5 id="drawer-points-display"> {currentlyDrawing} won {newDrawPoints} points! </h5>
+          <h5 id="guesser-points-display"> {correctGuesser} won {newGuessPoints} points! </h5>
         <Timer shouldAnimate={this.state.gameStarted} />
         <button onClick={() => {this.sendMessage(this.socket)}}>click</button>
         <br />
