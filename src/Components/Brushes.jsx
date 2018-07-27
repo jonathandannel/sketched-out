@@ -11,7 +11,6 @@ export default class Brushes extends Component {
   render() {
     return (
         <div>
-          Brushes go here
           <CirclePicker
             onChange={(color) => {this.props.onChange(color)}}
           />

@@ -87,6 +87,7 @@ export default class MainCanvas extends Component {
     if (this.props.line.prevPos) {
       this.paint(this.props.line.prevPos, this.props.line.currPos, this.props.line.strokeStyle)
     }
+    this.userStrokeStyle = this.props.lineColor
 
     return (
         <div>
