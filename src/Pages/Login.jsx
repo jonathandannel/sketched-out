@@ -58,6 +58,7 @@ class Login extends Component {
     )
   }
 
+
   handleFormSubmit(e) {
     e.preventDefault();
 
@@ -69,6 +70,7 @@ class Login extends Component {
         alert(err);
       })
   }
+
 }
 
 export default Login;

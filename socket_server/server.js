@@ -1,11 +1,11 @@
-const express = require('express');
+const express     = require('express');
 const SocketServer = require('ws').Server;
-const uuid = require('uuid/v1');
-const PORT = 8080;
-const jwt = require('jsonwebtoken');
-const exjwt = require('express-jwt');
-const bodyParser = require('body-parser')
-const http = require('http');
+const uuid        = require('uuid/v1');
+const PORT        = 8080;
+const jwt         = require('jsonwebtoken');
+const exjwt       = require('express-jwt');
+const bodyParser  = require('body-parser')
+const http        = require('http');
 
 
 const server = express();

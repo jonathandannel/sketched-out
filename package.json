@@ -52,11 +52,14 @@
     "jsonwebtoken": "^8.3.0",
     "jwt-decode": "^2.2.0",
     "moment": "^2.22.2",
+    "progressbar.js": "^1.0.1",
     "react": "16.4.1",
+    "react-color": "^2.14.1",
     "react-dom": "16.4.1",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-sketch": "^0.4.4",
+    "uuid": "^3.3.2",
     "ws": "^6.0.0"
   }
 }
