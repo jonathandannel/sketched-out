@@ -24,6 +24,20 @@ export default class AuthService {
     })
   }
 
+  register(username, password) {
+    // Get a token from api server using the fetch api
+    return this.fetch(`${this.domain}/register`, {
+      method: 'POST',
+      body: JSON.stringify({
+        username,
+        password
+      })
+    }).then(res => {
+      this.setToken(res.token) // Setting the token in localStorage
+      return Promise.resolve(res);
+    })
+  }
+
   loggedIn() {
     // Checks if there is a saved token and it's still valid
     const token = this.getToken() // Getting token from localstorage

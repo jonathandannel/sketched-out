@@ -26,12 +26,14 @@ export default class Register extends Component {
             className="username"
             name="username"
             type="text"
+            onChange={this.handleChange}
             />
             <label for="password">Password: </label>
             <input 
             className="password" 
             name="password"
             type="password" 
+            onChange={this.handleChange}
             />
             <button 
             className="submit"
@@ -55,7 +57,7 @@ export default class Register extends Component {
   handleFormSubmit(e) {
     e.preventDefault();
 
-    this.Auth.login(this.state.username, this.state.password)
+    this.Auth.register(this.state.username, this.state.password)
       .then(res => {
         this.props.history.replace('/');
       })
