@@ -8,6 +8,8 @@ const bodyParser        = require("body-parser");
 const http              = require("http");
 const randomstring      = require("randomstring");
 const bcrypt            = require("bcryptjs");
+const WebSocket         = require('ws');
+
 
 const server = express();
 const httpServer = http.createServer(server);
@@ -128,10 +130,11 @@ wss.on("connection", (ws, req) => {
   console.log("==> User connected!");
 
   ws.on('message', (data) => {
-    let parsedData = JSON.parse(data);
+    console.log(data)
     wss.clients.forEach((client) => {
-      client.send(JSON.stringify(parsedData));
-    });
+      if (client!== ws && client.readyState === WebSocket.OPEN)
+      client.send(data);
+    })
   });
 
   ws.on("close", () => console.log("Client disconnected"));
