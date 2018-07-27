@@ -92,10 +92,13 @@ server.post("/register", (req, res) => {
       password: hashedPassword
     };
 
+    console.log(newUser, "newuser before push")
     users.push(newUser)
+
+    console.log(users, "after push")
     //Now we set the token
     let token = jwt.sign(
-      { id: user.id, username: user.username },
+      { id: users.id, username: users.username },
       "secretkey",
       { expiresIn: 129600 }
     );
