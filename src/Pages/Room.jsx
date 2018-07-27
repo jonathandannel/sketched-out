@@ -14,7 +14,7 @@ export default class Room extends Component {
         <div id="canvas-container">
           <MainCanvas
             sendMessage={this.props.sendMessage}
-            line={this.props.messages}/>
+            userLines={this.props.messages}/>
         </div>
       </div>
     )

@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 const exjwt = require('express-jwt');
 const bodyParser = require('body-parser')
 const http = require('http');
+const WebSocket = require('ws');
 
 
 const server = express();
@@ -76,9 +77,10 @@ wss.on('connection', (ws, req) => {
   console.log('==> User connected!')
 
   ws.on('message', (data) => {
-    let parsedData = JSON.parse(data);
+    console.log(data)
     wss.clients.forEach((client) => {
-      client.send(JSON.stringify(parsedData));
+      if (client!== ws && client.readyState === WebSocket.OPEN)
+      client.send(data);
     })
   });
 
