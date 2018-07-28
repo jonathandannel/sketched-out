@@ -112,15 +112,13 @@ export default class Room extends Component {
 
   render() {
     return (
-      <div className="room-container">
+      <div id="room-container">
 
         <div class="game-info">
           <h5 id="drawer-points-display"> {currentlyDrawing} won {newDrawPoints} points! </h5>
-
           <h5 id="guesser-points-display"> {correctGuesser} won {newGuessPoints} points! </h5>
 
           <Timer shouldAnimate={this.state.gameStarted} />
-          <br />
 
           <p>Your clue is: <b>{this.state.currentClue}</b></p>
         </div>
@@ -141,12 +139,14 @@ export default class Room extends Component {
           sendMessage={this.props.sendMessage}
         />
 
-        <Brushes className="brushes"
+        <Brushes
+          className="brushes"
           lineColor={this.state.lineColor}
           onChange={this.changeColor}
         />
 
       </div>
+
     )
   }
 };
