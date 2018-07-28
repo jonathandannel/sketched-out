@@ -10,22 +10,26 @@ import Register from './Pages/Register.jsx';
 class Main extends Component {
 
   render() {
-    return <main>
+    return (
+      <main>
         <Switch>
           <Route exact path='/' component={Home} />
           <Route exact path='/home' component={Home} />
           <Route exact path='/login' component={Login} />
           <Route exact path='/register' component={Register} />
-          <Route exact path='/room' render={(props) => (
-            <Room
-              latestLineData={this.props.latestLineData}
-              sendMessage={this.props.sendMessage}
-            />
-          )} />
+          <Route exact path='/room' render=
+            {(props) => (
+              <Room
+                latestLineData={this.props.latestLineData}
+                sendMessage={this.props.sendMessage}
+              />
+            )}
+          />
           <Route exact path="/login" component={Login} />
           <Route exact path='/register' component={Register} />
         </Switch>
-      </main>;
+      </main>
+    )
   }
 
 }

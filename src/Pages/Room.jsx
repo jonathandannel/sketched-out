@@ -113,24 +113,32 @@ export default class Room extends Component {
   render() {
     return (
       <div className="room-container">
+
         <h5 id="drawer-points-display"> {currentlyDrawing} won {newDrawPoints} points! </h5>
         <h5 id="guesser-points-display"> {correctGuesser} won {newGuessPoints} points! </h5>
+
         <Timer shouldAnimate={this.state.gameStarted} />
-        <button onClick={() => {this.sendMessage(this.socket)}}>click</button>
         <br />
+
         <p>Your clue is: <b>{this.state.currentClue}</b></p>
-          <div id="canvas-container">
-            <MainCanvas
-              sendMessage={this.props.sendMessage}
-              lineColor={this.state.lineColor}
-              latestLineData={this.props.latestLineData} />
-          </div>
-          <button type="button"
-              onClick={this._undo}>
+
+        <div id="canvas-container">
+          <MainCanvas
+            sendMessage={this.props.sendMessage}
+            lineColor={this.state.lineColor}
+            latestLineData={this.props.latestLineData} />
+        </div>
+
+        <button type="button" onClick={this._undo}>
           Undo
-          </button>
+        </button>
+
         <Chat className="chat-container" />
-        <Brushes className="brushes" lineColor={this.state.lineColor} onChange={this.changeColor} />
+
+        <Brushes className="brushes"
+          lineColor={this.state.lineColor}
+          onChange={this.changeColor} />
+
       </div>
     )
   }
