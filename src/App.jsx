@@ -9,7 +9,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      messages: []
+      latestLineData: []
     }
   }
 
@@ -23,14 +23,16 @@ class App extends Component {
     }
 
     this.socket.onmessage = (e) => {
-      let incomingMessage = e.data
-      console.log(e.data)
-      let parsedMessage = JSON.parse(incomingMessage);
+      const parsedMessage = JSON.parse(e.data)
+      console.log(parsedMessage);
 
-      this.setState({
-        messages: parsedMessage
-      });
-
+      switch (parsedMessage.type) {
+        case 'latestLineData':
+          this.setState({
+            latestLineData: parsedMessage.content
+          });
+        break;
+      }
     }
   }
 
@@ -43,7 +45,7 @@ class App extends Component {
       <div>
         <NavBar />
         <Main
-          messages={this.state.messages} sendMessage={this.sendMessage}
+          latestLineData={this.state.latestLineData} sendMessage={this.sendMessage}
         />
       </div>
     )

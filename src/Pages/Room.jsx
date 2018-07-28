@@ -132,7 +132,7 @@ export default class Room extends Component {
             <MainCanvas
               sendMessage={this.props.sendMessage}
               lineColor={this.state.lineColor}
-              userLines={this.props.messages}/>
+              latestLineData={this.props.latestLineData} />
           </div>
           <button type="button"
               onClick={this._undo}>
@@ -144,5 +144,3 @@ export default class Room extends Component {
     )
   }
 };
-
-

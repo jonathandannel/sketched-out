@@ -26,7 +26,10 @@ export default class MainCanvas extends Component {
     this.ctx.lineWidth = 10
 
     setInterval(() => {
-      this.props.sendMessage(this.userLines)
+      this.props.sendMessage({
+        type: 'latestLineData',
+        content: this.userLines
+      })
     }, 600)
   }
 
@@ -75,7 +78,10 @@ export default class MainCanvas extends Component {
   //make message into an object with options
   sendPaintData = () => {
     this.userLines.push(this.line)
-    this.props.sendMessage(this.userLines)
+    this.props.sendMessage({
+      type: 'latestLineData',
+      content: this.userLines
+    })
     this.latestLineIndex = this.userLines.length - 1
   }
 
@@ -84,10 +90,10 @@ export default class MainCanvas extends Component {
   }
 
   render() {
-    if (this.props.userLines.length > 0) {
-      console.log(this.props.userLines)
+    if (this.props.latestLineData.length > 0) {
+      console.log(this.props.latestLineData)
 
-      this.props.userLines
+      this.props.latestLineData
       .slice(this.latestLineIndex)
       .forEach((line) => {
         this.paint(line.prevPos, line.currPos, line.strokeStyle)

@@ -127,9 +127,8 @@ server.use(function(err, req, res, next) {
 const wss = new SocketServer({ server: httpServer });
 wss.on("connection", (ws, req) => {
   console.log("==> User connected!");
-
   ws.on('message', (data) => {
-    console.log(data)
+    console.log(data);
     wss.clients.forEach((client) => {
       if (client!== ws && client.readyState === WebSocket.OPEN)
       client.send(data);
