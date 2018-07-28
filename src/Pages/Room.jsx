@@ -123,27 +123,30 @@ export default class Room extends Component {
           <p>Your clue is: <b>{this.state.currentClue}</b></p>
         </div>
 
-        <MainCanvas
-          className="canvas-container"
-          sendMessage={this.props.sendMessage}
-          lineColor={this.state.lineColor}
-          latestLineData={this.props.latestLineData}
-        />
+        <div id="canvas-container">
+          <MainCanvas
+            className="canvas-area"
+            sendMessage={this.props.sendMessage}
+            lineColor={this.state.lineColor}
+            latestLineData={this.props.latestLineData}
+          />
+          <Chat
+            className="chat-area"
+            sendMessage={this.props.sendMessage}
+          />
+        </div>
 
-        <button type="button" onClick={this._undo}>
-          Undo
-        </button>
+        <div id="brush-container">
+          <button type="button" onClick={this._undo}>
+            Undo
+          </button>
 
-        <Chat
-          className="chat-container"
-          sendMessage={this.props.sendMessage}
-        />
-
-        <Brushes
-          className="brushes"
-          lineColor={this.state.lineColor}
-          onChange={this.changeColor}
-        />
+          <Brushes
+            className="brush-area"
+            lineColor={this.state.lineColor}
+            onChange={this.changeColor}
+          />
+        </div>
 
       </div>
 
