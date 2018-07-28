@@ -31,8 +31,6 @@ export default class Home extends Component {
     return (
       <div>
         <h1>This is the home page!</h1>
-        <div>Div 1</div>
-        <div>Div 2</div>
         <Button>
           <Link to='room'>Room</Link>
           </Button>
@@ -43,6 +41,25 @@ export default class Home extends Component {
         <div>
         </div>
         <SimpleModalWrapped />
+        <h1>some stuff</h1>
+        <h1>some stuff</h1>
+
+        <h1>some stuff</h1>
+
+        <h1>some stuff</h1>
+
+        <h1>some stuff</h1>
+
+        <h1>some stuff</h1>
+
+        <h1>some stuff</h1>
+
+        <h1>some stuff</h1>
+
+        <h1>some stuff</h1>
+
+        <h1>some stuff</h1>
+
 
       </div>
 

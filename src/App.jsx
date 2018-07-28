@@ -42,9 +42,11 @@ class App extends Component {
     return (
       <div>
         <NavBar />
-        <Main
-          messages={this.state.messages} sendMessage={this.sendMessage}
-        />
+        <div>
+          <Main
+            messages={this.state.messages} sendMessage={this.sendMessage}
+          />
+        </div>
       </div>
     )
   }

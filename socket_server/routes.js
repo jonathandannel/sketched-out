@@ -5,7 +5,7 @@ const randomstring = require("randomstring");
 const bcrypt = require("bcryptjs");
 
 
-export default (server, db) => {
+module.exports = function routes(server, db) {
 
   const dataHelpers = dbHelpers(db)
 
@@ -15,8 +15,8 @@ export default (server, db) => {
 
   const users = [{
       id: 1,
-      username: "test",
-      password: "test"
+      username: 'a',
+      password: '$2a$10$IfTDfRm6FLb2rv3PfRKwEOedzNe0TbBMIeZPb2XxTe4HUf3kG3caa'
     },
     {
       id: 2,
