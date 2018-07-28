@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
 import SimpleModalWrapped from '../Components/NewRoomModal.jsx';
+import Button    from '@material-ui/core/Button';
+import { Link } from 'react-router-dom'
+
+
 
 //For testing purposes only
 const rooms = [
@@ -29,6 +33,9 @@ export default class Home extends Component {
         <h1>This is the home page!</h1>
         <div>Div 1</div>
         <div>Div 2</div>
+        <Button>
+          <Link to='room'>Room</Link>
+          </Button>
         <span className="room-thumbnail-container">
           <h3>Active Games</h3>
           {this.displayRooms()}
@@ -36,7 +43,9 @@ export default class Home extends Component {
         <div>
         </div>
         <SimpleModalWrapped />
+
       </div>
+
     )
   }
 }
