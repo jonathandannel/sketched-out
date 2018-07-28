@@ -114,30 +114,37 @@ export default class Room extends Component {
     return (
       <div className="room-container">
 
-        <h5 id="drawer-points-display"> {currentlyDrawing} won {newDrawPoints} points! </h5>
-        <h5 id="guesser-points-display"> {correctGuesser} won {newGuessPoints} points! </h5>
+        <div class="game-info">
+          <h5 id="drawer-points-display"> {currentlyDrawing} won {newDrawPoints} points! </h5>
 
-        <Timer shouldAnimate={this.state.gameStarted} />
-        <br />
+          <h5 id="guesser-points-display"> {correctGuesser} won {newGuessPoints} points! </h5>
 
-        <p>Your clue is: <b>{this.state.currentClue}</b></p>
+          <Timer shouldAnimate={this.state.gameStarted} />
+          <br />
 
-        <div id="canvas-container">
-          <MainCanvas
-            sendMessage={this.props.sendMessage}
-            lineColor={this.state.lineColor}
-            latestLineData={this.props.latestLineData} />
+          <p>Your clue is: <b>{this.state.currentClue}</b></p>
         </div>
+
+        <MainCanvas
+          className="canvas-container"
+          sendMessage={this.props.sendMessage}
+          lineColor={this.state.lineColor}
+          latestLineData={this.props.latestLineData}
+        />
 
         <button type="button" onClick={this._undo}>
           Undo
         </button>
 
-        <Chat className="chat-container" />
+        <Chat
+          className="chat-container"
+          sendMessage={this.props.sendMessage}
+        />
 
         <Brushes className="brushes"
           lineColor={this.state.lineColor}
-          onChange={this.changeColor} />
+          onChange={this.changeColor}
+        />
 
       </div>
     )
