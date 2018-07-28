@@ -8,14 +8,14 @@ export default class MainCanvas extends Component {
     this.stopPainting = this.stopPainting.bind(this)
   }
 
-    isPainting = false;
-    line = null;
+  isPainting = false;
+  line = null;
 
-    userLines = []
-    latestLineIndex = 0
+  userLines = []
+  latestLineIndex = 0
 
-    prevPos = { offsetX: 0, offsetY: 0}
-    userStrokeStyle = this.props.lineColor;
+  prevPos = { offsetX: 0, offsetY: 0}
+  userStrokeStyle = this.props.lineColor;
 
   componentDidMount() {
     this.canvas.width = 1000;
@@ -27,7 +27,7 @@ export default class MainCanvas extends Component {
 
     setInterval(() => {
       this.props.sendMessage(this.userLines)
-    }, 250)
+    }, 600)
   }
 
   handleMouseDown = ({ nativeEvent })=> {

@@ -10,7 +10,6 @@ const randomstring      = require("randomstring");
 const bcrypt            = require("bcryptjs");
 const WebSocket         = require('ws');
 
-
 const server = express();
 const httpServer = http.createServer(server);
 
