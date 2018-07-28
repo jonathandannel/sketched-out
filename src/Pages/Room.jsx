@@ -112,34 +112,49 @@ export default class Room extends Component {
 
   render() {
     return (
-      <div className="room-container">
+      <div id="room-container">
 
-        <h5 id="drawer-points-display"> {currentlyDrawing} won {newDrawPoints} points! </h5>
-        <h5 id="guesser-points-display"> {correctGuesser} won {newGuessPoints} points! </h5>
+        <div id="game-info">
+          <h5 id="drawer-points-display"> {currentlyDrawing} won {newDrawPoints} points! </h5>
+          <h5 id="guesser-points-display"> {correctGuesser} won {newGuessPoints} points! </h5>
+        </div>
 
-        <Timer shouldAnimate={this.state.gameStarted} />
-        <br />
+        <div id="timer">
+          <Timer shouldAnimate={this.state.gameStarted} />
+        </div>
 
-        <p>Your clue is: <b>{this.state.currentClue}</b></p>
+        <div id="clue">
+          Your clue is: <b>{this.state.currentClue}</b>
+        </div>
 
-        <div id="canvas-container">
+        <div id="canvas-area">
           <MainCanvas
             sendMessage={this.props.sendMessage}
             lineColor={this.state.lineColor}
-            latestLineData={this.props.latestLineData} />
-        </div>
+            latestLineData={this.props.latestLineData}
+           />
 
-        <button type="button" onClick={this._undo}>
-          Undo
-        </button>
+           <div id="chat-area">
+             <Chat
+             className="chat-container"
+             sendMessage={this.props.sendMessage}
+             />
+           </div>
+         </div>
 
-        <Chat className="chat-container" />
-
-        <Brushes className="brushes"
-          lineColor={this.state.lineColor}
-          onChange={this.changeColor} />
+      <div id="brush-area">
+         <Brushes
+           className="brushes"
+           lineColor={this.state.lineColor}
+           onChange={this.changeColor}
+         />
+         <button type="button" onClick={this._undo}>
+           Undo
+         </button>
+       </div>
 
       </div>
+
     )
   }
 };
