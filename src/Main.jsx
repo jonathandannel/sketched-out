@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { Switch, Route } from 'react-router-dom'
 import Home     from './Pages/Home.jsx';
 import Room     from './Pages/Room.jsx';
-import Button   from '@material-ui/core/Button';
+import { Button }   from '@material-ui/core/';
 import Login    from './Pages/Login.jsx';
 import Register from './Pages/Register.jsx';
 
