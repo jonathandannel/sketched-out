@@ -31,15 +31,6 @@ export default class Room extends Component {
     }
 
 
-  sendMessage = (sock) => {
-    const message = {
-      type: 'text',
-      content: 'hi!'
-    }
-    sock.send(message)
-    console.log('sending', sock)
-  }
-
 // Drawing Functions
 
   changeColor = (color) => {
@@ -122,8 +113,8 @@ export default class Room extends Component {
   render() {
     return (
       <div className="room-container">
-          <h5 id="drawer-points-display"> {currentlyDrawing} won {newDrawPoints} points! </h5>
-          <h5 id="guesser-points-display"> {correctGuesser} won {newGuessPoints} points! </h5>
+        <h5 id="drawer-points-display"> {currentlyDrawing} won {newDrawPoints} points! </h5>
+        <h5 id="guesser-points-display"> {correctGuesser} won {newGuessPoints} points! </h5>
         <Timer shouldAnimate={this.state.gameStarted} />
         <button onClick={() => {this.sendMessage(this.socket)}}>click</button>
         <br />
