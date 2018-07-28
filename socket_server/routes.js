@@ -1,10 +1,14 @@
+const jwt = require("jsonwebtoken");
+const exjwt = require("express-jwt");
+const dbHelpers = require ('./db/data-helpers')
+const randomstring = require("randomstring");
+const bcrypt = require("bcryptjs");
 
 
-const dbHelpers = require ('./db/data-helper')
 export default (server, db) => {
 
   const dataHelpers = dbHelpers(db)
-  
+
   const jwtMW = exjwt({
     secret: "secretkey"
   });

@@ -2,12 +2,8 @@ const express = require("express");
 const SocketServer = require("ws").Server;
 const uuid = require("uuid/v1");
 const PORT = 8080;
-const jwt = require("jsonwebtoken");
-const exjwt = require("express-jwt");
 const bodyParser = require("body-parser");
 const http = require("http");
-const randomstring = require("randomstring");
-const bcrypt = require("bcryptjs");
 const WebSocket = require('ws');
 const routes = require('./routes')
 
