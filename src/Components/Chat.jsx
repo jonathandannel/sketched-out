@@ -6,9 +6,13 @@ export default class Chat extends Component {
 
   render() {
     return (
-      <div>
-        <MessageList chatMessages={this.props.chatMessages}/>
-        <MessageInput sendMessage={this.props.sendMessage} />
+      <div id="chat-list-and-input">
+        <div id="chat-messages">
+          <MessageList chatMessages={this.props.chatMessages}/>
+        </div>
+        <div id="message-input">
+          <MessageInput sendMessage={this.props.sendMessage} />
+        </div>
       </div>
     )
   }

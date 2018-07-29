@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Paper }from '@material-ui/core';
 
 export default class MessageList extends Component {
   constructor(props) {
@@ -8,7 +9,7 @@ export default class MessageList extends Component {
   getMessages = () => {
     return this.props.chatMessages.map((message) => {
       return (
-        <div> {message} </div>
+        <div> <Paper>{message}</Paper> </div>
       )
     })
   }

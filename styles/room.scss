@@ -7,3 +7,26 @@
   display: flex;
   flex-direction: row;
 }
+
+#chat-area {
+  background-color: #cbd0d8;
+  width: 30%;
+  font-size: 1.2rem;
+  display: flex;
+  flex-direction: column-reverse;
+  margin-bottom: 4px;
+  padding-right: 3px;
+
+  input {
+    width: 100%;
+    font-size: 20px;
+  }
+}
+
+#chat-messages {
+
+}
+
+#chat-list-and-input {
+  width: 100%
+}

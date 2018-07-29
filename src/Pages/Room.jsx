@@ -130,11 +130,13 @@ export default class Room extends Component {
             lineColor={this.state.lineColor}
             latestLineData={this.props.latestLineData}
           />
-          <Chat
-            className="chat-area"
-            sendMessage={this.props.sendMessage}
-            chatMessages={this.props.chatMessages}
-          />
+          <span id="chat-area">
+            <Chat
+              className="chat-area"
+              sendMessage={this.props.sendMessage}
+              chatMessages={this.props.chatMessages}
+            />
+          </span>
         </div>
 
         <div id="brush-container">
