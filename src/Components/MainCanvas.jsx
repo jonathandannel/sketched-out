@@ -30,7 +30,7 @@ export default class MainCanvas extends Component {
         type: 'latestLineData',
         content: this.userLines
       })
-    }, 600)
+    }, 1000)
   }
 
   handleMouseDown = ({ nativeEvent })=> {
@@ -91,7 +91,6 @@ export default class MainCanvas extends Component {
 
   render() {
     if (this.props.latestLineData.length > 0) {
-      console.log(this.props.latestLineData)
 
       this.props.latestLineData
       .slice(this.latestLineIndex)
@@ -101,7 +100,7 @@ export default class MainCanvas extends Component {
 
       this.latestLineIndex = this.userLines.length - 1
     }
-    
+
     this.userStrokeStyle = this.props.lineColor
 
     return (

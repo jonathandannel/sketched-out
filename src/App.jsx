@@ -9,7 +9,8 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      latestLineData: []
+      latestLineData: [],
+      chatMessages: []
     }
   }
 
@@ -32,6 +33,14 @@ class App extends Component {
             latestLineData: parsedMessage.content
           });
         break;
+
+        case 'chatMessages':
+          let allMessages = this.state.chatMessages.slice();
+          allMessages.push(parsedMessage.content)
+          this.setState({
+            chatMessages: allMessages
+          })
+        break;
       }
     }
   }
@@ -45,7 +54,9 @@ class App extends Component {
       <div>
         <NavBar />
         <Main
-          latestLineData={this.state.latestLineData} sendMessage={this.sendMessage}
+          latestLineData={this.state.latestLineData}
+          sendMessage={this.sendMessage}
+          chatMessages={this.state.chatMessages}
         />
       </div>
     )

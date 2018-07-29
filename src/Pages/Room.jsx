@@ -114,7 +114,7 @@ export default class Room extends Component {
     return (
       <div id="room-container">
 
-        <div class="game-info">
+        <div className="game-info">
           <h5 id="drawer-points-display"> {currentlyDrawing} won {newDrawPoints} points! </h5>
           <h5 id="guesser-points-display"> {correctGuesser} won {newGuessPoints} points! </h5>
 
@@ -133,6 +133,7 @@ export default class Room extends Component {
           <Chat
             className="chat-area"
             sendMessage={this.props.sendMessage}
+            chatMessages={this.props.chatMessages}
           />
         </div>
 

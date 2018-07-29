@@ -22,6 +22,7 @@ class Main extends Component {
               <Room
                 latestLineData={this.props.latestLineData}
                 sendMessage={this.props.sendMessage}
+                chatMessages={this.props.chatMessages}
               />
             )}
           />

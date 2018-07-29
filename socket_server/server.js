@@ -37,26 +37,32 @@ MongoClient.connect(MONGODB_URI)
     }));
 
 
-    routes(server, db) 
+    routes(server, db)
 
 
     const wss = new SocketServer({
       server: httpServer
     });
+
     wss.on("connection", (ws, req) => {
       console.log("==> User connected!");
 
       ws.on('message', (data) => {
         console.log(data)
+        const message = JSON.parse(data);
+
         wss.clients.forEach((client) => {
-          if (client !== ws && client.readyState === WebSocket.OPEN)
+          if (client !== ws && client.readyState === WebSocket.OPEN && message.type !== 'chatMessages') {
             client.send(data);
+          } else {
+            client.send(data);
+          }
         })
       });
 
       ws.on("close", () => console.log("Client disconnected"));
     });
-      
+
 
 
     httpServer.listen(PORT, "0.0.0.0", "localhost", () =>
@@ -67,4 +73,3 @@ MongoClient.connect(MONGODB_URI)
     console.error(`Failed to connect: ${MONGODB_URI}`)
     throw err
   })
-
