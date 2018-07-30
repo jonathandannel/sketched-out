@@ -23,6 +23,7 @@ class Main extends Component {
                 latestLineData={this.props.latestLineData}
                 sendMessage={this.props.sendMessage}
                 chatMessages={this.props.chatMessages}
+                currentUser={this.props.currentUser}
               />
             )}
           />

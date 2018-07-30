@@ -10,7 +10,8 @@ class App extends Component {
     super(props)
     this.state = {
       latestLineData: [],
-      chatMessages: []
+      chatMessages: [],
+      currentUser: 'jonathan'
     }
   }
 
@@ -57,6 +58,7 @@ class App extends Component {
           latestLineData={this.state.latestLineData}
           sendMessage={this.sendMessage}
           chatMessages={this.state.chatMessages}
+          currentUser={this.state.currentUser}
         />
       </div>
     )

@@ -9,7 +9,7 @@ export default class Chat extends Component {
     if (e.key === 'Enter' && e.target.value.length > 0) {
       this.props.sendMessage({
         type: 'chatMessages',
-        content: e.target.value
+        content: e.target.value + this.props.currentUser
       });
       e.target.value = '';
     }

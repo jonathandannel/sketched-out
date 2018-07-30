@@ -26,10 +26,19 @@ export default class Room extends Component {
       gameStarted: false,
       currentClue: null,
       currentlyDrawing: roomPlayers[0],
-      lineColor: 'white'
+      lineColor: 'white',
+      currentUsers: ['mo', 'farid']
       }
-    }
+  }
 
+
+  componentWillMount() {
+    let allUsers = this.state.currentUsers.slice();
+    allUsers.push(this.props.currentUser)
+    this.setState({
+      currentUsers: allUsers
+    })
+  }
 
 // Drawing Functions
 
@@ -135,6 +144,7 @@ export default class Room extends Component {
               className="chat-area"
               sendMessage={this.props.sendMessage}
               chatMessages={this.props.chatMessages}
+              currentUser={this.props.currentUser}
             />
           </span>
         </div>

@@ -8,10 +8,14 @@ export default class Chat extends Component {
     return (
       <div id="chat-list-and-input">
         <div id="chat-messages">
-          <MessageList chatMessages={this.props.chatMessages}/>
+          <MessageList
+            chatMessages={this.props.chatMessages}
+          />
         </div>
         <div id="message-input">
-          <MessageInput sendMessage={this.props.sendMessage} />
+          <MessageInput
+            currentUser={this.props.currentUser}
+            sendMessage={this.props.sendMessage} />
         </div>
       </div>
     )
