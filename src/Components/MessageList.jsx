@@ -9,7 +9,9 @@ export default class MessageList extends Component {
   getMessages = () => {
     return this.props.chatMessages.map((message) => {
       return (
-        <div> <Paper>{message}</Paper> </div>
+        <div id="single-message">
+          <Paper>{message}</Paper>
+        </div>
       )
     })
   }

@@ -7,12 +7,10 @@ export default class Chat extends Component {
 
   handleInput = (e) => {
     if (e.key === 'Enter' && e.target.value.length > 0) {
-
       this.props.sendMessage({
         type: 'chatMessages',
         content: e.target.value
       });
-
       e.target.value = '';
     }
   }
