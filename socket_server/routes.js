@@ -21,7 +21,7 @@ module.exports = function routes(server, db) {
     {
       id: 2,
       username: "mo",
-      password: "mo"
+      password: "$2a$10$IfTDfRm6FLb2rv3PfRKwEOedzNe0TbBMIeZPb2XxTe4HUf3kG3caa"
     }
   ];
 

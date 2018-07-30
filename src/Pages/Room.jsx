@@ -25,9 +25,9 @@ export default class Room extends Component {
     this.state = {
       gameStarted: false,
       currentClue: null,
-      currentlyDrawing: roomPlayers[0],
+      currentlyDrawing: currentUsers[0],
       lineColor: 'white',
-      currentUsers: ['GameBot']
+      currentUsers: []
     }
   }
 
