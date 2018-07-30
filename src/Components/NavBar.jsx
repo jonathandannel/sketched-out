@@ -8,7 +8,21 @@ import {  Button,
 
 
 export default class NavBar extends Component {
+
   render() {
+    let buttons
+    if (this.props.currentUser){  
+      buttons = 
+      <div className='authButtons'>
+        <Button component={Link} to='/'>Logout</Button>
+      </div>
+    } else {
+      buttons = 
+      <div className='authButtons'>
+        <Button component={Link} to='/login'>Login</Button>
+        <Button component={Link} to='/register'>Register</Button>
+      </div>
+    }
     return (
       <AppBar>
         <Toolbar className='navbar'>
@@ -18,10 +32,8 @@ export default class NavBar extends Component {
                 <h1 className='title'>SKETCHED OUT</h1>
               </Link> 
           </div>
-          <div className='authButtons'>
-            <Button component={Link} to='/login'>Login</Button>
-            <Button component={Link} to='/register'>Register</Button>
-          </div>
+          
+           {buttons}
         </Toolbar>
 
       </AppBar>

@@ -9,7 +9,8 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      latestLineData: []
+      latestLineData: [],
+      currentUser: ''
     }
   }
 
@@ -31,9 +32,20 @@ class App extends Component {
           this.setState({
             latestLineData: parsedMessage.content
           });
+        case 'userName':
+          this.setState({
+            currentUser: parsedMessage.content
+          })
         break;
       }
     }
+  }
+
+  setUser = userName => {
+    console.log('setuser user:',userName)
+    this.setState({
+      currentUser: userName
+    })
   }
 
   sendMessage = message => {
@@ -43,9 +55,11 @@ class App extends Component {
   render() {
     return (
       <div>
-        <NavBar />
+        <NavBar currentUser={this.state.currentUser}/>
         <Main
-          latestLineData={this.state.latestLineData} sendMessage={this.sendMessage}
+          latestLineData={this.state.latestLineData} 
+          sendMessage={this.sendMessage}
+          setUser={this.setUser}
         />
       </div>
     )

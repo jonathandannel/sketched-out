@@ -15,7 +15,13 @@ class Main extends Component {
         <Switch>
           <Route exact path='/' component={Home} />
           <Route exact path='/home' component={Home} />
-          <Route exact path='/login' component={Login} />
+          <Route exact path='/login' render=
+            {(props) => (
+              <Login
+                sendMessage={this.props.sendMessage}
+                setUser={this.props.setUser}
+              />
+            )} />
           <Route exact path='/register' component={Register} />
           <Route exact path='/room' render=
             {(props) => (
@@ -25,7 +31,6 @@ class Main extends Component {
               />
             )}
           />
-          <Route exact path="/login" component={Login} />
           <Route exact path='/register' component={Register} />
         </Switch>
       </main>
