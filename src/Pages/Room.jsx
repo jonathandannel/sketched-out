@@ -25,7 +25,6 @@ export default class Room extends Component {
     this.state = {
       gameStarted: false,
       currentClue: null,
-      currentlyDrawing: currentUsers[0],
       lineColor: 'white',
       currentUsers: []
     }
@@ -55,8 +54,12 @@ export default class Room extends Component {
 // Game Logic Functions
 
   setNextPlayer = () => {
-    let i = (roomPlayers.indexOf(this.state.currentlyDrawing) + 1) % roomPlayers.length
-    this.setState({currentlyDrawing: roomPlayers[i]})
+    let users = this.state.currentUsers.slice();
+    let firstUser = users.shift
+    users.push(firstUser);
+    this.setState({
+      currentUsers: users
+    })
   }
 
   getTimeRemaining = () => {
@@ -137,6 +140,8 @@ export default class Room extends Component {
             sendMessage={this.props.sendMessage}
             lineColor={this.state.lineColor}
             latestLineData={this.props.latestLineData}
+            currentlyDrawing={this.state.currentUsers[0]}
+            currentUser={this.props.currentUser}
           />
           <span id="chat-area">
             <Chat

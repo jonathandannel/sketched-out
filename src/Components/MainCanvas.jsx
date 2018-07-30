@@ -34,13 +34,15 @@ export default class MainCanvas extends Component {
   }
 
   handleMouseDown = ({ nativeEvent })=> {
-    const { offsetX, offsetY } = nativeEvent;
-    this.isPainting = true;
-    this.prevPos = { offsetX, offsetY };
+    if (this.props.currentUser === this.props.currentlyDrawing) {
+      const { offsetX, offsetY } = nativeEvent;
+      this.isPainting = true;
+      this.prevPos = { offsetX, offsetY };
+    }
   }
 
   handleMouseMove = ({ nativeEvent }) => {
-    if (this.isPainting) {
+    if (this.isPainting && this.props.currentlyDrawing === this.props.currentUser) {
       const { offsetX, offsetY } = nativeEvent;
       const offsetData = { offsetX, offsetY };
 
