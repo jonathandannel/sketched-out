@@ -17,10 +17,6 @@ class Login extends Component {
 
   componentWillMount() {
     console.log(this.props.history);
-    if (this.Auth.loggedIn()){
-      console.log("redirecting!")
-      this.props.history.replace('/');
-    }
   }
 
   render() {
