@@ -16,7 +16,6 @@ var newGuessPoints  = 0;
 var correctGuess    = false;
 var roomPlayers     = ['PaintyGuy', 'Van Gogh', 'Yo Mama'];
 var correctGuesser  = roomPlayers[1];
-var currentlyDrawing = roomPlayers[0];
 
 export default class Room extends Component {
   constructor(props) {
@@ -31,7 +30,7 @@ export default class Room extends Component {
   }
 
 
-  componentDidMount() {
+  componentWillMount() {
     let allUsers = this.state.currentUsers.slice();
     allUsers.push(this.props.currentUser)
     this.setState({
@@ -55,7 +54,7 @@ export default class Room extends Component {
 
   setNextPlayer = () => {
     let users = this.state.currentUsers.slice();
-    let firstUser = users.shift
+    let firstUser = users.shift();
     users.push(firstUser);
     this.setState({
       currentUsers: users
@@ -126,8 +125,8 @@ export default class Room extends Component {
       <div id="room-container">
 
         <div className="game-info">
-          <h5 id="drawer-points-display"> {currentlyDrawing} won {newDrawPoints} points! </h5>
-          <h5 id="guesser-points-display"> {correctGuesser} won {newGuessPoints} points! </h5>
+          <h5 id="drawer-points-display"> {this.state.currentUsers[0]} won {newDrawPoints} points! </h5>
+          <h5 id="guesser-points-display"> {this.state.currentUsers[0]} won {newGuessPoints} points! </h5>
 
           <Timer shouldAnimate={this.state.gameStarted} />
 

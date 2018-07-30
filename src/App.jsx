@@ -51,7 +51,7 @@ class App extends Component {
       currentUser: userName
     })
   }
-  
+
   clearUser = () =>{
     this.setState({
       currentUser: ''
@@ -65,8 +65,9 @@ class App extends Component {
   render() {
     return (
       <div>
-        <NavBar currentUser={this.state.currentUser}
-                clearUser={this.clearUser}/>
+        <NavBar
+          currentUser={this.state.currentUser}
+          clearUser={this.clearUser}/>
         <Main
           latestLineData={this.state.latestLineData}
           sendMessage={this.sendMessage}
