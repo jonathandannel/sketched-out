@@ -24,21 +24,18 @@ export default class Room extends Component {
     this.state = {
       gameStarted: false,
       currentClue: null,
-      lineColor: 'white',
-      currentUsers: []
+      lineColor: 'white'
     }
   }
 
-
-  componentWillMount() {
-    let allUsers = this.state.currentUsers.slice();
-    allUsers.push(this.props.currentUser)
-    this.setState({
-      currentUsers: allUsers
-    }, () => {
-      this.startRound()
-      console.log(allUsers)
+  componentDidMount() {
+    this.props.sendMessage({
+      type: 'roomUpdate',
+      content: {
+        roomUsers: [...this.props.roomUsers, this.props.currentUser]
+      }
     })
+    console.log("users array from room CDM", [...this.props.roomUsers, this.props.currentUser])
   }
 
 // Drawing Functions
@@ -53,11 +50,15 @@ export default class Room extends Component {
 // Game Logic Functions
 
   setNextPlayer = () => {
-    let users = this.state.currentUsers.slice();
+    let users = this.props.roomUsers.slice();
     let firstUser = users.shift();
     users.push(firstUser);
-    this.setState({
-      currentUsers: users
+
+    this.props.sendMessage({
+      type: 'roomUpdate',
+      content: {
+        roomUsers: users
+      }
     })
   }
 
@@ -125,8 +126,8 @@ export default class Room extends Component {
       <div id="room-container">
 
         <div className="game-info">
-          <h5 id="drawer-points-display"> {this.state.currentUsers[0]} won {newDrawPoints} points! </h5>
-          <h5 id="guesser-points-display"> {this.state.currentUsers[0]} won {newGuessPoints} points! </h5>
+          <h5 id="drawer-points-display"> {this.props.roomUsers[0]} won {newDrawPoints} points! </h5>
+          <h5 id="guesser-points-display"> {} won {newGuessPoints} points! </h5>
 
           <Timer shouldAnimate={this.state.gameStarted} />
 
@@ -139,7 +140,7 @@ export default class Room extends Component {
             sendMessage={this.props.sendMessage}
             lineColor={this.state.lineColor}
             latestLineData={this.props.latestLineData}
-            currentlyDrawing={this.state.currentUsers[0]}
+            currentlyDrawing={this.props.roomUsers[0]}
             currentUser={this.props.currentUser}
           />
           <span id="chat-area">

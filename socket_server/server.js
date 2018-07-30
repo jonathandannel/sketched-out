@@ -48,8 +48,12 @@ MongoClient.connect(MONGODB_URI)
       console.log("==> User connected!");
 
       ws.on('message', (data) => {
-        console.log(data)
+
         const message = JSON.parse(data);
+        
+        if (message.type === 'roomUpdate') {
+          console.log(message)
+        }
 
         wss.clients.forEach((client) => {
           if (client !== ws && client.readyState === WebSocket.OPEN && message.type !== 'chatMessages') {

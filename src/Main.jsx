@@ -26,10 +26,12 @@ class Main extends Component {
           <Route exact path='/room' render=
             {(props) => (
               <Room
+                roomState={this.props.roomState}
                 latestLineData={this.props.latestLineData}
                 sendMessage={this.props.sendMessage}
                 chatMessages={this.props.chatMessages}
                 currentUser={this.props.currentUser}
+                roomUsers={this.props.roomUsers}
               />
             )}
           />

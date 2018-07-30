@@ -30,11 +30,14 @@ export default class MainCanvas extends Component {
         type: 'latestLineData',
         content: this.userLines
       })
-    }, 1000)
+    }, 3000)
+
+    console.log('CURRENTLYDRAWING', this.props.currentlyDrawing);
+    console.log('CURRENTUSER', this.props.currentUser);
   }
 
   handleMouseDown = ({ nativeEvent })=> {
-    if (this.props.currentUser === this.props.currentlyDrawing) {
+    if (this.props.currentlyDrawing === this.props.currentUser) {
       const { offsetX, offsetY } = nativeEvent;
       this.isPainting = true;
       this.prevPos = { offsetX, offsetY };
@@ -42,7 +45,7 @@ export default class MainCanvas extends Component {
   }
 
   handleMouseMove = ({ nativeEvent }) => {
-    if (this.isPainting && this.props.currentlyDrawing === this.props.currentUser) {
+    if (this.isPainting) {
       const { offsetX, offsetY } = nativeEvent;
       const offsetData = { offsetX, offsetY };
 
@@ -63,6 +66,7 @@ export default class MainCanvas extends Component {
   }
 
   paint = (prevPos, currPos, strokeStyle) => {
+    console.log('PAINT EXECUTING')
     const { offsetX, offsetY } = currPos;
     const { offsetX: x, offsetY: y } = prevPos;
 

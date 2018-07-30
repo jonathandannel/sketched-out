@@ -11,7 +11,8 @@ class App extends Component {
     this.state = {
       latestLineData: [],
       chatMessages: [],
-      currentUser: ''
+      currentUser: '',
+      roomUsers: []
     }
   }
 
@@ -26,7 +27,6 @@ class App extends Component {
 
     this.socket.onmessage = (e) => {
       const parsedMessage = JSON.parse(e.data)
-      console.log(parsedMessage);
 
       switch (parsedMessage.type) {
         case 'latestLineData':
@@ -39,6 +39,11 @@ class App extends Component {
           allMessages.push(parsedMessage.content)
           this.setState({
             chatMessages: allMessages
+          })
+        break;
+        case 'roomUpdate':
+          this.setState({
+            roomUsers: parsedMessage.content.roomUsers
           })
         break;
       }
@@ -75,6 +80,7 @@ class App extends Component {
           currentUser={this.state.currentUser}
           setUser={this.setUser}
           clearUser={this.clearUser}
+          roomUsers={this.state.roomUsers}
         />
       </div>
     )
