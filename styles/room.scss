@@ -1,6 +1,7 @@
 #room-container {
   display: flex;
-  flex-direction: column
+  flex-direction: column;
+  margin-top: 100px;
 }
 
 #canvas-container {
@@ -16,6 +17,7 @@
   flex-direction: column-reverse;
   margin-bottom: 4px;
   padding-right: 3px;
+  margin-left: 5px;
 
   input {
     width: 100%;
@@ -32,8 +34,9 @@
   padding-left: 4%;
   font-size: 20px;
   height: 30px;
+  margin: 2px;
 }
 
 #chat-list-and-input {
-  width: 100%
+  width: 100%;
 }
