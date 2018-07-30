@@ -64,10 +64,11 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className='mainContainer'>
         <NavBar currentUser={this.state.currentUser}
                 clearUser={this.clearUser}/>
-        <Main
+    
+        <Main 
           latestLineData={this.state.latestLineData}
           sendMessage={this.sendMessage}
           chatMessages={this.state.chatMessages}
