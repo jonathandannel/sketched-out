@@ -33,6 +33,10 @@ class App extends Component {
           this.setState({
             latestLineData: parsedMessage.content
           });
+        case 'userName':
+          this.setState({
+            currentUser: parsedMessage.content
+          })
         break;
 
         case 'chatMessages':
@@ -46,6 +50,13 @@ class App extends Component {
     }
   }
 
+  setUser = userName => {
+    console.log('setuser user:',userName)
+    this.setState({
+      currentUser: userName
+    })
+  }
+
   sendMessage = message => {
     this.socket.send(JSON.stringify(message))
   }
@@ -53,12 +64,13 @@ class App extends Component {
   render() {
     return (
       <div>
-        <NavBar />
+        <NavBar currentUser={this.state.currentUser}/>
         <Main
           latestLineData={this.state.latestLineData}
           sendMessage={this.sendMessage}
           chatMessages={this.state.chatMessages}
           currentUser={this.state.currentUser}
+          setUser={this.setUser}
         />
       </div>
     )
