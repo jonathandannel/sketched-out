@@ -11,7 +11,7 @@ export default class MessageList extends Component {
       return (
           <Paper>
             <div id="single-message">
-              {message}
+              {message.username}: {message.text}
             </div>
           </Paper>
       )

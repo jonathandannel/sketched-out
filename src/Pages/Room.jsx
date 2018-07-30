@@ -27,16 +27,19 @@ export default class Room extends Component {
       currentClue: null,
       currentlyDrawing: roomPlayers[0],
       lineColor: 'white',
-      currentUsers: ['mo', 'farid']
-      }
+      currentUsers: ['GameBot']
+    }
   }
 
 
-  componentWillMount() {
+  componentDidMount() {
     let allUsers = this.state.currentUsers.slice();
     allUsers.push(this.props.currentUser)
     this.setState({
       currentUsers: allUsers
+    }, () => {
+      this.startRound()
+      console.log(allUsers)
     })
   }
 
@@ -113,10 +116,6 @@ export default class Room extends Component {
     this.guesserPoints(timeRemaining);
     this.setNextPlayer();
     this.startRound();
-  }
-
-  componentDidMount() {
-    this.startRound()
   }
 
   render() {
