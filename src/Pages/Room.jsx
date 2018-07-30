@@ -26,10 +26,22 @@ export default class Room extends Component {
       gameStarted: false,
       currentClue: null,
       currentlyDrawing: roomPlayers[0],
-      lineColor: 'white'
-      }
+      lineColor: 'white',
+      currentUsers: ['GameBot']
     }
+  }
 
+
+  componentDidMount() {
+    let allUsers = this.state.currentUsers.slice();
+    allUsers.push(this.props.currentUser)
+    this.setState({
+      currentUsers: allUsers
+    }, () => {
+      this.startRound()
+      console.log(allUsers)
+    })
+  }
 
 // Drawing Functions
 
@@ -106,10 +118,6 @@ export default class Room extends Component {
     this.startRound();
   }
 
-  componentDidMount() {
-    this.startRound()
-  }
-
   render() {
     return (
       <div id="room-container">
@@ -135,6 +143,7 @@ export default class Room extends Component {
               className="chat-area"
               sendMessage={this.props.sendMessage}
               chatMessages={this.props.chatMessages}
+              currentUser={this.props.currentUser}
             />
           </span>
         </div>

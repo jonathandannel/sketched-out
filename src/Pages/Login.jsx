@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom'
 // import './Login.css';
 import AuthService from "../AuthService.jsx";
 
@@ -9,17 +10,19 @@ class Login extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.Auth = new AuthService();
+    this.state = {
+      loggedIn: false
+    }
   }
 
   componentWillMount() {
     console.log(this.props.history);
-    if (this.Auth.loggedIn()){
-      console.log("redirecting!")
-      this.props.history.replace('/');
-    }
   }
 
   render() {
+    if (this.state.loggedIn){
+      return <Redirect to='/'/>
+    }
     return (
       <div className="center">
         <div className="card">
@@ -56,13 +59,16 @@ class Login extends Component {
     )
   }
 
-
   handleFormSubmit(e) {
     e.preventDefault();
 
     this.Auth.login(this.state.username, this.state.password)
       .then(res => {
-        this.props.history.replace('/');
+        console.log('here?')
+        this.props.setUser(this.Auth.getProfile().username)
+        this.setState({
+          loggedIn: true
+        })
       })
       .catch(err => {
         alert(err);

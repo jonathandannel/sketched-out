@@ -80,7 +80,7 @@ export default class AuthService {
 
   handleLogout() {
     Auth.logout()
-    this.props.history.replace('/login');
+    this.props.history.replace('/');
   }
 
   fetch(url, options) {

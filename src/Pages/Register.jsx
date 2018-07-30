@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import { Redirect } from 'react-router-dom'
 import AuthService from "../AuthService.jsx";
 
 export default class Register extends Component {
@@ -8,6 +8,9 @@ export default class Register extends Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
     this.Auth = new AuthService()
+    this.state = {
+      loggedIn: false
+    }
   }
 
   componentWillMount(){
@@ -17,6 +20,9 @@ export default class Register extends Component {
   }
   
   render() {
+    if (this.state.loggedIn){
+      return <Redirect to='/'/>
+    }
     return (
       <div>
         <form action="/register" method="post" onSubmit={this.handleFormSubmit}>
@@ -59,7 +65,10 @@ export default class Register extends Component {
 
     this.Auth.register(this.state.username, this.state.password)
       .then(res => {
-        this.props.history.replace('/');
+        this.props.setUser(this.Auth.getProfile().username)
+        this.setState({
+          loggedIn: true
+        })
       })
       .catch(err => {
         alert(err);

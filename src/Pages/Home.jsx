@@ -41,26 +41,6 @@ export default class Home extends Component {
         <div>
         </div>
         <SimpleModalWrapped />
-        <h1>some stuff</h1>
-        <h1>some stuff</h1>
-
-        <h1>some stuff</h1>
-
-        <h1>some stuff</h1>
-
-        <h1>some stuff</h1>
-
-        <h1>some stuff</h1>
-
-        <h1>some stuff</h1>
-
-        <h1>some stuff</h1>
-
-        <h1>some stuff</h1>
-
-        <h1>some stuff</h1>
-
-
       </div>
 
     )
