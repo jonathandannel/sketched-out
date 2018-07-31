@@ -16,7 +16,7 @@ var newGuessPoints  = 0;
 var correctGuess    = false;
 var roomPlayers     = ['PaintyGuy', 'Van Gogh', 'Yo Mama'];
 var correctGuesser  = roomPlayers[1];
-
+var currentlyDrawing= roomPlayers[0]
 export default class Room extends Component {
   constructor(props) {
     super(props);
@@ -24,7 +24,8 @@ export default class Room extends Component {
     this.state = {
       gameStarted: false,
       currentClue: null,
-      lineColor: 'white'
+      lineColor: 'white',
+      
     }
   }
 

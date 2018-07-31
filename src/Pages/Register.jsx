@@ -13,12 +13,13 @@ import {  Button,
 export default class Register extends Component {
   constructor(){
     super();
-    this.handleChange = this.handleChange.bind(this)
+    this.handleUser = this.handleUser.bind(this)
+    this.handlePass = this.handlePass.bind(this)
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
     this.Auth = new AuthService()
     this.state = {
       loggedIn: false,
-      open: false
+      open: false,
     }
   }
   handleClickOpen = () => {
@@ -29,44 +30,66 @@ export default class Register extends Component {
     this.setState({ open: false });
   };
 
-
   render() {
     if (this.state.loggedIn){
       return <Redirect to='/'/>
     }
     return (
       <div>
-        <form action="/register" method="post" onSubmit={this.handleFormSubmit}>
-        <div>
-          <label for="username">Username: </label>
-          <input 
-          className="username"
-          name="username"
-          type="text"
-          onChange={this.handleChange}
-          />
-          <label for="password">Password: </label>
-          <input 
-          className="password" 
-          name="password"
-          type="password" 
-          onChange={this.handleChange}
-          />
-          <button 
-          className="submit"
-          type="submit" 
-          value="SUBMIT" 
-          >Register</button>
-        </div>
-        </form>
+        <Button onClick={this.handleClickOpen}>Register</Button>
+          <Dialog
+            open={this.state.open}
+            onClose={this.handleClose}
+            aria-labelledby="form-dialog-title"
+          >
+            <DialogTitle id="form-dialog-title">Register</DialogTitle>
+            <DialogContent>
+              <TextField
+                autoFocus
+                margin="dense"
+                label="Username"
+                type="text"
+                fullWidth
+                value={this.state.username}
+                onChange={this.handleUser}
+              />
+              <TextField
+                autoFocus
+                margin="dense"
+                label="Password"
+                type="password"
+                fullWidth
+                value={this.state.password}
+                onChange={this.handlePass}
+              />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={this.handleClose} color="primary">
+                Cancel
+              </Button>
+              <Button         
+                      onClick={this.handleFormSubmit} color="primary">
+                Register
+              </Button>
+            </DialogActions>
+          </Dialog>
       </div>
     )
   }
-  handleChange(e) {
+  handleUser(e) {
 
     this.setState(
       {
-        [e.target.name]: e.target.value
+        username: e.target.value
+      }
+    )
+  }
+
+  handlePass(e) {
+
+    this.setState(
+      {
+        password: e.target.value
       }
     )
   }
@@ -76,9 +99,8 @@ export default class Register extends Component {
 
     this.Auth.register(this.state.username, this.state.password)
       .then(res => {
-        this.props.setUser(this.Auth.getProfile().username)
-        this.setState({
-          loggedIn: true
+        this.props.setUser(this.Auth.getProfile().username, () => {
+          this.setState({loggedIn: true})
         })
       })
       .catch(err => {
@@ -126,3 +148,39 @@ export default class Register extends Component {
     </Button>
   </DialogActions>
 </Dialog> */}
+
+
+
+        {/* <div>
+          <label for="username">Username: </label>
+          <input 
+          className="username"
+          name="username"
+          type="text"
+          onChange={this.handleChange}
+          />
+          <label for="password">Password: </label>
+          <input 
+          className="password" 
+          name="password"
+          type="password" 
+          onChange={this.handleChange}
+          />
+          <button 
+          className="submit"
+          type="submit" 
+          value="SUBMIT" 
+          >Register</button>
+        </div> */}
+
+        // getInitialUsername = () => {
+        //   return {
+        //     username: ''
+        //   }
+        // }
+      
+        // getInitialPassword = () => {
+        //   return {
+        //     password: ''
+        //   }
+        // }
