@@ -5,7 +5,7 @@ import moment    from 'moment'
 import Button    from '@material-ui/core/Button';
 import Brushes   from '../Components/Brushes.jsx';
 import Chat      from '../Components/Chat.jsx';
-import Timer     from '../Components/Timer.jsx';
+// import Timer     from '../Components/Timer.jsx';
 import Modal     from '@material-ui/core/Modal';
 import MainCanvas from '../Components/MainCanvas.jsx';
 
@@ -118,12 +118,12 @@ export default class Room extends Component {
     this.startRound();
     //tell the socket
   }
-
+  
   render() {
     return (
       <div id="room-container">
         <span>Your clue is: <b>{this.state.currentClue}</b>
-          <Timer shouldAnimate={this.state.gameStarted} />
+       
         </span>
       <div id="canvas-container">
         <div id="brush-container">
