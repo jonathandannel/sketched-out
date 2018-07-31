@@ -128,6 +128,7 @@ export default class Room extends Component {
         <div className="game-info">
           <h5 id="drawer-points-display"> {this.props.roomUsers[0]} won {newDrawPoints} points! </h5>
           <h5 id="guesser-points-display"> {} won {newGuessPoints} points! </h5>
+        </div>
         <span>Your clue is: <b>{this.state.currentClue}</b>
           <Timer shouldAnimate={this.state.gameStarted} />
         </span>
