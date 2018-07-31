@@ -21,6 +21,7 @@ export default class Chat extends Component {
   render() {
     return (
         <input
+          id="message-input"
           placeholder="guess"
           onKeyDown={this.handleInput}
         />

@@ -48,7 +48,6 @@ export default class Room extends Component {
   changeColor = (color) => {
     console.log("old colour", this.state.lineColor)
     this.setState({lineColor: color.hex})
-    console.log("new colour", this.state.lineColor)
   }
 
 
@@ -105,6 +104,7 @@ export default class Room extends Component {
     setTimeout(() => {
       this.endRound();
     }, 30000)
+    //tell the socket who is drawing
   }
 
   // When correctGuess === true || secondsLeft === 0
@@ -116,22 +116,23 @@ export default class Room extends Component {
     this.guesserPoints(timeRemaining);
     this.setNextPlayer();
     this.startRound();
+    //tell the socket
   }
 
   render() {
     return (
       <div id="room-container">
-
-        <div className="game-info">
-          <h5 id="drawer-points-display"> {currentlyDrawing} won {newDrawPoints} points! </h5>
-          <h5 id="guesser-points-display"> {correctGuesser} won {newGuessPoints} points! </h5>
-
+        <span>Your clue is: <b>{this.state.currentClue}</b>
           <Timer shouldAnimate={this.state.gameStarted} />
-
-          <p>Your clue is: <b>{this.state.currentClue}</b></p>
+        </span>
+      <div id="canvas-container">
+        <div id="brush-container">
+          <Brushes
+            className="brush-area color-picker"
+            lineColor={this.state.lineColor}
+            onChange={this.changeColor}
+          />
         </div>
-
-        <div id="canvas-container">
           <MainCanvas
             className="canvas-area"
             sendMessage={this.props.sendMessage}
@@ -146,22 +147,16 @@ export default class Room extends Component {
               currentUser={this.props.currentUser}
             />
           </span>
-        </div>
-
-        <div id="brush-container">
-          <button type="button" onClick={this._undo}>
+            <div className="game-info">
+              <h5 id="drawer-points-display"> {currentlyDrawing} won {newDrawPoints} points! </h5>
+              <h5 id="guesser-points-display"> {correctGuesser} won {newGuessPoints} points! </h5>
+            </div>
+          </div>
+          <button id="undo-button" className="MuiButton-label-41" type="button" onClick={this._undo}>
             Undo
           </button>
 
-          <Brushes
-            className="brush-area"
-            lineColor={this.state.lineColor}
-            onChange={this.changeColor}
-          />
-        </div>
-
       </div>
-
     )
   }
 };

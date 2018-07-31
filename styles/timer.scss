@@ -1,0 +1,19 @@
+#progressBar {
+  width: 90%;
+  margin: 10px auto;
+  height: 22px;
+  background-color: #73AB84;
+  border-radius: 10px;
+}
+
+#progressBar div {
+  height: 100%;
+  color: #30604B;
+  text-align: right;
+  padding: 0 10px;
+  line-height: 22px;
+  width: 0;
+  background-color: #30604B;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
