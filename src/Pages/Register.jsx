@@ -1,6 +1,14 @@
 import React, {Component} from 'react';
 import { Redirect } from 'react-router-dom'
 import AuthService from "../AuthService.jsx";
+import {  Button,
+          TextField,
+          Dialog,
+          DialogActions,
+          DialogContent,
+          DialogContentText,
+          DialogTitle } from '@material-ui/core'
+
 
 export default class Register extends Component {
   constructor(){
@@ -9,16 +17,19 @@ export default class Register extends Component {
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
     this.Auth = new AuthService()
     this.state = {
-      loggedIn: false
+      loggedIn: false,
+      open: false
     }
   }
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
 
-  componentWillMount(){
-    if (this.Auth.loggedIn()){
-     this.props.history.replace('/') 
-    }
-  }
-  
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
+
   render() {
     if (this.state.loggedIn){
       return <Redirect to='/'/>
@@ -26,27 +37,27 @@ export default class Register extends Component {
     return (
       <div>
         <form action="/register" method="post" onSubmit={this.handleFormSubmit}>
-          <div>
-            <label for="username">Username: </label>
-            <input 
-            className="username"
-            name="username"
-            type="text"
-            onChange={this.handleChange}
-            />
-            <label for="password">Password: </label>
-            <input 
-            className="password" 
-            name="password"
-            type="password" 
-            onChange={this.handleChange}
-            />
-            <button 
-            className="submit"
-            type="submit" 
-            value="SUBMIT" 
-            >Register</button>
-          </div>
+        <div>
+          <label for="username">Username: </label>
+          <input 
+          className="username"
+          name="username"
+          type="text"
+          onChange={this.handleChange}
+          />
+          <label for="password">Password: </label>
+          <input 
+          className="password" 
+          name="password"
+          type="password" 
+          onChange={this.handleChange}
+          />
+          <button 
+          className="submit"
+          type="submit" 
+          value="SUBMIT" 
+          >Register</button>
+        </div>
         </form>
       </div>
     )
@@ -76,3 +87,42 @@ export default class Register extends Component {
   }
 }
 
+
+
+
+{/* <Button onClick={this.handleClickOpen}>Register</Button>
+<Dialog
+  open={this.state.open}
+  onClose={this.handleClose}
+  aria-labelledby="form-dialog-title"
+>
+  <DialogTitle id="form-dialog-title">Register</DialogTitle>
+  <DialogContent>
+    <TextField
+      autoFocus
+      margin="dense"
+      label="Username"
+      type="text"
+      fullWidth
+      onChange={this.handleChange}
+    />
+    <TextField
+      autoFocus
+      margin="dense"
+      label="Password"
+      type="password"
+      fullWidth
+      onChange={this.handleChange}
+    />
+  </DialogContent>
+  <DialogActions>
+    <Button onClick={this.handleClose} color="primary">
+      Cancel
+    </Button>
+    <Button 
+            
+            onClick={this.handleFormSubmit} color="primary">
+      Register
+    </Button>
+  </DialogActions>
+</Dialog> */}

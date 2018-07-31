@@ -71,6 +71,7 @@ class Login extends Component {
         })
       })
       .catch(err => {
+        //change to a error to user
         alert(err);
       })
   }

@@ -6,14 +6,20 @@ import {  Button,
         }
   from '@material-ui/core';
 import AuthService from "../AuthService.jsx";
+import Register from "../Pages/Register.jsx"
 
 
 
 export default class NavBar extends Component {
-  constructor(){
+  constructor() {
     super()
     this.Auth = new AuthService();
+    this.state = {
+      currentUser : ''
+    }
   }
+
+
   render() {
     let buttons
     if (this.props.currentUser){
