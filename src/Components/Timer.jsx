@@ -47,21 +47,24 @@ class Timer extends Component {
    constructor(props) {
     super(props);
     this.timerRef = React.createRef();
+    this.progress = this.progress.bind(this)
   }
 
  progress(timeleft, timetotal, $element) {
     let progressBarWidth = timeleft * $element.width() / timetotal;
     $element.find('div').animate({ width: progressBarWidth }, 30000).html(Math.floor(timeleft/60));
+  ;
     if (timeleft > 0) {
         setTimeout(function() {
-            progress(timeleft - 1, timetotal, $element);
+
+            this.progress(timeleft - 1, timetotal, $element);
         }, 1000);
     }
   }
 
   componentDidMount() {
     if (this.props.shouldAnimate){
-        this.progress(3000, 3000, $('#progressBar'));
+        // this.progress(3000, 3000, $('#progressBar'));
     }
   }
 

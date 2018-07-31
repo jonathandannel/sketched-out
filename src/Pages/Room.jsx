@@ -134,6 +134,7 @@ export default class Room extends Component {
           />
         </div>
           <MainCanvas
+
             className="canvas-area"
             sendMessage={this.props.sendMessage}
             lineColor={this.state.lineColor}
