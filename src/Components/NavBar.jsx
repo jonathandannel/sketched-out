@@ -10,10 +10,15 @@ import AuthService from "../AuthService.jsx";
 
 
 export default class NavBar extends Component {
-  constructor(){
+  constructor() {
     super()
     this.Auth = new AuthService();
+    this.state = {
+      currentUser : ''
+    }
   }
+
+
   render() {
     let buttons
     if (this.props.currentUser){  

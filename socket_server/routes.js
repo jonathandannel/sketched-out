@@ -64,16 +64,16 @@ module.exports = function routes(server, db) {
     const username = req.body.username;
     const password = req.body.password;
     let exists = false;
-
+    let foundUser
     dataHelpers.getUsers().then(users => {
       for (let user of users) {
         if (username == user.username) {
           exists = true;
+          foundUser = user
         }
       }
-
       if (exists === true) {
-        res.status(401).json({
+        return res.status(401).json({
           success: false,
           token: null,
           err: "Username already exists"
@@ -87,26 +87,30 @@ module.exports = function routes(server, db) {
           username: username,
           password: hashedPassword
         };
-        // users.push(newUser)
-        dataHelpers.saveUsers(newUser)
-        //Now we set the token
-        let token = jwt.sign({
-            id: users.id,
-            username: users.username
-          },
-          "secretkey", {
-            expiresIn: 129600
-          }
-        );
-        res.json({
-          success: true,
-          err: null,
-          token
-        });
-        return;
+        console.log('here?')
+        foundUser = newUser
+        return dataHelpers.saveUsers(newUser)
       }
-    }).catch(err =>{
-      console.log(err)
+    }).then(response =>{
+        let token = jwt.sign({
+          id: foundUser.id,
+          username: foundUser.username
+        },
+        "secretkey", {
+          expiresIn: 129600
+        }
+      );
+      if (exists !== true){
+      res.json({
+        success: true,
+        err: null,
+        token
+      });
+    }
+      return;
+    })
+    .catch(err =>{
+    console.log({err})
     })
   })
 
@@ -123,3 +127,20 @@ module.exports = function routes(server, db) {
   });
 
 }
+
+      //   // users.push(newUser)
+      //   //Now we set the token
+      //   let token = jwt.sign({
+      //     id: users.id,
+      //     username: users.username
+      //   },
+      //   "secretkey", {
+      //     expiresIn: 129600
+      //   }
+      // );
+      // res.json({
+      //   success: true,
+      //   err: null,
+      //   token
+      // });
+      // return;

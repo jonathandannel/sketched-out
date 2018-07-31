@@ -13,12 +13,6 @@ export default class Register extends Component {
     }
   }
 
-  componentWillMount(){
-    if (this.Auth.loggedIn()){
-     this.props.history.replace('/') 
-    }
-  }
-  
   render() {
     if (this.state.loggedIn){
       return <Redirect to='/'/>

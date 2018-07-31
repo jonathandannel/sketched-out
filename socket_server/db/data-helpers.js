@@ -5,12 +5,13 @@
 module.exports = function makeDataHelpers(db) {
   return {
     saveUsers: newUser => {
+      console.log('newuser')
       return new Promise((resolve, reject) => {
-        db.collection('users').insertOne((err, newUser) => {
+        db.collection('users').insertOne(newUser, (err, newUser) => {
           if (err) {
             reject(err)
           } else {
-            resolve(null)
+            resolve('done')
           }
         })
       })
