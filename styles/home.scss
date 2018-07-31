@@ -1,5 +1,8 @@
 .room-thumbnail-container {
   margin: auto;
+  display: flex;
+  justify-content: space-around;
+
 }
 
 .room-thumbnail {
@@ -10,8 +13,24 @@
   float: left;
   margin: 10px;
   text-align: center;
+  vertical-align: middle;
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  transition-duration: 0.3s;
+  transition-property: transform;
+}
+
+.room-thumbnail:hover,
+.room-thumbnail:focus,
+.room-thumbnail:active {
+  opacity: 0.8;
+  transform: scale(1.1);
 }
 
 .mainContainer{
   padding-top: 82px;
+  background: rgba(153, 209, 156, 0.1);
+  min-height: 100vh
 }

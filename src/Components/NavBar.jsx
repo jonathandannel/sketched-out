@@ -6,6 +6,7 @@ import {  Button,
         }
   from '@material-ui/core';
 import AuthService from "../AuthService.jsx";
+import Register from "../Pages/Register.jsx"
 
 
 
