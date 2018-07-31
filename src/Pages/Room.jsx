@@ -156,8 +156,9 @@ export default class Room extends Component {
           <button id="undo-button" className="MuiButton-label-41" type="button" onClick={this._undo}>
             Undo
           </button>
+        </div>
 
-      </div>
     )
   }
-};
+}
+;

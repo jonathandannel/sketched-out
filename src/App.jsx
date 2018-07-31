@@ -27,12 +27,13 @@ class App extends Component {
 
     this.socket.onmessage = (e) => {
       const parsedMessage = JSON.parse(e.data)
+      // console.log(parsedMessage);
 
       switch (parsedMessage.type) {
         case 'latestLineData':
-          this.setState({
-            latestLineData: parsedMessage.content
-          });
+          // this.setState({
+          //   latestLineData: parsedMessage.content
+          // });
         break;
         case 'chatMessages':
           let allMessages = this.state.chatMessages.slice();
@@ -50,11 +51,11 @@ class App extends Component {
     }
   }
 
-  setUser = userName => {
+  setUser = (userName, cb) => {
     console.log('setuser user:',userName)
     this.setState({
       currentUser: userName
-    })
+    }, cb())
   }
 
   clearUser = () =>{
@@ -71,9 +72,12 @@ class App extends Component {
     return (
       <div className='mainContainer'>
         <NavBar currentUser={this.state.currentUser}
-                clearUser={this.clearUser}/>
+                clearUser={this.clearUser}
+                setUser={this.setUser}
 
-        <Main
+                />
+    
+        <Main 
           latestLineData={this.state.latestLineData}
           sendMessage={this.sendMessage}
           chatMessages={this.state.chatMessages}

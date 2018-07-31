@@ -7,6 +7,7 @@ import {  Button,
   from '@material-ui/core';
 import AuthService from "../AuthService.jsx";
 import Register from "../Pages/Register.jsx"
+import Login from "../Pages/Login.jsx"
 
 
 
@@ -14,29 +15,26 @@ export default class NavBar extends Component {
   constructor() {
     super()
     this.Auth = new AuthService();
-    this.state = {
-      currentUser : ''
-    }
   }
-
 
   render() {
     let buttons
-    if (this.props.currentUser){
+    let user
+    if (this.Auth.loggedIn()){
+      user = 
+        <div className='userName'>Hi, {this.Auth.getProfile().username}!</div>
       buttons =
       <div className='authButtons'>
         <Button className="nav-button"
-        onClick={()=>{
-          this.props.clearUser()
-          this.Auth.logout()
-        }}
-                component={Link} to='/'>Logout</Button>
-      </div>
+        onClick={()=>{this.Auth.logout()}}
+        component={Link} to='/'>Logout</Button>
+      </div>;
+
     } else {
       buttons =
       <div className='authButtons'>
-        <Button className="nav-button" component={Link} to='/login'>Login</Button>
-        <Button className="nav-button" component={Link} to='/register'>Register</Button>
+        <Login setUser={this.props.setUser}/>
+        <Register setUser={this.props.setUser}/>
       </div>
     }
     return (
@@ -48,7 +46,8 @@ export default class NavBar extends Component {
                 <h1 className='title'>SKETCHED OUT</h1>
               </Link>
           </div>
-           {buttons}
+          {user} 
+          {buttons}
         </Toolbar>
 
       </AppBar>

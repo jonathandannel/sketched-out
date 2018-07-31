@@ -36,9 +36,7 @@ MongoClient.connect(MONGODB_URI)
       extended: true
     }));
 
-
     routes(server, db)
-
 
     const wss = new SocketServer({
       server: httpServer
