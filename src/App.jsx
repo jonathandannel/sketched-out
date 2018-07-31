@@ -26,7 +26,7 @@ class App extends Component {
 
     this.socket.onmessage = (e) => {
       const parsedMessage = JSON.parse(e.data)
-      console.log(parsedMessage);
+      // console.log(parsedMessage);
 
       switch (parsedMessage.type) {
         case 'latestLineData':
@@ -51,7 +51,7 @@ class App extends Component {
       currentUser: userName
     })
   }
-  
+
   clearUser = () =>{
     this.setState({
       currentUser: ''
