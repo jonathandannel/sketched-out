@@ -57,6 +57,7 @@
     "progressbar.js": "^1.0.1",
     "randomcolor": "^0.5.3",
     "randomstring": "^1.1.5",
+    "rc-progress": "^2.2.5",
     "react": "16.4.1",
     "react-color": "^2.14.1",
     "react-dom": "16.4.1",

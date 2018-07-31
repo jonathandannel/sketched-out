@@ -25,6 +25,7 @@ export default class Room extends Component {
       gameStarted: false,
       currentClue: null,
       lineColor: 'white'
+      currentlyDrawing: roomPlayers[0],
     }
   }
 
