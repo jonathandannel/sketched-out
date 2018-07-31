@@ -27,6 +27,10 @@ class App extends Component {
 
     this.socket.onmessage = (e) => {
       const parsedMessage = JSON.parse(e.data)
+<<<<<<< HEAD
+=======
+      // console.log(parsedMessage);
+>>>>>>> aee8263829ada050db3a52296338d3203225b541
 
       switch (parsedMessage.type) {
         case 'latestLineData':
@@ -69,11 +73,19 @@ class App extends Component {
 
   render() {
     return (
+<<<<<<< HEAD
       <div>
         <NavBar
           currentUser={this.state.currentUser}
           clearUser={this.clearUser}/>
         <Main
+=======
+      <div className='mainContainer'>
+        <NavBar currentUser={this.state.currentUser}
+                clearUser={this.clearUser}/>
+    
+        <Main 
+>>>>>>> aee8263829ada050db3a52296338d3203225b541
           latestLineData={this.state.latestLineData}
           sendMessage={this.sendMessage}
           chatMessages={this.state.chatMessages}

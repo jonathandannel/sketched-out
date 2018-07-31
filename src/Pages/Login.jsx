@@ -24,7 +24,7 @@ class Login extends Component {
       return <Redirect to='/'/>
     }
     return (
-      <div className="center">
+      <div className="center login-page">
         <div className="card">
           <h1>Login</h1>
           <form onSubmit={this.handleFormSubmit}>
@@ -71,6 +71,7 @@ class Login extends Component {
         })
       })
       .catch(err => {
+        //change to a error to user
         alert(err);
       })
   }

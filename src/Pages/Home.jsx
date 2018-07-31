@@ -34,8 +34,9 @@ export default class Home extends Component {
         <Button>
           <Link to='room'>Room</Link>
           </Button>
-        <span className="room-thumbnail-container">
           <h3>Active Games</h3>
+        <span className="room-thumbnail-container">
+          
           {this.displayRooms()}
         </span>
         <div>

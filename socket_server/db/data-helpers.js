@@ -5,29 +5,30 @@
 module.exports = function makeDataHelpers(db) {
   return {
     saveUsers: newUser => {
+      console.log('newuser')
       return new Promise((resolve, reject) => {
-        db.collection('users').insertOne(newUser, (err) => {
+        db.collection('users').insertOne(newUser, (err, newUser) => {
           if (err) {
             reject(err)
           } else {
-            resolve(null)
+            resolve('done')
           }
         })
       })
     },
-
-    getUsers: user => {
+    
+    getUsers: () => {
       return new Promise((resolve, reject) => {
-        db.collection('users').find(user).toArray((err, users) => {
-          if (err){
+        let users
+        db.collection('users').find().toArray((err, users) => {
+          if (err) {
             reject(err)
           } else {
+            console.log(users)
             resolve(users)
           }
         })
       })
-
     }
-
   }
 }

@@ -1,6 +1,8 @@
 #room-container {
   display: flex;
-  flex-direction: column
+  flex-direction: column;
+  margin-top: 90px;
+  margin-left: 5px;
 }
 
 #canvas-container {
@@ -16,6 +18,7 @@
   flex-direction: column-reverse;
   margin-bottom: 4px;
   padding-right: 3px;
+  margin-left: 5px;
 
   input {
     width: 100%;
@@ -23,17 +26,28 @@
   }
 }
 
-#chat-messages {
-
+#timer {
+  float: center;
 }
 
-#single-message {
-  padding-top: 5px;
-  padding-left: 4%;
-  font-size: 20px;
-  height: 30px;
+#brush-container {
+  margin-right: 10px;
+  background-color: #e0e0e0;
+  padding: 2px;
+  border-radius: 5px;
+  height: 440px;
 }
 
-#chat-list-and-input {
-  width: 100%
+#drawer-points-display {
+  display: none;
+}
+
+#guesser-points-display {
+  display: none;
+}
+
+#undo-button {
+  color: #3b3c3d;
+  height: 40px;
+  width: 60px;
 }

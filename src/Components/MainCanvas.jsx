@@ -18,8 +18,8 @@ export default class MainCanvas extends Component {
   userStrokeStyle = this.props.lineColor;
 
   componentDidMount() {
-    this.canvas.width = 1000;
-    this.canvas.height = 800;
+    this.canvas.width = 900;
+    this.canvas.height = 450;
     this.ctx = this.canvas.getContext('2d');
     this.ctx.lineJoin = 'round';
     this.ctx.lineCap = 'round';
@@ -113,7 +113,7 @@ export default class MainCanvas extends Component {
         <div>
           <canvas
             ref={(ref) => (this.canvas = ref)}
-            style={ {background: 'black'} }
+            style={ {background: 'white'} }
             onMouseDown={this.handleMouseDown}
             onMouseMove={this.handleMouseMove}
             onMouseUp={this.stopPainting}
