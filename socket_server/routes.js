@@ -13,7 +13,6 @@ module.exports = function routes(server, db) {
     secret: "secretkey"
   });
 
-<<<<<<< HEAD
   const users = [{
       id: 1,
       username: 'a',
@@ -25,19 +24,6 @@ module.exports = function routes(server, db) {
       password: "$2a$10$IfTDfRm6FLb2rv3PfRKwEOedzNe0TbBMIeZPb2XxTe4HUf3kG3caa"
     }
   ];
-=======
-  // const users = [{
-  //     id: 1,
-  //     username: 'a',
-  //     password: '$2a$10$IfTDfRm6FLb2rv3PfRKwEOedzNe0TbBMIeZPb2XxTe4HUf3kG3caa'
-  //   },
-  //   {
-  //     id: 2,
-  //     username: 'mo',
-  //     password: '$2a$10$IfTDfRm6FLb2rv3PfRKwEOedzNe0TbBMIeZPb2XxTe4HUf3kG3caa'
-  //   }
-  // ];
->>>>>>> gerry/testing
 
   server.post("/login", (req, res) => {
     const username = req.body.username;
@@ -72,7 +58,7 @@ module.exports = function routes(server, db) {
       console.log(err)
     })
   })
-    
+
 
   server.post("/register", (req, res) => {
     const username = req.body.username;
@@ -141,23 +127,3 @@ module.exports = function routes(server, db) {
   });
 
 }
-<<<<<<< HEAD
-=======
-
-      //   // users.push(newUser)
-      //   //Now we set the token
-      //   let token = jwt.sign({
-      //     id: users.id,
-      //     username: users.username
-      //   },
-      //   "secretkey", {
-      //     expiresIn: 129600
-      //   }
-      // );
-      // res.json({
-      //   success: true,
-      //   err: null,
-      //   token
-      // });
-      // return;
->>>>>>> gerry/testing

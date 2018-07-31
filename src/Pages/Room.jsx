@@ -16,6 +16,7 @@ var newGuessPoints  = 0;
 var correctGuess    = false;
 var roomPlayers     = ['PaintyGuy', 'Van Gogh', 'Yo Mama'];
 var correctGuesser  = roomPlayers[1];
+var currentlyDrawing = roomPlayers[0];
 
 export default class Room extends Component {
   constructor(props) {
@@ -24,19 +25,22 @@ export default class Room extends Component {
     this.state = {
       gameStarted: false,
       currentClue: null,
-      lineColor: 'white'
       currentlyDrawing: roomPlayers[0],
+      lineColor: 'white',
+      currentUsers: []
     }
   }
 
+
   componentDidMount() {
-    this.props.sendMessage({
-      type: 'roomUpdate',
-      content: {
-        roomUsers: [...this.props.roomUsers, this.props.currentUser]
-      }
+    let allUsers = this.state.currentUsers.slice();
+    allUsers.push(this.props.currentUser)
+    this.setState({
+      currentUsers: allUsers
+    }, () => {
+      this.startRound()
+      console.log(allUsers)
     })
-    console.log("users array from room CDM", [...this.props.roomUsers, this.props.currentUser])
   }
 
 // Drawing Functions
@@ -50,16 +54,8 @@ export default class Room extends Component {
 // Game Logic Functions
 
   setNextPlayer = () => {
-    let users = this.props.roomUsers.slice();
-    let firstUser = users.shift();
-    users.push(firstUser);
-
-    this.props.sendMessage({
-      type: 'roomUpdate',
-      content: {
-        roomUsers: users
-      }
-    })
+    let i = (roomPlayers.indexOf(this.state.currentlyDrawing) + 1) % roomPlayers.length
+    this.setState({currentlyDrawing: roomPlayers[i]})
   }
 
   getTimeRemaining = () => {
@@ -126,10 +122,6 @@ export default class Room extends Component {
   render() {
     return (
       <div id="room-container">
-        <div className="game-info">
-          <h5 id="drawer-points-display"> {this.props.roomUsers[0]} won {newDrawPoints} points! </h5>
-          <h5 id="guesser-points-display"> {} won {newGuessPoints} points! </h5>
-        </div>
         <span>Your clue is: <b>{this.state.currentClue}</b>
           <Timer shouldAnimate={this.state.gameStarted} />
         </span>
@@ -147,8 +139,6 @@ export default class Room extends Component {
             sendMessage={this.props.sendMessage}
             lineColor={this.state.lineColor}
             latestLineData={this.props.latestLineData}
-            currentlyDrawing={this.props.roomUsers[0]}
-            currentUser={this.props.currentUser}
           />
           <span id="chat-area">
             <Chat
