@@ -1,13 +1,30 @@
-[{
-  "id": "5a6NXw",
-  "username": "b",
-  "password": "$2a$10$JExXUuxAkqCEsvIMyTI5De746sZH9fbcOFt8jxSQV11eBuvYyi3ay"
-}, {
-  "id": "sjhPY1",
-  "username": "z",
-  "password": "$2a$10$Ao5plfu9x1fZdI7lz8CYDe.ElWFhREIo4CR.vuiX7DOOAxZt6jxQy"
-}, {
-  "id": "bagAWr",
-  "username": "x",
-  "password": "$2a$10$TXMIQhJ/Bs/H3pyGcF8.c.jAIdqORrZxNQzZ9GzfECb37aaFLQuhK"
-}]
+[
+  {
+    "id": "5a6NXw",
+    "username": "Gerry",
+    "password": "$2a$10$JExXUuxAkqCEsvIMyTI5De746sZH9fbcOFt8jxSQV11eBuvYyi3ay",
+    "correctGuesses": 5,
+    "totalPoints": 345
+  },
+  {
+    "id": "sjhPY1",
+    "username": "Farid",
+    "password": "$2a$10$Ao5plfu9x1fZdI7lz8CYDe.ElWFhREIo4CR.vuiX7DOOAxZt6jxQy",
+    "correctGuesses": 14,
+    "totalPoints": 519
+  },
+  {
+    "id": "bagAWr",
+    "username": "Mo",
+    "password": "$2a$10$TXMIQhJ/Bs/H3pyGcF8.c.jAIdqORrZxNQzZ9GzfECb37aaFLQuhK",
+    "correctGuesses": 21,
+    "totalPoints": 931
+  },
+  {
+    "id": "bagU3S",
+    "username": "Jonathan",
+    "password": "$2a$10$TXMIQhJ/Bs/H3pyGcF8.c.jAIdqORrZxNQzZ9GzfECb37aaFLQuhK",
+    "correctGuesses": 17,
+    "totalPoints": 761
+  }
+]
