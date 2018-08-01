@@ -50,7 +50,7 @@ class App extends Component {
         break;
         case 'latestCanvas':
           this.setState({
-            latestCanvas: parsedMessage.content
+            latestLineData: parsedMessage.content
           })
         break;
       }// this.setState({// this.setState({
@@ -95,7 +95,6 @@ class App extends Component {
           setUser={this.setUser}
           clearUser={this.clearUser}
           userList={this.state.currentUsers}
-          latestCanvas={this.state.latestCanvas}
         />
       </div>
     )

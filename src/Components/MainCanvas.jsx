@@ -24,6 +24,7 @@ export default class MainCanvas extends Component {
     this.ctx.lineJoin = 'round';
     this.ctx.lineCap = 'round';
     this.ctx.lineWidth = 10
+
   }
 
   handleMouseDown = ({ nativeEvent })=> {
@@ -73,11 +74,9 @@ export default class MainCanvas extends Component {
 
   //make message into an object with options
   sendPaintData = () => {
-    this.userLines.push(this.line)
     this.props.sendMessage({
       type: 'latestLineData',
-      content: this.userLines
-
+      content: [this.line]
     })
     this.latestLineIndex = this.userLines.length - 1
   }
@@ -87,19 +86,18 @@ export default class MainCanvas extends Component {
   }
 
   render() {
+    if (this.props.latestLineData.length > 0) {
 
-      if (this.props.latestCanvas.length > 0) {
+      this.props.latestLineData
+      .slice(this.latestLineIndex)
+      .forEach((line) => {
+        this.paint(line.prevPos, line.currPos, line.strokeStyle)
+      });
 
-        this.props.latestLineData
-        .slice(this.latestLineIndex)
-        .forEach((line) => {
-          this.paint(line.prevPos, line.currPos, line.strokeStyle)
-        });
+      this.latestLineIndex = this.userLines.length - 1
+    }
 
-        this.latestLineIndex = this.userLines.length - 1
-      }
-
-      this.userStrokeStyle = this.props.lineColor
+    this.userStrokeStyle = this.props.lineColor
 
     return (
         <div>
