@@ -1,0 +1,8 @@
+[{
+  "id": 1,
+  "name": "SketchedOut",
+  "password": "123",
+  "users": [{"username": "Mo", "points": 0},
+            {"username": "Jonathan", "points": 0}],
+  "canvas": []
+}]
