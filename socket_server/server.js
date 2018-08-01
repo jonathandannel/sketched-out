@@ -9,9 +9,7 @@ const http              = require("http");
 const randomstring      = require("randomstring");
 const bcrypt            = require("bcryptjs");
 const WebSocket         = require('ws');
-
 const routes            = require('./routes')
-
 const server            = express();
 const httpServer        = http.createServer(server);
 
@@ -49,7 +47,6 @@ MongoClient.connect(MONGODB_URI)
       console.log("==> User connected!");
 
       ws.on('message', (data) => {
-
         const message = JSON.parse(data);
 
         if (message.type === 'roomJoin') {

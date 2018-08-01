@@ -39,8 +39,6 @@ export default class Home extends Component {
           
           {this.displayRooms()}
         </span>
-        <div>
-        </div>
         <SimpleModalWrapped />
       </div>
 
