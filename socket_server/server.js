@@ -48,7 +48,6 @@ MongoClient.connect(MONGODB_URI)
       console.log("==> User connected!");
 
       ws.on('message', (data) => {
-        console.log(data)
         const message = JSON.parse(data);
 
         wss.clients.forEach((client) => {

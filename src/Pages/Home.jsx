@@ -38,8 +38,6 @@ export default class Home extends Component {
           <h3>Active Games</h3>
           {this.displayRooms()}
         </span>
-        <div>
-        </div>
         <SimpleModalWrapped />
       </div>
 

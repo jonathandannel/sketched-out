@@ -5,7 +5,7 @@ import moment    from 'moment'
 import Button    from '@material-ui/core/Button';
 import Brushes   from '../Components/Brushes.jsx';
 import Chat      from '../Components/Chat.jsx';
-import Timer     from '../Components/Timer.jsx';
+import TimeBar     from '../Components/TimeBar.jsx';
 import Modal     from '@material-ui/core/Modal';
 import MainCanvas from '../Components/MainCanvas.jsx';
 
@@ -26,11 +26,10 @@ export default class Room extends Component {
       gameStarted: false,
       currentClue: null,
       currentlyDrawing: roomPlayers[0],
-      lineColor: 'white',
+      lineColor: 'black',
       currentUsers: []
     }
   }
-
 
   componentDidMount() {
     let allUsers = this.state.currentUsers.slice();
@@ -60,13 +59,11 @@ export default class Room extends Component {
 
   getTimeRemaining = () => {
     let secondsLeft = Math.floor(moment().diff(this.state.startTime) / 1000)
-    console.log("seconds", secondsLeft);
-    return secondsLeft
+    return 30 - secondsLeft
   }
 
   drawerPoints = (timeRemaining) => {
     newDrawPoints = 150 - ((30 - timeRemaining) * 4);
-    console.log("Drawer points", newDrawPoints);
     setTimeout(function() {
       $("#drawer-points-display").fadeIn("slow", function() {
         setTimeout(function() {
@@ -81,7 +78,6 @@ export default class Room extends Component {
   // make the message display guesser's name ------------------------------
   guesserPoints = (timeRemaining) => {
     newGuessPoints = 100 - ((30 - timeRemaining) * 3);
-    console.log("Guesser points", newGuessPoints);
     $("#guesser-points-display").fadeIn("slow", function() {
         setTimeout(function() {
           $("#guesser-points-display").fadeOut('fast')
@@ -89,6 +85,7 @@ export default class Room extends Component {
     });
     return newGuessPoints;
     // add points to db
+    //add 1 to correct guesses
   }
 
   setClue = () => {
@@ -123,7 +120,7 @@ export default class Room extends Component {
     return (
       <div id="room-container">
         <span>Your clue is: <b>{this.state.currentClue}</b>
-          <Timer shouldAnimate={this.state.gameStarted} />
+          <TimeBar timeRemaining={this.getTimeRemaining()} shouldAnimate={this.state.gameStarted} />
         </span>
       <div id="canvas-container">
         <div id="brush-container">
@@ -134,7 +131,6 @@ export default class Room extends Component {
           />
         </div>
           <MainCanvas
-
             className="canvas-area"
             sendMessage={this.props.sendMessage}
             lineColor={this.state.lineColor}

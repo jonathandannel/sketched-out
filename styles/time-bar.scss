@@ -1,0 +1,12 @@
+#progress {
+  width: 75%;
+  margin: 5px auto;
+  height: 15px;
+  border-radius: 10px;
+}
+
+#time-bar path {
+  transition: stroke-dashoffset 2s ease 0s, stroke 2s linear !important;
+}
+
+

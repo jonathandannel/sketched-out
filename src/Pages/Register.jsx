@@ -15,10 +15,10 @@ export default class Register extends Component {
 
   componentWillMount(){
     if (this.Auth.loggedIn()){
-     this.props.history.replace('/') 
+     this.props.history.replace('/')
     }
   }
-  
+
   render() {
     if (this.state.loggedIn){
       return <Redirect to='/'/>
@@ -27,24 +27,24 @@ export default class Register extends Component {
       <div>
         <form action="/register" method="post" onSubmit={this.handleFormSubmit}>
           <div>
-            <label for="username">Username: </label>
-            <input 
+            <label htmlFor="username">Username: </label>
+            <input
             className="username"
             name="username"
             type="text"
             onChange={this.handleChange}
             />
-            <label for="password">Password: </label>
-            <input 
-            className="password" 
+            <label htmlFor="password">Password: </label>
+            <input
+            className="password"
             name="password"
-            type="password" 
+            type="password"
             onChange={this.handleChange}
             />
-            <button 
+            <button
             className="submit"
-            type="submit" 
-            value="SUBMIT" 
+            type="submit"
+            value="SUBMIT"
             >Register</button>
           </div>
         </form>
