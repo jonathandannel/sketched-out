@@ -48,7 +48,7 @@ MongoClient.connect(MONGODB_URI)
       ws.on('message', (data) => {
 
         const message = JSON.parse(data);
-        
+
         if (message.type === 'roomUpdate') {
           console.log(message)
         }
