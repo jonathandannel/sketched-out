@@ -37,7 +37,8 @@ class Main extends Component {
                 sendMessage={this.props.sendMessage}
                 chatMessages={this.props.chatMessages}
                 currentUser={this.props.currentUser}
-                roomUsers={this.props.roomUsers}
+                userList={this.props.userList}
+                latestCanvas={this.props.latestCanvas}
               />
             )}
           />

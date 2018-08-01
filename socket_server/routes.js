@@ -30,7 +30,6 @@ module.exports = function routes(server, db) {
     const password = req.body.password;
 
     dataHelpers.getUsers().then(users => {
-      console.log(users)
       for (let user of users) {
         if (username == user.username && bcrypt.compareSync(password, user.password)) {
           let token = jwt.sign({
@@ -87,7 +86,6 @@ module.exports = function routes(server, db) {
           username: username,
           password: hashedPassword
         };
-        console.log('here?')
         foundUser = newUser
         return dataHelpers.saveUsers(newUser)
       }

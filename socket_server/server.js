@@ -36,6 +36,9 @@ MongoClient.connect(MONGODB_URI)
 
     routes(server, db)
 
+    const users = [];
+    const canvas = [];
+
     const wss = new SocketServer({
       server: httpServer
     });
@@ -45,8 +48,26 @@ MongoClient.connect(MONGODB_URI)
 
       ws.on('message', (data) => {
         const message = JSON.parse(data);
-        if (message.type === 'roomUpdate') {
-          console.log(message)
+
+        if (message.type === 'roomJoin') {
+          console.log(message.content)
+          users.push(message.content)
+          let outgoing = {
+            type: 'userList',
+            content: users
+          };
+          wss.clients.forEach((client) =>{
+            client.send(JSON.stringify(outgoing))
+          })
+        }
+
+        if (message.type === 'receiveLatestCanvasData'){
+          let outgoingCanvas = {
+            type: 'latestCanvas',
+            content: canvas
+          }
+
+          ws.send(JSON.stringify(outgoingCanvas))
         }
         if (message.type === 'chatMessages') {
           if (message.includes("CURRENT CLUE")) {
@@ -56,7 +77,11 @@ MongoClient.connect(MONGODB_URI)
         wss.clients.forEach((client) => {
           if (client !== ws && client.readyState === WebSocket.OPEN && message.type !== 'chatMessages') {
             client.send(data);
-          } else {
+          } else if (message.type === 'latestLineData'){
+            console.log(message.content)
+            message.content.forEach((line) => {
+              canvas.push(line)
+            });
             client.send(data);
           }
         })
