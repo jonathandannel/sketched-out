@@ -66,15 +66,15 @@ MongoClient.connect(MONGODB_URI)
             type: 'latestCanvas',
             content: canvas
           }
-          wss.clients.forEach((client) => {
-            client.send(JSON.stringify(outgoingCanvas))
-          })
+
+          ws.send(JSON.stringify(outgoingCanvas))
         }
 
         wss.clients.forEach((client) => {
           if (client !== ws && client.readyState === WebSocket.OPEN && message.type !== 'chatMessages') {
             client.send(data);
           } else if (message.type === 'latestLineData'){
+            console.log(message.content)
             message.content.forEach((line) => {
               canvas.push(line)
             });
