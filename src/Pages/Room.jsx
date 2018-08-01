@@ -26,19 +26,19 @@ export default class Room extends Component {
       gameStarted: false,
       currentClue: null,
       currentlyDrawing: roomPlayers[0],
-      lineColor: 'black',
-      currentUsers: []
+      lineColor: 'white'
     }
   }
 
   componentDidMount() {
-    let allUsers = this.state.currentUsers.slice();
-    allUsers.push(this.props.currentUser)
-    this.setState({
-      currentUsers: allUsers
-    }, () => {
-      this.startRound()
-      console.log(allUsers)
+    this.props.sendMessage({
+      type: 'roomJoin',
+      content: this.props.currentUser
+    })
+
+    this.props.sendMessage({
+      type: 'receiveLatestCanvasData',
+      content: ''
     })
   }
 
@@ -122,6 +122,7 @@ export default class Room extends Component {
         <span>Your clue is: <b>{this.state.currentClue}</b>
 
           <TimeBar timeRemaining={this.getTimeRemaining()} shouldAnimate={this.state.gameStarted} />
+          {this.props.userList}
 
         </span>
       <div id="canvas-container">
@@ -137,6 +138,7 @@ export default class Room extends Component {
             sendMessage={this.props.sendMessage}
             lineColor={this.state.lineColor}
             latestLineData={this.props.latestLineData}
+            latestCanvas={this.props.latestCanvas}
           />
           <span id="chat-area">
             <Chat

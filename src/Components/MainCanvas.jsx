@@ -24,16 +24,6 @@ export default class MainCanvas extends Component {
     this.ctx.lineJoin = 'round';
     this.ctx.lineCap = 'round';
     this.ctx.lineWidth = 10
-
-    setInterval(() => {
-      this.props.sendMessage({
-        type: 'latestLineData',
-        content: this.userLines
-      })
-    }, 3000)
-
-    console.log('CURRENTLYDRAWING', this.props.currentlyDrawing);
-    console.log('CURRENTUSER', this.props.currentUser);
   }
 
   handleMouseDown = ({ nativeEvent })=> {
@@ -87,6 +77,7 @@ export default class MainCanvas extends Component {
     this.props.sendMessage({
       type: 'latestLineData',
       content: this.userLines
+
     })
     this.latestLineIndex = this.userLines.length - 1
   }
@@ -96,18 +87,19 @@ export default class MainCanvas extends Component {
   }
 
   render() {
-    if (this.props.latestLineData.length > 0) {
 
-      this.props.latestLineData
-      .slice(this.latestLineIndex)
-      .forEach((line) => {
-        this.paint(line.prevPos, line.currPos, line.strokeStyle)
-      });
+      if (this.props.latestCanvas.length > 0) {
 
-      this.latestLineIndex = this.userLines.length - 1
-    }
+        this.props.latestLineData
+        .slice(this.latestLineIndex)
+        .forEach((line) => {
+          this.paint(line.prevPos, line.currPos, line.strokeStyle)
+        });
 
-    this.userStrokeStyle = this.props.lineColor
+        this.latestLineIndex = this.userLines.length - 1
+      }
+
+      this.userStrokeStyle = this.props.lineColor
 
     return (
         <div>

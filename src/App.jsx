@@ -12,7 +12,8 @@ class App extends Component {
       latestLineData: [],
       chatMessages: [],
       currentUser: '',
-      roomUsers: []
+      currentUsers: [],
+      latestCanvas: []
     }
   }
 
@@ -31,9 +32,9 @@ class App extends Component {
 
       switch (parsedMessage.type) {
         case 'latestLineData':
-          // this.setState({
-          //   latestLineData: parsedMessage.content
-          // });
+          this.setState({
+            latestLineData: parsedMessage.content
+          });
         break;
         case 'chatMessages':
           let allMessages = this.state.chatMessages.slice();
@@ -42,12 +43,21 @@ class App extends Component {
             chatMessages: allMessages
           })
         break;
-        case 'roomUpdate':
+        case 'userList':
           this.setState({
-            roomUsers: parsedMessage.content.roomUsers
+            currentUsers: parsedMessage.content
           })
         break;
-      }
+        case 'latestCanvas':
+          this.setState({
+            latestCanvas: parsedMessage.content
+          })
+        break;
+      }// this.setState({// this.setState({
+          //   latestLineData: parsedMessage.content
+          // });
+          //   latestLineData: parsedMessage.content
+          // });
     }
   }
 
@@ -76,15 +86,16 @@ class App extends Component {
                 setUser={this.setUser}
 
                 />
-    
-        <Main 
+
+        <Main
           latestLineData={this.state.latestLineData}
           sendMessage={this.sendMessage}
           chatMessages={this.state.chatMessages}
           currentUser={this.state.currentUser}
           setUser={this.setUser}
           clearUser={this.clearUser}
-          roomUsers={this.state.roomUsers}
+          userList={this.state.currentUsers}
+          latestCanvas={this.state.latestCanvas}
         />
       </div>
     )
