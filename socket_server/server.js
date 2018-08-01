@@ -79,6 +79,8 @@ MongoClient.connect(MONGODB_URI)
               canvas.push(line)
             });
             client.send(data);
+          } else if (message.type === 'chatMessages') {
+              client.send(data);
           }
         })
       });
