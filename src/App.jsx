@@ -65,7 +65,7 @@ class App extends Component {
   }
 
   sendMessage = message => {
-    this.socket.send(JSON.stringify(message))
+    this.socket.send(JSON.stringify(message));
   }
 
   render() {
@@ -76,8 +76,8 @@ class App extends Component {
                 setUser={this.setUser}
 
                 />
-    
-        <Main 
+
+        <Main
           latestLineData={this.state.latestLineData}
           sendMessage={this.sendMessage}
           chatMessages={this.state.chatMessages}

@@ -31,35 +31,49 @@ export default class Register extends Component {
   };
 
 
-  render() {
+    render() {
     if (this.state.loggedIn){
       return <Redirect to='/'/>
     }
     return (
       <div>
-        <form action="/register" method="post" onSubmit={this.handleFormSubmit}>
-          <div>
-            <label htmlFor="username">Username: </label>
-            <input
-            className="username"
-            name="username"
-            type="text"
-            onChange={this.handleChange}
-            />
-            <label htmlFor="password">Password: </label>
-            <input
-            className="password"
-            name="password"
-            type="password"
-            onChange={this.handleChange}
-            />
-            <button
-            className="submit"
-            type="submit"
-            value="SUBMIT"
-            >Register</button>
-          </div>
-        </form>
+        <Button onClick={this.handleClickOpen}>Register</Button>
+          <Dialog
+            open={this.state.open}
+            onClose={this.handleClose}
+            aria-labelledby="form-dialog-title"
+          >
+            <DialogTitle id="form-dialog-title">Register</DialogTitle>
+            <DialogContent>
+              <TextField
+                autoFocus
+                margin="dense"
+                label="Username"
+                type="text"
+                fullWidth
+                value={this.state.username}
+                onChange={this.handleUser}
+              />
+              <TextField
+                autoFocus
+                margin="dense"
+                label="Password"
+                type="password"
+                fullWidth
+                value={this.state.password}
+                onChange={this.handlePass}
+              />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={this.handleClose} color="primary">
+                Cancel
+              </Button>
+              <Button
+                      onClick={this.handleFormSubmit} color="primary">
+                Register
+              </Button>
+            </DialogActions>
+          </Dialog>
       </div>
     )
   }

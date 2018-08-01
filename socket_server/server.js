@@ -45,11 +45,14 @@ MongoClient.connect(MONGODB_URI)
 
       ws.on('message', (data) => {
         const message = JSON.parse(data);
-
         if (message.type === 'roomUpdate') {
           console.log(message)
         }
-
+        if (message.type === 'chatMessages') {
+          if (message.includes("CURRENT CLUE")) {
+            // correctGuess === true;
+          }
+        }
         wss.clients.forEach((client) => {
           if (client !== ws && client.readyState === WebSocket.OPEN && message.type !== 'chatMessages') {
             client.send(data);

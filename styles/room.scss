@@ -1,7 +1,7 @@
 #room-container {
   display: flex;
   flex-direction: column;
-  margin-top: 90px;
+  margin-top: 30px;
   margin-left: 5px;
 }
 
@@ -24,10 +24,6 @@
     width: 100%;
     font-size: 20px;
   }
-}
-
-#timer {
-  float: center;
 }
 
 #brush-container {

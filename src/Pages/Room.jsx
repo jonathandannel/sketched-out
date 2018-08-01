@@ -17,6 +17,7 @@ var correctGuess    = false;
 var roomPlayers     = ['PaintyGuy', 'Van Gogh', 'Yo Mama'];
 var correctGuesser  = roomPlayers[1];
 var currentlyDrawing = roomPlayers[0];
+var secondsLeft;
 
 export default class Room extends Component {
   constructor(props) {
@@ -58,12 +59,21 @@ export default class Room extends Component {
   }
 
   getTimeRemaining = () => {
-    let secondsLeft = Math.floor(moment().diff(this.state.startTime) / 1000)
-    return 30 - secondsLeft
+    if (this.state.gameStarted) {
+    secondsLeft = 30 - Math.floor(moment().diff(this.state.startTime) / 1000)
+    console.log(secondsLeft, "sec left");
+    } if (secondsLeft === 0) {
+      this.endRound();
+    } if (secondsLeft > 0) {
+      setTimeout(() => {
+        this.getTimeRemaining();
+        }, 1000)
+      return secondsLeft
+    }
   }
 
   drawerPoints = (timeRemaining) => {
-    newDrawPoints = 150 - ((30 - timeRemaining) * 4);
+    newDrawPoints = 150 - ((timeRemaining) * 4);
     setTimeout(function() {
       $("#drawer-points-display").fadeIn("slow", function() {
         setTimeout(function() {
@@ -77,7 +87,7 @@ export default class Room extends Component {
 
   // make the message display guesser's name ------------------------------
   guesserPoints = (timeRemaining) => {
-    newGuessPoints = 100 - ((30 - timeRemaining) * 3);
+    newGuessPoints = 100 - ((timeRemaining) * 3);
     $("#guesser-points-display").fadeIn("slow", function() {
         setTimeout(function() {
           $("#guesser-points-display").fadeOut('fast')
@@ -101,19 +111,29 @@ export default class Room extends Component {
     setTimeout(() => {
       this.endRound();
     }, 30000)
-    //tell the socket who is drawing
+
+    //tell the socket who is drawing, the clue, and time started
+    /*
+    message = {
+      currentlyDrawing,
+      currentClue,
+      timeStarted,
+    }
+    */
   }
 
-  // When correctGuess === true || secondsLeft === 0
+//correctGuess === true
   endRound = () => {
-    console.log("ending round!")
-    this.setState({gameStarted: false});
-    let timeRemaining = this.getTimeRemaining();
-    this.drawerPoints(timeRemaining);
-    this.guesserPoints(timeRemaining);
-    this.setNextPlayer();
-    this.startRound();
-    //tell the socket
+      secondsLeft = 0
+      console.log("ending round!")
+      this.setState({gameStarted: false});
+      // let timeRemaining = this.getTimeRemaining();
+      this.drawerPoints(secondsLeft);
+      this.guesserPoints(secondsLeft);
+      this.setNextPlayer();
+      this.startRound();
+      //tell the socket
+
   }
 
   render() {
