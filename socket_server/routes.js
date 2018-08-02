@@ -13,18 +13,6 @@ module.exports = function routes(server, db) {
     secret: "secretkey"
   });
 
-  const users = [{
-      id: 1,
-      username: 'a',
-      password: '$2a$10$IfTDfRm6FLb2rv3PfRKwEOedzNe0TbBMIeZPb2XxTe4HUf3kG3caa'
-    },
-    {
-      id: 2,
-      username: "mo",
-      password: "$2a$10$IfTDfRm6FLb2rv3PfRKwEOedzNe0TbBMIeZPb2XxTe4HUf3kG3caa"
-    }
-  ];
-
   server.post("/login", (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
