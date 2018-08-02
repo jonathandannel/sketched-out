@@ -76,12 +76,12 @@ MongoClient.connect(MONGODB_URI)
           ws.send(JSON.stringify(outgoingCanvas))
         }
 
-        if (message.type === 'chatMessages') {
-          if (message.includes(currentClue)) {
-            // correctGuess === true;
-            //tell room to start a new round
-          }
-        }
+        // if (message.type === 'chatMessages') {
+        //   if (message.includes(currentClue)) {
+        //     // correctGuess === true;
+        //     //tell room to start a new round
+        //   }
+        // }
 
         if (message.type === 'startingRound') {
           console.log(message.content)
@@ -89,7 +89,11 @@ MongoClient.connect(MONGODB_URI)
             type: 'startingRound',
             content: message.content.currentClue
           }
-          ws.send(JSON.stringify(outgoingStartRound))
+
+          wss.clients.forEach((client) => {
+            client.send(JSON.stringify(outgoingStartRound))
+          })
+
         }
 
         wss.clients.forEach((client) => {

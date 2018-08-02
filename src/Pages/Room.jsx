@@ -61,7 +61,7 @@ export default class Room extends Component {
   }
 
   getTimeRemaining = () => {
-    if (this.state.gameStarted) {
+    if (this.props.gameStarted) {
     secondsLeft = 30 - Math.floor(moment().diff(this.state.startTime) / 1000)
     console.log(secondsLeft, "sec left");
     } if (secondsLeft === 0) {
@@ -103,7 +103,6 @@ export default class Room extends Component {
   setClue = () => {
     let currentClue = clueArray[Math.floor((Math.random() * clueArray.length) + 1)];
     console.log("The clue is:", currentClue);
-    this.setState({currentClue: currentClue});
     return currentClue;
   }
 
@@ -116,7 +115,11 @@ export default class Room extends Component {
     }, 30000)
     let roomState = {
       type: 'startingRound',
-      content: this.setClue(),
+      content: {
+        currentClue: this.setClue(),
+        startTimer: true,
+        currentlyDrawing: ''
+      }
     }
     this.props.sendMessage(roomState);
     //tell the socket who is drawing, the clue, and time started
@@ -133,7 +136,7 @@ export default class Room extends Component {
   endRound = () => {
       secondsLeft = 0
       console.log("ending round!")
-      this.setState({gameStarted: false});
+      // this.setState({gameStarted: false});
       // let timeRemaining = this.getTimeRemaining();
       this.drawerPoints(secondsLeft);
       this.guesserPoints(secondsLeft);
@@ -146,9 +149,9 @@ export default class Room extends Component {
   render() {
     return (
       <div id="room-container">
-        <span>Your clue is: <b>{this.state.currentClue}</b>
+        <span>Your clue is: <b>{this.props.currentClue}</b>
 
-          <TimeBar timeRemaining={this.getTimeRemaining()} shouldAnimate={this.state.gameStarted} />
+          <TimeBar timeRemaining={this.getTimeRemaining()} shouldAnimate={this.props.gameStarted} />
           {this.props.userList}
 
         </span>

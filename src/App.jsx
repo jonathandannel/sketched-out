@@ -13,7 +13,9 @@ class App extends Component {
       chatMessages: [],
       currentUser: '',
       currentUsers: [],
-      latestCanvas: []
+      latestCanvas: [],
+      gameStarted: false,
+      currentClue: ''
     }
   }
 
@@ -55,7 +57,7 @@ class App extends Component {
         break;
         case 'startingRound':
           this.setState({
-            currentClue: parsedMessage.content.currentClue,
+            currentClue: parsedMessage.content,
             gameStarted: true
           })
         break;
@@ -99,6 +101,8 @@ class App extends Component {
           setUser={this.setUser}
           clearUser={this.clearUser}
           userList={this.state.currentUsers}
+          currentClue={this.state.currentClue}
+          gameStarted={this.state.gameStarted}
         />
       </div>
     )
