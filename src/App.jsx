@@ -21,9 +21,8 @@ class App extends Component {
 
   componentDidMount() {
     this.Auth = new AuthService();
-    // const user = this.Auth.getProfile()
-    // console.log(user)
     this.socket = new WebSocket(`ws://localhost:8080`);
+
     this.socket.onopen = (e) => {
       console.log('==> Socket connection started!')
     }
@@ -61,11 +60,7 @@ class App extends Component {
             gameStarted: true
           })
         break;
-      }// this.setState({// this.setState({
-          //   latestLineData: parsedMessage.content
-          // });
-          //   latestLineData: parsedMessage.content
-          // });
+      }
     }
   }
 
@@ -89,10 +84,11 @@ class App extends Component {
   render() {
     return (
       <div className='mainContainer'>
-        <NavBar currentUser={this.state.currentUser}
-                clearUser={this.clearUser}
-                setUser={this.setUser}
-                />
+        <NavBar
+          currentUser={this.state.currentUser}
+          clearUser={this.clearUser}
+          setUser={this.setUser}
+        />
         <Main
           latestLineData={this.state.latestLineData}
           sendMessage={this.sendMessage}

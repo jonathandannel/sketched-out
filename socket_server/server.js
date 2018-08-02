@@ -60,33 +60,6 @@ MongoClient.connect(MONGODB_URI)
         const message = JSON.parse(data);
 
         switch (message.type) {
-
-          case 'roomJoin':
-            console.log('=> room join', message.content)
-            users.push(message.content)
-            let outgoing = {
-              type: 'userList',
-              content: users
-            }
-            wss.clients.forEach((client) => {
-              client.send(JSON.stringify(outgoing));
-            })
-          break;
-
-          case 'receiveLatestCanvasData':
-            let outgoingCanvas = {
-              type: 'latestCanvas',
-              content: canvas
-            }
-            ws.send(JSON.stringify(outgoingCanvas))
-          break;
-
-          case 'chatMessages':
-            wss.clients.forEach((client) => {
-              client.send(data);
-            })
-          break;
-
           case 'latestLineData':
             console.log(message.content)
             message.content.forEach((line) => {
@@ -96,23 +69,43 @@ MongoClient.connect(MONGODB_URI)
               client.send(data);
             })
           break;
-
+          case 'receiveLatestCanvasData':
+            let outgoingCanvas = {
+              type: 'latestCanvas',
+              content: canvas
+            }
+            ws.send(JSON.stringify(outgoingCanvas))
+          break;
+          case 'chatMessages':
+            wss.clients.forEach((client) => {
+              client.send(data);
+            })
+          break;
+          case 'roomJoin':
+            users.push(message.content)
+            let outgoing = {
+              type: 'userList',
+              content: users
+            }
+            wss.clients.forEach((client) => {
+              client.send(JSON.stringify(outgoing));
+            })
+          break;
           case 'startingRound':
             console.log(message.content)
             let outgoingStartRound = {
               type: 'startingRound',
               content: message.content.currentClue
             }
-
             wss.clients.forEach((client) => {
               client.send(JSON.stringify(outgoingStartRound))
             })
           break;
-
         }
 
 
       ws.on("close", () => console.log("Client disconnected"));
+
     });
   })
 
@@ -121,6 +114,7 @@ MongoClient.connect(MONGODB_URI)
       console.log(`==> Sketched Out websocket server listening on ${PORT}`)
     )
   })
+
   .catch(err => {
     console.error(`Failed to connect: ${MONGODB_URI}`)
     throw err
