@@ -32,27 +32,25 @@ export default class Leaderboard extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      users: [
-        {
-          username: "farid",
-          totalPoints: 12
-        },
-        {
-          username: "anar",
-          totalPoints: 16
-        },
-        {
-          username: "idana",
-          totalPoints: 22
-        },
-        {
-          username: "mom",
-          totalPoints: 9
-        }
-      ]
+      users: []
     }
   }
-
+  componentDidMount() {
+    fetch("http://localhost:8080/")
+      .then(response => {
+        if (response.ok) {
+          return response.json()
+        }
+        throw "Failed request"
+      })
+      .then( json => {
+        this.setState({users: json})
+      })
+      .catch( error => {
+        debugger
+        console.log(error)
+      })
+  }
   render() {
     return <LeaderboardScores users={this.state.users}/>
   }
