@@ -36,6 +36,8 @@ MongoClient.connect(MONGODB_URI)
 
     routes(server, db)
 
+    /********* ROOM STATE *********/
+
     const users = [];
     const canvas = [];
     const roomState = {
@@ -44,6 +46,8 @@ MongoClient.connect(MONGODB_URI)
         currentClue: "",
       }
     }
+
+    /******************************/
 
     const wss = new SocketServer({
       server: httpServer
@@ -55,70 +59,68 @@ MongoClient.connect(MONGODB_URI)
       ws.on('message', (data) => {
         const message = JSON.parse(data);
 
-        if (message.type === 'roomJoin') {
-          console.log(message.content)
-          users.push(message.content)
-          let outgoing = {
-            type: 'userList',
-            content: users
-          };
-          wss.clients.forEach((client) =>{
-            client.send(JSON.stringify(outgoing))
-          })
-        }
+        switch (message.type) {
 
-        if (message.type === 'receiveLatestCanvasData') {
-          let outgoingCanvas = {
-            type: 'latestCanvas',
-            content: canvas
-          }
+          case 'roomJoin':
+            console.log('=> room join', message.content)
+            users.push(message.content)
+            let outgoing = {
+              type: 'userList',
+              content: users
+            }
+            wss.clients.forEach((client) => {
+              client.send(JSON.stringify(outgoing));
+            })
+          break;
 
-          ws.send(JSON.stringify(outgoingCanvas))
-        }
+          case 'receiveLatestCanvasData':
+            let outgoingCanvas = {
+              type: 'latestCanvas',
+              content: canvas
+            }
+            ws.send(JSON.stringify(outgoingCanvas))
+          break;
 
-        // if (message.type === 'chatMessages') {
-        //   if (message.includes(currentClue)) {
-        //     // correctGuess === true;
-        //     //tell room to start a new round
-        //   }
-        // }
+          case 'chatMessages':
+            wss.clients.forEach((client) => {
+              client.send(data);
+            })
+          break;
 
-        if (message.type === 'startingRound') {
-          console.log(message.content)
-          let outgoingStartRound = {
-            type: 'startingRound',
-            content: message.content.currentClue
-          }
-
-          wss.clients.forEach((client) => {
-            client.send(JSON.stringify(outgoingStartRound))
-          })
-
-        }
-
-        wss.clients.forEach((client) => {
-          if (client !== ws && client.readyState === WebSocket.OPEN && message.type !== 'chatMessages') {
-            client.send(data);
-          } else if (message.type === 'latestLineData'){
+          case 'latestLineData':
             console.log(message.content)
             message.content.forEach((line) => {
-              canvas.push(line)
+              canvas.push(line);
             });
-            client.send(data);
-          } else if (message.type === 'chatMessages') {
+            wss.clients.forEach((client) => {
               client.send(data);
-          }
-        })
-      });
+            })
+          break;
+
+          case 'startingRound':
+            console.log(message.content)
+            let outgoingStartRound = {
+              type: 'startingRound',
+              content: message.content.currentClue
+            }
+
+            wss.clients.forEach((client) => {
+              client.send(JSON.stringify(outgoingStartRound))
+            })
+          break;
+
+        }
+
+
 
       ws.on("close", () => console.log("Client disconnected"));
     });
-
+  })
 
 
     httpServer.listen(PORT, "0.0.0.0", "localhost", () =>
       console.log(`==> Sketched Out websocket server listening on ${PORT}`)
-    );
+    )
   })
   .catch(err => {
     console.error(`Failed to connect: ${MONGODB_URI}`)
