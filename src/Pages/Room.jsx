@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {SketchField, Tools} from "react-sketch";
+import { Link } from 'react-router-dom'
 import clueArray from '../lib/clues'
 import moment    from 'moment'
 import Button    from '@material-ui/core/Button';
@@ -30,7 +30,7 @@ export default class Room extends Component {
       currentlyDrawing: roomPlayers[0],
       lineColor: 'white'
     }
-    // this.Auth = new AuthService()
+    this.Auth = new AuthService()
   }
 
   componentDidMount() {
@@ -127,7 +127,6 @@ export default class Room extends Component {
   }
 
   render() {
-
     return (
       <div id="room-container">
         <span>Your clue is: <b>{this.state.currentClue}</b>

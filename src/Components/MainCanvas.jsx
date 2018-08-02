@@ -102,6 +102,7 @@ export default class MainCanvas extends Component {
     return (
         <div>
           <canvas
+            id='canvas'
             ref={(ref) => (this.canvas = ref)}
             style={ {background: 'white'} }
             onMouseDown={this.handleMouseDown}
