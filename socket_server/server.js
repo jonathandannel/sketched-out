@@ -112,7 +112,6 @@ MongoClient.connect(MONGODB_URI)
         }
 
 
-
       ws.on("close", () => console.log("Client disconnected"));
     });
   })
