@@ -68,6 +68,12 @@ class App extends Component {
             secondsLeft: parsedMessage.content
           })
         break;
+        case 'clearCanvas':
+          console.log('clearcanvas called');
+          this.setState({
+            latestLineData: []
+          })
+        break;
       }
     }
   }

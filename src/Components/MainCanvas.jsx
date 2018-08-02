@@ -86,6 +86,14 @@ export default class MainCanvas extends Component {
   }
 
   render() {
+    if (this.props.latestLineData.length < 1 && this.ctx) {
+      console.log('empty array', this.ctx.fillStyle);
+      this.ctx.beginPath();
+      this.ctx.rect(0, 0, 900, 450);
+      this.ctx.fillStyle = 'white';
+      this.ctx.fill()
+    }
+
     if (this.props.latestLineData.length > 0) {
 
       this.props.latestLineData

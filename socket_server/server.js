@@ -147,6 +147,17 @@ MongoClient.connect(MONGODB_URI)
       GAME.secondsLeft = 0;
       GAME.gameStarted = false;
       clearInterval(timerInterval);
+      GAME.canvas = [];
+
+      let message = {
+        type: 'clearCanvas',
+        content: ''
+      }
+
+      wss.clients.forEach((client) => {
+        client.send(JSON.stringify(message))
+      })
+
       startRound()
     }
 
