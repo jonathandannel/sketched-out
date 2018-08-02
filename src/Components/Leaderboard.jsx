@@ -1,28 +1,57 @@
-import React, {Component} from 'react';
+import React, { Component } from "react";
 
-const leaderboardScores = () => {
-  users.map(user => {
-    <tr>
-      <td>user.username</td>
-      <td>user.score</td>
-    </tr>
-  })
-}
+const LeaderboardScoreRow = (props) => (
+  <tr>
+    <td>{props.username}</td>
+    <td>{props.totalPoints}</td>
+  </tr>
+)
+const LeaderboardScores = props => (
+  <table>
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      { props.users.map( (user, i) => (
+        <LeaderboardScoreRow 
+          username={user.username} 
+          totalPoints={user.totalPoints} 
+          key={i}/>
+        ))
+      }
+    </tbody>
+  </table>
+);
 
+
+// console.log(leaderboardScores)
 export default class Leaderboard extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      users: []
+    }
+  }
+  componentDidMount() {
+    fetch("http://localhost:8080/")
+      .then(response => {
+        if (response.ok) {
+          return response.json()
+        }
+        throw "Failed request"
+      })
+      .then( json => {
+        this.setState({users: json})
+      })
+      .catch( error => {
+        debugger
+        console.log(error)
+      })
+  }
   render() {
-    return (
-      <div>
-        <table>
-        <thead colspan="2">High Scores</thead>
-          <th>User</th>
-          <th>Score</th>
-        <tbody>
-          {leaderboardScores}
-        </tbody>
-      </table>
-      </div>
-    )
+    return <LeaderboardScores users={this.state.users}/>
   }
 }
-

@@ -18,7 +18,6 @@ const httpServer        = http.createServer(server);
 const MongoClient = require('mongodb').MongoClient
 const MONGODB_URI = "mongodb://localhost:27017/sketchedout"
 
-
 MongoClient.connect(MONGODB_URI)
   .then(db => {
     console.log(`Connected to mongodb: ${MONGODB_URI}`)
@@ -29,6 +28,13 @@ MongoClient.connect(MONGODB_URI)
       next();
     });
 
+    // if (err) throw err;
+    // var dbo = db.db("mydb");
+    // var query = { username: "Gerry" };
+    // dbo.collection("customers").find(query).toArray(function (err, result) {
+    //   if (err) throw err;
+    //   console.log(result);
+    // });
     server.use(bodyParser.json());
     server.use(bodyParser.urlencoded({
       extended: true

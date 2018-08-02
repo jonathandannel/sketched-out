@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import SimpleModalWrapped from '../Components/NewRoomModal.jsx';
 import Button    from '@material-ui/core/Button';
 import { Link } from 'react-router-dom'
+import Leaderboard from '../Components/Leaderboard.jsx'
 
 
 
@@ -28,20 +29,18 @@ export default class Home extends Component {
   }
 
   render() {
-    return (
-      <div>
+    return <div>
         <h1>This is the home page!</h1>
         <Button>
-          <Link to='room'>Room</Link>
-          </Button>
-          <h3>Active Games</h3>
+          <Link to="room">Room</Link>
+        </Button>
+        <h3>Active Games</h3>
         <span className="room-thumbnail-container">
           {this.displayRooms()}
         </span>
         <SimpleModalWrapped />
-      </div>
-
-    )
+        <Leaderboard />
+      </div>;
   }
 }
 
