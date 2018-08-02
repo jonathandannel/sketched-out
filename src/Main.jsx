@@ -32,7 +32,6 @@ class Main extends Component {
           <Route exact path='/room' render=
             {(props) => (
               <Room
-                roomState={this.props.roomState}
                 latestLineData={this.props.latestLineData}
                 sendMessage={this.props.sendMessage}
                 chatMessages={this.props.chatMessages}
@@ -40,7 +39,6 @@ class Main extends Component {
                 userList={this.props.userList}
                 latestCanvas={this.props.latestCanvas}
                 currentClue={this.props.currentClue}
-                gameStarted={this.props.gameStarted}
               />
             )}
           />

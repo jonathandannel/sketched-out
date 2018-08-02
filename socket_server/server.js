@@ -14,6 +14,9 @@ const server            = express();
 const httpServer        = http.createServer(server);
 
 
+const clues             = require('../src/lib/clues.js')
+
+
 // Database Connection
 const MongoClient = require('mongodb').MongoClient
 const MONGODB_URI = "mongodb://localhost:27017/sketchedout"
@@ -38,14 +41,57 @@ MongoClient.connect(MONGODB_URI)
 
     /********* ROOM STATE *********/
 
-    const users = [];
-    const canvas = [];
-    const roomState = {
-      type: "",
-      content: {
-        currentClue: "",
-      }
+    // const users = [];
+    // const canvas = [];
+    // const roomState = {
+    //   type: "",
+    //   content: {
+    //     currentClue: "",
+    //   }
+    // }
+
+    const players = ['ONE', 'TWO', 'three'];
+
+    const GAME = {
+      roomId: 1,
+      players: players,
+      canvas: [],
+      currentlyDrawing: players[0],
+      gameStarted: false,
+      startTimer: false,
+      currentClue: ''
     }
+
+
+    /******************************/
+          // GAME Functions
+
+
+    const getClue = () => {
+      let currentClue = clues[Math.floor(Math.random() * (clues.length + 1))];
+      GAME.currentClue = currentClue;
+    }
+
+    const setCurrentlyDrawing = () => {
+      let i = (players.indexOf(GAME.currentlyDrawing) + 1) % players.length;
+      GAME.currentlyDrawing = GAME.players[i]
+    }
+
+    const startRound = () => {
+      getClue();
+      setCurrentlyDrawing()
+      GAME.gameStarted = true;
+      let message = {
+        type: 'roundStarted',
+        content: GAME
+      }
+      wss.clients.forEach((client) => {
+        client.send(JSON.stringify(message));
+      })
+      console.log(GAME)
+    }
+
+
 
     /******************************/
 
@@ -56,6 +102,9 @@ MongoClient.connect(MONGODB_URI)
     wss.on("connection", (ws, req) => {
       console.log("==> User connected!");
 
+
+      startRound()
+
       ws.on('message', (data) => {
         const message = JSON.parse(data);
 
@@ -63,7 +112,7 @@ MongoClient.connect(MONGODB_URI)
           case 'latestLineData':
             console.log(message.content)
             message.content.forEach((line) => {
-              canvas.push(line);
+              GAME.canvas.push(line);
             });
             wss.clients.forEach((client) => {
               client.send(data);
@@ -72,7 +121,7 @@ MongoClient.connect(MONGODB_URI)
           case 'receiveLatestCanvasData':
             let outgoingCanvas = {
               type: 'latestCanvas',
-              content: canvas
+              content: GAME.canvas
             }
             ws.send(JSON.stringify(outgoingCanvas))
           break;
@@ -82,10 +131,10 @@ MongoClient.connect(MONGODB_URI)
             })
           break;
           case 'roomJoin':
-            users.push(message.content)
+            players.push(message.content)
             let outgoing = {
               type: 'userList',
-              content: users
+              content: GAME.players
             }
             wss.clients.forEach((client) => {
               client.send(JSON.stringify(outgoing));

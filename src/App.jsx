@@ -54,10 +54,12 @@ class App extends Component {
             latestLineData: parsedMessage.content
           })
         break;
-        case 'startingRound':
+        case 'roundStarted':
           this.setState({
-            currentClue: parsedMessage.content,
-            gameStarted: true
+            currentClue: parsedMessage.content.currentClue
+          })
+          this.setState({
+            currentlyDrawing: parsedMessage.content.currentlyDrawing
           })
         break;
       }
