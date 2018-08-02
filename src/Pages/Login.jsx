@@ -46,7 +46,7 @@ class Login extends Component {
             <DialogTitle id="form-dialog-title">Login</DialogTitle>
             <DialogContent>
               <TextField
-                autoFocus
+                autoFocus="true"
                 margin="dense"
                 label="Username"
                 type="text"
@@ -55,7 +55,7 @@ class Login extends Component {
                 onChange={this.handleUser}
               />
               <TextField
-                autoFocus
+                autoFocus="false"
                 margin="dense"
                 label="Password"
                 type="password"
@@ -68,8 +68,7 @@ class Login extends Component {
               <Button onClick={this.handleClose} color="primary">
                 Cancel
               </Button>
-              <Button         
-                      onClick={this.handleFormSubmit} color="primary">
+              <Button onClick={this.handleFormSubmit} color="primary">
                 Login
               </Button>
             </DialogActions>
