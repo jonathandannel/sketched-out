@@ -67,5 +67,6 @@
     "react-sketch": "^0.4.4",
     "uuid": "^3.3.2",
     "ws": "^6.0.0"
-  }
+  },
+  "proxy": "http://localhost:8080/"
 }

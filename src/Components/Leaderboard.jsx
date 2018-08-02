@@ -1,59 +1,59 @@
 import React, { Component } from "react";
 
-const arrayOfUsers = [
-  {
-    username: "farid",
-    totalPoints: 12
-  },
-  {
-    username: "anar",
-    totalPoints: 16
-  },
-  {
-    username: "idana",
-    totalPoints: 22
-  },
-  {
-    username: "mom",
-    totalPoints: 9
-  }
-];
-console.log(arrayOfUsers, "array of users");
+const LeaderboardScoreRow = (props) => (
+  <tr>
+    <td>{props.username}</td>
+    <td>{props.totalPoints}</td>
+  </tr>
+)
+const LeaderboardScores = props => (
+  <table>
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      { props.users.map( (user, i) => (
+        <LeaderboardScoreRow 
+          username={user.username} 
+          totalPoints={user.totalPoints} 
+          key={i}/>
+        ))
+      }
+    </tbody>
+  </table>
+);
 
-arrayOfUsers.sort((a, b) => {
-  return b.totalPoints - a.totalPoints;
-});
 
-console.log(arrayOfUsers, "after sort");
-
-const LeaderboardScores = () => {
-  const displayTopUsers = arrayOfUsers.map(user => (
-    <tr>
-      <td>{user.username}</td>
-      <td>{user.totalPoints}</td>
-    </tr>
-  ));
-  return <tbody>{displayTopUsers}</tbody>;
-};
 // console.log(leaderboardScores)
 export default class Leaderboard extends Component {
-  render() {
-    return (
-      <div>
-        <table>
-          <thead>
-            <tr>
-              <th>User</th>
+  constructor(props) {
+    super(props)
+    this.state = {
+      users: [
+        {
+          username: "farid",
+          totalPoints: 12
+        },
+        {
+          username: "anar",
+          totalPoints: 16
+        },
+        {
+          username: "idana",
+          totalPoints: 22
+        },
+        {
+          username: "mom",
+          totalPoints: 9
+        }
+      ]
+    }
+  }
 
-              <th>Score</th>
-            </tr>
-          </thead>
-          {/* <tbody> */}
-          {/* {leaderboardScores} */}
-          <LeaderboardScores />
-          {/* </tbody> */}
-        </table>
-      </div>
-    );
+  render() {
+    return <LeaderboardScores users={this.state.users}/>
   }
 }

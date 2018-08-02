@@ -114,8 +114,19 @@ module.exports = function routes(server, db) {
     })
   })
 
-  server.get("/", jwtMW, (req, res) => {
-    res.send("You are authenticated");
+  // server.get("/leaderboard", (req, res) => {
+  //   res.send();
+  // });
+
+  server.get("/", (req, res) => {
+
+    dataHelpers.getUsers()
+    .then(users => {
+      users.sort((a, b) => {
+        return b.totalPoints - a.totalPoints;
+      });
+      res.send(users)
+    })
   });
 
   server.use(function (err, req, res, next) {
