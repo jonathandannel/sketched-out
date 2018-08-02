@@ -61,7 +61,8 @@ MongoClient.connect(MONGODB_URI)
       gameStarted: false,
       startTime: '',
       startTimer: false,
-      currentClue: ''
+      currentClue: '',
+      secondsLeft: 30
     }
 
 
@@ -79,22 +80,10 @@ MongoClient.connect(MONGODB_URI)
       GAME.currentlyDrawing = GAME.players[i]
     }
 
-    getTimeRemaining = () => {
-      if (GAME.gameStarted) {
-      secondsLeft = 30 - Math.floor(moment().diff(GAME.startTime) / 1000)
-      console.log(secondsLeft, "sec left");
-      } if (secondsLeft === 0) {
-      } if (secondsLeft > 0) {
-        setTimeout(() => {
-          getTimeRemaining();
-          }, 1000)
-      }
-      return secondsLeft
-    }
-
     const startRound = () => {
       getClue();
       setCurrentlyDrawing()
+      startTimer();
       GAME.startTime = moment()
       GAME.gameStarted = true;
       let message = {
@@ -108,6 +97,36 @@ MongoClient.connect(MONGODB_URI)
     }
 
 
+    const endRound = () => {
+      GAME.secondsLeft = 0;
+      GAME.gameStarted = false;
+      clearInterval(timerInterval);
+      startRound()
+    }
+
+    let timerInterval = null;
+
+    const startTimer = () => {
+      GAME.secondsLeft = 30;
+      timerInterval = setInterval(() => {
+        if (GAME.secondsLeft === 0) {
+          endRound()
+        } else {
+          GAME.secondsLeft --;
+          let outgoing = {
+            type: 'timer',
+            content: GAME.secondsLeft
+          }
+
+          wss.clients.forEach((client) => {
+            client.send(JSON.stringify(outgoing))
+          })
+        }
+        console.log('sending timer', GAME.secondsLeft)
+      }, 1000)
+    }
+
+
 
     /******************************/
 
@@ -115,26 +134,10 @@ MongoClient.connect(MONGODB_URI)
       server: httpServer
     });
 
+    startRound();
+
     wss.on("connection", (ws, req) => {
       console.log("==> User connected!");
-
-
-      startRound();
-
-      let time = 30
-
-      setInterval(() => {
-        time --;
-        let outgoing = {
-          type: 'timer',
-          content: time
-        }
-
-        wss.clients.forEach((client) => {
-          client.send(JSON.stringify(outgoing))
-        })
-        console.log('sending timer', time)
-      }, 1000)
 
       ws.on('message', (data) => {
         const message = JSON.parse(data);
@@ -199,3 +202,20 @@ MongoClient.connect(MONGODB_URI)
     console.error(`Failed to connect: ${MONGODB_URI}`)
     throw err
   })
+      //
+      //
+      //
+      //
+      //
+      // getTimeRemaining = () => {
+      //   if (GAME.gameStarted) {
+      //   secondsLeft = 30 - Math.floor(moment().diff(GAME.startTime) / 1000)
+      //   console.log(secondsLeft, "sec left");
+      //   } if (secondsLeft === 0) {
+      //   } if (secondsLeft > 0) {
+      //     setTimeout(() => {
+      //       getTimeRemaining();
+      //       }, 1000)
+      //   }
+      //   return secondsLeft
+      // }

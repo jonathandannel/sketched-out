@@ -5,13 +5,7 @@ import { Line, Circle }   from 'rc-progress';
 
 class TimeBar extends Component {
 
-  startTimer = () => {
-      line.animate(1, {
-        duration: 1000,
-        easing: 'easeOut'
-      }, function() {
-      })
-    }
+
 
 
   render() {
