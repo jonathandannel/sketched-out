@@ -59,7 +59,6 @@ MongoClient.connect(MONGODB_URI)
       canvas: [],
       currentlyDrawing: players[0],
       gameStarted: false,
-      startTime: '',
       startTimer: false,
       currentClue: '',
       secondsLeft: 30
@@ -69,6 +68,7 @@ MongoClient.connect(MONGODB_URI)
     /******************************/
           // GAME Functions
 
+    let timerInterval = null;
 
     const getClue = () => {
       let currentClue = clues[Math.floor(Math.random() * (clues.length + 1))];
@@ -79,32 +79,32 @@ MongoClient.connect(MONGODB_URI)
       let i = (players.indexOf(GAME.currentlyDrawing) + 1) % players.length;
       GAME.currentlyDrawing = GAME.players[i]
     }
+    //
+    // guesserPoints = () => {
+    //   newGuessPoints = 100 - ((secondsLeft) * 3);
+    //   $("#guesser-points-display").fadeIn("slow", function() {
+    //       setTimeout(function() {
+    //         $("#guesser-points-display").fadeOut('fast')
+    //       }, 1000)
+    //   });
+    //   return newGuessPoints;
+    //   // add points to db
+    //   //user.correct_guesses ++
+    // }
+    //
+    // drawerPoints = () => {
+    //   newDrawPoints = 150 - ((secondsLeft) * 4);
+    //   setTimeout(function() {
+    //     $("#drawer-points-display").fadeIn("slow", function() {
+    //       setTimeout(function() {
+    //         $("#drawer-points-display").fadeOut('fast')
+    //       }, 1000)
+    //     })
+    //   }, 500)
+    //   return newDrawPoints;
+    //   //add points to db
+    // }
 
-    const startRound = () => {
-      getClue();
-      setCurrentlyDrawing()
-      startTimer();
-      GAME.startTime = moment()
-      GAME.gameStarted = true;
-      let message = {
-        type: 'roundStarted',
-        content: GAME
-      }
-      wss.clients.forEach((client) => {
-        client.send(JSON.stringify(message));
-      })
-      console.log(GAME)
-    }
-
-
-    const endRound = () => {
-      GAME.secondsLeft = 0;
-      GAME.gameStarted = false;
-      clearInterval(timerInterval);
-      startRound()
-    }
-
-    let timerInterval = null;
 
     const startTimer = () => {
       GAME.secondsLeft = 30;
@@ -126,6 +126,30 @@ MongoClient.connect(MONGODB_URI)
       }, 1000)
     }
 
+    const startRound = () => {
+      getClue();
+      setCurrentlyDrawing()
+      startTimer();
+      GAME.gameStarted = true;
+      let message = {
+        type: 'roundStarted',
+        content: GAME
+      }
+      wss.clients.forEach((client) => {
+        client.send(JSON.stringify(message));
+      })
+      console.log(GAME)
+    }
+
+    const endRound = () => {
+      // drawerPoints();
+      // guesserPoints();
+      GAME.secondsLeft = 0;
+      GAME.gameStarted = false;
+      clearInterval(timerInterval);
+      startRound()
+    }
+
 
 
     /******************************/
@@ -133,8 +157,6 @@ MongoClient.connect(MONGODB_URI)
     const wss = new SocketServer({
       server: httpServer
     });
-
-    startRound();
 
     wss.on("connection", (ws, req) => {
       console.log("==> User connected!");
@@ -173,6 +195,9 @@ MongoClient.connect(MONGODB_URI)
             wss.clients.forEach((client) => {
               client.send(JSON.stringify(outgoing));
             })
+          break;
+          case 'beginRound':
+            startRound();
           break;
           case 'startingRound':
             console.log(message.content)
@@ -219,3 +244,14 @@ MongoClient.connect(MONGODB_URI)
       //   }
       //   return secondsLeft
       // }
+      //
+      // case 'startingRound':
+      //   console.log(message.content)
+      //   let outgoingStartRound = {
+      //     type: 'startingRound',
+      //     content: message.content.currentClue
+      //   }
+      //   wss.clients.forEach((client) => {
+      //     client.send(JSON.stringify(outgoingStartRound))
+      //   })
+      // break;

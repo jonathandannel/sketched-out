@@ -37,6 +37,13 @@ export default class Room extends Component {
     this.setState({lineColor: color.hex})
   }
 
+  startRound = () => {
+    this.props.sendMessage({
+      type: 'beginRound',
+      content: ''
+    })
+  }
+
 
 // Game Logic Functions
 
@@ -72,6 +79,7 @@ export default class Room extends Component {
               currentUser={this.props.currentUser}
             />
           </span>
+          <button onClick={this.startRound}>Start</button>
         </div>
       </div>
 
