@@ -36,7 +36,6 @@ export default class Home extends Component {
           </Button>
           <h3>Active Games</h3>
         <span className="room-thumbnail-container">
-          
           {this.displayRooms()}
         </span>
         <SimpleModalWrapped />

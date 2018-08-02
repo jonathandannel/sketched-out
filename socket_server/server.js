@@ -38,6 +38,12 @@ MongoClient.connect(MONGODB_URI)
 
     const users = [];
     const canvas = [];
+    const roomState = {
+      type: "",
+      content: {
+        currentClue: "",
+      }
+    }
 
     const wss = new SocketServer({
       server: httpServer
@@ -61,7 +67,7 @@ MongoClient.connect(MONGODB_URI)
           })
         }
 
-        if (message.type === 'receiveLatestCanvasData'){
+        if (message.type === 'receiveLatestCanvasData') {
           let outgoingCanvas = {
             type: 'latestCanvas',
             content: canvas
@@ -69,11 +75,23 @@ MongoClient.connect(MONGODB_URI)
 
           ws.send(JSON.stringify(outgoingCanvas))
         }
+
         if (message.type === 'chatMessages') {
-          if (message.includes("CURRENT CLUE")) {
+          if (message.includes(currentClue)) {
             // correctGuess === true;
+            //tell room to start a new round
           }
         }
+
+        if (message.type === 'startingRound') {
+          console.log(message.content)
+          let outgoingStartRound = {
+            type: 'startingRound',
+            content: message.content.currentClue
+          }
+          ws.send(JSON.stringify(outgoingStartRound))
+        }
+
         wss.clients.forEach((client) => {
           if (client !== ws && client.readyState === WebSocket.OPEN && message.type !== 'chatMessages') {
             client.send(data);

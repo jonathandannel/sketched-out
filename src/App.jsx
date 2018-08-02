@@ -53,6 +53,12 @@ class App extends Component {
             latestLineData: parsedMessage.content
           })
         break;
+        case 'startingRound':
+          this.setState({
+            currentClue: parsedMessage.content.currentClue,
+            gameStarted: true
+          })
+        break;
       }// this.setState({// this.setState({
           //   latestLineData: parsedMessage.content
           // });
@@ -84,9 +90,7 @@ class App extends Component {
         <NavBar currentUser={this.state.currentUser}
                 clearUser={this.clearUser}
                 setUser={this.setUser}
-
                 />
-
         <Main
           latestLineData={this.state.latestLineData}
           sendMessage={this.sendMessage}
@@ -100,5 +104,6 @@ class App extends Component {
     )
   }
 }
+
 
 export default App;

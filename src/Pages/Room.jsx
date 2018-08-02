@@ -18,6 +18,7 @@ var roomPlayers     = ['PaintyGuy', 'Van Gogh', 'Yo Mama'];
 var correctGuesser  = roomPlayers[1];
 var currentlyDrawing = roomPlayers[0];
 var secondsLeft;
+var currentClue;
 
 export default class Room extends Component {
   constructor(props) {
@@ -32,6 +33,7 @@ export default class Room extends Component {
   }
 
   componentDidMount() {
+    this.startRound();
     this.props.sendMessage({
       type: 'roomJoin',
       content: this.props.currentUser
@@ -68,8 +70,8 @@ export default class Room extends Component {
       setTimeout(() => {
         this.getTimeRemaining();
         }, 1000)
-      return secondsLeft
     }
+    return secondsLeft
   }
 
   drawerPoints = (timeRemaining) => {
@@ -95,23 +97,28 @@ export default class Room extends Component {
     });
     return newGuessPoints;
     // add points to db
-    //add 1 to correct guesses
+    //user.correct_guesses ++
   }
 
   setClue = () => {
     let currentClue = clueArray[Math.floor((Math.random() * clueArray.length) + 1)];
-    console.log("The clue is:", currentClue)
+    console.log("The clue is:", currentClue);
     this.setState({currentClue: currentClue});
+    return currentClue;
   }
 
   startRound = () => {
     console.log("starting round!")
-    this.setClue();
+    ;
     this.setState({gameStarted: true, startTime: moment()});
     setTimeout(() => {
       this.endRound();
     }, 30000)
-
+    let roomState = {
+      type: 'startingRound',
+      content: this.setClue(),
+    }
+    this.props.sendMessage(roomState);
     //tell the socket who is drawing, the clue, and time started
     /*
     message = {

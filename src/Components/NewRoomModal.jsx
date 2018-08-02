@@ -19,7 +19,13 @@ export default class FormDialog extends React.Component {
   handleClose = () => {
     this.setState({ open: false });
   };
-  
+
+  createPrivateRoom = () => {
+    //add new room name and password to the db
+
+    this.setState({ open: false });
+  }
+
 
   render() {
     return (
@@ -51,7 +57,7 @@ export default class FormDialog extends React.Component {
             <Button onClick={this.handleClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={this.createPrivateRoom} color="primary">
               Create
             </Button>
           </DialogActions>
