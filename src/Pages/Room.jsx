@@ -8,6 +8,8 @@ import Chat      from '../Components/Chat.jsx';
 import TimeBar     from '../Components/TimeBar.jsx';
 import Modal     from '@material-ui/core/Modal';
 import MainCanvas from '../Components/MainCanvas.jsx';
+import AuthService from "../AuthService.jsx";
+
 
 // Not good practice to have variables assigned here ----------------------------
 // Mo will try to fix it
@@ -28,18 +30,26 @@ export default class Room extends Component {
       currentlyDrawing: roomPlayers[0],
       lineColor: 'white'
     }
+    // this.Auth = new AuthService()
   }
 
   componentDidMount() {
-    this.props.sendMessage({
-      type: 'roomJoin',
-      content: this.props.currentUser
-    })
+    //Waits for websocket to load before trying to send a message
+    //to avoid blank page 
+    let poller = setInterval(() => {
+      if (this.socket) {
+        this.props.sendMessage({
+          type: 'roomJoin',
+          content: this.props.currentUser
+        })
+        this.props.sendMessage({
+          type: 'receiveLatestCanvasData',
+          content: ''
+        })
+        clearInterval(poller);
+      }
+    }, 100);
 
-    this.props.sendMessage({
-      type: 'receiveLatestCanvasData',
-      content: ''
-    })
   }
 
 // Drawing Functions
@@ -117,6 +127,7 @@ export default class Room extends Component {
   }
 
   render() {
+
     return (
       <div id="room-container">
         <span>Your clue is: <b>{this.state.currentClue}</b>

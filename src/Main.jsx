@@ -39,6 +39,7 @@ class Main extends Component {
                 currentUser={this.props.currentUser}
                 userList={this.props.userList}
                 latestCanvas={this.props.latestCanvas}
+                socket={this.props.socket}
               />
             )}
           />

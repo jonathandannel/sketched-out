@@ -19,6 +19,11 @@ class App extends Component {
 
   componentDidMount() {
     this.Auth = new AuthService();
+    if (this.Auth.loggedIn()){
+      this.setState({
+        currentUser: this.Auth.getProfile().username
+      })
+    }
     // const user = this.Auth.getProfile()
     // console.log(user)
     this.socket = new WebSocket(`ws://localhost:8080`);
@@ -95,6 +100,7 @@ class App extends Component {
           setUser={this.setUser}
           clearUser={this.clearUser}
           userList={this.state.currentUsers}
+          socket={this.socket}
         />
       </div>
     )

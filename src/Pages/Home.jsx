@@ -17,7 +17,7 @@ export default class Home extends Component {
   displayRooms = () => {
     const roomDivs = rooms.map(room => {
       return (
-        <div className="room-thumbnail">
+        <div className="room-thumbnail" key={room.id}>
           <b>{room.name}</b>
         <br />
           {room.playerTotal} players

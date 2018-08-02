@@ -32,7 +32,7 @@ export default class Register extends Component {
 
 
   render() {
-    if (this.state.loggedIn){
+    if (this.Auth.loggedIn()){
       return <Redirect to='/'/>
     }
     return (
