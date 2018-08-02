@@ -14,8 +14,9 @@ class App extends Component {
       currentUser: '',
       currentUsers: [],
       latestCanvas: [],
-      gameStarted: false,
-      currentClue: ''
+      gameStarted: true,
+      currentClue: '',
+      secondsLeft: 30
     }
   }
 
@@ -62,6 +63,11 @@ class App extends Component {
             currentlyDrawing: parsedMessage.content.currentlyDrawing
           })
         break;
+        case 'timer':
+          this.setState({
+            secondsLeft: parsedMessage.content
+          })
+        break;
       }
     }
   }
@@ -101,6 +107,7 @@ class App extends Component {
           userList={this.state.currentUsers}
           currentClue={this.state.currentClue}
           gameStarted={this.state.gameStarted}
+          secondsLeft={this.state.secondsLeft}
         />
       </div>
     )

@@ -12,6 +12,7 @@ const WebSocket         = require('ws');
 const routes            = require('./routes')
 const server            = express();
 const httpServer        = http.createServer(server);
+const moment = require('moment');
 
 
 const clues             = require('../src/lib/clues.js')
@@ -58,6 +59,7 @@ MongoClient.connect(MONGODB_URI)
       canvas: [],
       currentlyDrawing: players[0],
       gameStarted: false,
+      startTime: '',
       startTimer: false,
       currentClue: ''
     }
@@ -77,9 +79,23 @@ MongoClient.connect(MONGODB_URI)
       GAME.currentlyDrawing = GAME.players[i]
     }
 
+    getTimeRemaining = () => {
+      if (GAME.gameStarted) {
+      secondsLeft = 30 - Math.floor(moment().diff(GAME.startTime) / 1000)
+      console.log(secondsLeft, "sec left");
+      } if (secondsLeft === 0) {
+      } if (secondsLeft > 0) {
+        setTimeout(() => {
+          getTimeRemaining();
+          }, 1000)
+      }
+      return secondsLeft
+    }
+
     const startRound = () => {
       getClue();
       setCurrentlyDrawing()
+      GAME.startTime = moment()
       GAME.gameStarted = true;
       let message = {
         type: 'roundStarted',
@@ -103,7 +119,22 @@ MongoClient.connect(MONGODB_URI)
       console.log("==> User connected!");
 
 
-      startRound()
+      startRound();
+
+      let time = 30
+
+      setInterval(() => {
+        time --;
+        let outgoing = {
+          type: 'timer',
+          content: time
+        }
+
+        wss.clients.forEach((client) => {
+          client.send(JSON.stringify(outgoing))
+        })
+        console.log('sending timer', time)
+      }, 1000)
 
       ws.on('message', (data) => {
         const message = JSON.parse(data);

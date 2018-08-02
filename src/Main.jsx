@@ -39,6 +39,7 @@ class Main extends Component {
                 userList={this.props.userList}
                 latestCanvas={this.props.latestCanvas}
                 currentClue={this.props.currentClue}
+                secondsLeft={this.props.secondsLeft}
               />
             )}
           />

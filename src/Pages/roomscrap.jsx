@@ -1,4 +1,4 @@
-<TimeBar timeRemaining={this.getTimeRemaining()} shouldAnimate={this.props.gameStarted} />
+
 {this.props.userList}
 
 

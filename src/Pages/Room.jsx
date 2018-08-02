@@ -44,7 +44,9 @@ export default class Room extends Component {
   render() {
     return (
       <div id="room-container">
-        <TimeBar shouldAnimate={this.props.gameStarted} />
+        <TimeBar
+          shouldAnimate={this.props.gameStarted} timeRemaining={this.props.secondsLeft}
+         />
         <span>Your clue is: <b>{this.props.currentClue}</b>
         </span>
       <div id="canvas-container">
