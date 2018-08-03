@@ -136,18 +136,30 @@ MongoClient.connect(MONGODB_URI)
     }
 
     const startRound = () => {
-      getClue();
-      setCurrentlyDrawing()
-      startTimer();
-      GAME.gameStarted = true;
-      let message = {
-        type: 'roundStarted',
-        content: GAME
+      GAME.secondsLeft = 30
+      let outgoing = {
+        type: 'timer',
+        content: GAME.secondsLeft
       }
+
       wss.clients.forEach((client) => {
-        client.send(JSON.stringify(message));
+        client.send(JSON.stringify(outgoing))
       })
-      console.log(GAME)
+      let gameTimeout = setTimeout(()=> {
+        startTimer();
+        setCurrentlyDrawing()
+        getClue();
+        GAME.gameStarted = true;
+        let message = {
+          type: 'roundStarted',
+          content: GAME
+        }
+        wss.clients.forEach((client) => {
+          client.send(JSON.stringify(message));
+        })
+        console.log(GAME)
+      }, 3000)
+
     }
 
     const endRound = () => {
