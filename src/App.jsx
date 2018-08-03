@@ -14,8 +14,9 @@ class App extends Component {
       currentUser: '',
       currentUsers: [],
       latestCanvas: [],
-      gameStarted: false,
-      currentClue: ''
+      gameStarted: true,
+      currentClue: '',
+      secondsLeft: 30
     }
   }
 
@@ -59,10 +60,23 @@ class App extends Component {
             latestLineData: parsedMessage.content
           })
         break;
-        case 'startingRound':
+        case 'roundStarted':
           this.setState({
-            currentClue: parsedMessage.content,
-            gameStarted: true
+            currentClue: parsedMessage.content.currentClue
+          })
+          this.setState({
+            currentlyDrawing: parsedMessage.content.currentlyDrawing
+          })
+        break;
+        case 'timer':
+          this.setState({
+            secondsLeft: parsedMessage.content
+          })
+        break;
+        case 'clearCanvas':
+          console.log('clearcanvas called');
+          this.setState({
+            latestLineData: []
           })
         break;
       }
@@ -105,6 +119,7 @@ class App extends Component {
           currentClue={this.state.currentClue}
           gameStarted={this.state.gameStarted}
           socket={this.socket}
+          secondsLeft={this.state.secondsLeft}
         />
       </div>
     )

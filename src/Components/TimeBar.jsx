@@ -6,18 +6,7 @@ import { Line, Circle }   from 'rc-progress';
 class TimeBar extends Component {
 
 
-  startTimer = () => {
-    if (this.props.shouldAnimate) {
-      line.animate(1, {
-        duration: 1000,
-        easing: 'easeOut'
-      }, function() {
-      });
-    } else {
-      line.stop();
-      line.set(0);
-    }
-  }
+
 
   render() {
 
@@ -30,6 +19,6 @@ class TimeBar extends Component {
         </div>
     )
   }
-};
+}
 
 export default TimeBar;

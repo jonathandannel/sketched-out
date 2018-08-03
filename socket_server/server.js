@@ -12,6 +12,10 @@ const WebSocket         = require('ws');
 const routes            = require('./routes')
 const server            = express();
 const httpServer        = http.createServer(server);
+const moment = require('moment');
+
+
+const clues             = require('../src/lib/clues.js')
 
 
 // Database Connection
@@ -44,14 +48,126 @@ MongoClient.connect(MONGODB_URI)
 
     /********* ROOM STATE *********/
 
-    const users = [];
-    const canvas = [];
-    const roomState = {
-      type: "",
-      content: {
-        currentClue: "",
-      }
+    // const users = [];
+    // const canvas = [];
+    // const roomState = {
+    //   type: "",
+    //   content: {
+    //     currentClue: "",
+    //   }
+    // }
+
+    const players = ['ONE', 'TWO', 'three'];
+
+    const GAME = {
+      roomId: 1,
+      players: players,
+      canvas: [],
+      currentlyDrawing: players[0],
+      gameStarted: false,
+      startTimer: false,
+      currentClue: '',
+      secondsLeft: 30
     }
+
+
+    /******************************/
+          // GAME Functions
+
+    let timerInterval = null;
+
+    const getClue = () => {
+      let currentClue = clues[Math.floor(Math.random() * (clues.length + 1))];
+      GAME.currentClue = currentClue;
+    }
+
+    const setCurrentlyDrawing = () => {
+      let i = (players.indexOf(GAME.currentlyDrawing) + 1) % players.length;
+      GAME.currentlyDrawing = GAME.players[i]
+    }
+    //
+    // guesserPoints = () => {
+    //   newGuessPoints = 100 - ((secondsLeft) * 3);
+    //   $("#guesser-points-display").fadeIn("slow", function() {
+    //       setTimeout(function() {
+    //         $("#guesser-points-display").fadeOut('fast')
+    //       }, 1000)
+    //   });
+    //   return newGuessPoints;
+    //   // add points to db
+    //   //user.correct_guesses ++
+    // }
+    //
+    // drawerPoints = () => {
+    //   newDrawPoints = 150 - ((secondsLeft) * 4);
+    //   setTimeout(function() {
+    //     $("#drawer-points-display").fadeIn("slow", function() {
+    //       setTimeout(function() {
+    //         $("#drawer-points-display").fadeOut('fast')
+    //       }, 1000)
+    //     })
+    //   }, 500)
+    //   return newDrawPoints;
+    //   //add points to db
+    // }
+
+
+    const startTimer = () => {
+      GAME.secondsLeft = 30;
+      timerInterval = setInterval(() => {
+        if (GAME.secondsLeft === 0) {
+          endRound()
+        } else {
+          GAME.secondsLeft --;
+          let outgoing = {
+            type: 'timer',
+            content: GAME.secondsLeft
+          }
+
+          wss.clients.forEach((client) => {
+            client.send(JSON.stringify(outgoing))
+          })
+        }
+        console.log('sending timer', GAME.secondsLeft)
+      }, 1000)
+    }
+
+    const startRound = () => {
+      getClue();
+      setCurrentlyDrawing()
+      startTimer();
+      GAME.gameStarted = true;
+      let message = {
+        type: 'roundStarted',
+        content: GAME
+      }
+      wss.clients.forEach((client) => {
+        client.send(JSON.stringify(message));
+      })
+      console.log(GAME)
+    }
+
+    const endRound = () => {
+      // drawerPoints();
+      // guesserPoints();
+      GAME.secondsLeft = 0;
+      GAME.gameStarted = false;
+      clearInterval(timerInterval);
+      GAME.canvas = [];
+
+      let message = {
+        type: 'clearCanvas',
+        content: ''
+      }
+
+      wss.clients.forEach((client) => {
+        client.send(JSON.stringify(message))
+      })
+
+      startRound()
+    }
+
+
 
     /******************************/
 
@@ -69,7 +185,7 @@ MongoClient.connect(MONGODB_URI)
           case 'latestLineData':
             console.log(message.content)
             message.content.forEach((line) => {
-              canvas.push(line);
+              GAME.canvas.push(line);
             });
             wss.clients.forEach((client) => {
               client.send(data);
@@ -78,7 +194,7 @@ MongoClient.connect(MONGODB_URI)
           case 'receiveLatestCanvasData':
             let outgoingCanvas = {
               type: 'latestCanvas',
-              content: canvas
+              content: GAME.canvas
             }
             ws.send(JSON.stringify(outgoingCanvas))
           break;
@@ -88,14 +204,17 @@ MongoClient.connect(MONGODB_URI)
             })
           break;
           case 'roomJoin':
-            users.push(message.content)
+            players.push(message.content)
             let outgoing = {
               type: 'userList',
-              content: users
+              content: GAME.players
             }
             wss.clients.forEach((client) => {
               client.send(JSON.stringify(outgoing));
             })
+          break;
+          case 'beginRound':
+            startRound();
           break;
           case 'startingRound':
             console.log(message.content)
@@ -125,3 +244,31 @@ MongoClient.connect(MONGODB_URI)
     console.error(`Failed to connect: ${MONGODB_URI}`)
     throw err
   })
+      //
+      //
+      //
+      //
+      //
+      // getTimeRemaining = () => {
+      //   if (GAME.gameStarted) {
+      //   secondsLeft = 30 - Math.floor(moment().diff(GAME.startTime) / 1000)
+      //   console.log(secondsLeft, "sec left");
+      //   } if (secondsLeft === 0) {
+      //   } if (secondsLeft > 0) {
+      //     setTimeout(() => {
+      //       getTimeRemaining();
+      //       }, 1000)
+      //   }
+      //   return secondsLeft
+      // }
+      //
+      // case 'startingRound':
+      //   console.log(message.content)
+      //   let outgoingStartRound = {
+      //     type: 'startingRound',
+      //     content: message.content.currentClue
+      //   }
+      //   wss.clients.forEach((client) => {
+      //     client.send(JSON.stringify(outgoingStartRound))
+      //   })
+      // break;
