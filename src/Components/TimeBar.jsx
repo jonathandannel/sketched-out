@@ -11,7 +11,7 @@ class TimeBar extends Component {
   render() {
 
     let percent = Math.floor(this.props.timeRemaining / 30 * 100)
-    console.log("percent", percent)
+
 
     return (
         <div id="progress">

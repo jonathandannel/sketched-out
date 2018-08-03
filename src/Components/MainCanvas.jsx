@@ -30,7 +30,7 @@ export default class MainCanvas extends Component {
   }
 
   handleMouseDown = ({ nativeEvent })=> {
-    console.log({nativeEvent})
+    // console.log({nativeEvent})
     if (this.props.currentlyDrawing === this.props.currentUser) {
       const { offsetX, offsetY } = nativeEvent;
       this.isPainting = true;
@@ -59,7 +59,7 @@ export default class MainCanvas extends Component {
     }
   }
   onTouchStart = ({ nativeEvent })=> {
-    console.log({nativeEvent})
+    // console.log({nativeEvent})
     // nativeEvent.preventDefault()
     if (this.props.currentlyDrawing === this.props.currentUser) {
       const { clientX, clientY } = nativeEvent.targetTouches[0];
@@ -70,56 +70,61 @@ export default class MainCanvas extends Component {
   }
 
   onTouchMove = ({ nativeEvent }) => {
-    // nativeEvent.preventDefault()
-    if (this.isPainting) {
-      const { clientX, clientY } = nativeEvent.targetTouches[0];
-      const offsetData = { clientX, clientY };
-      const positionData = {
-        start: { ...this.prevPos },
-        stop: {...offsetData}
-      };
+    if (this.props.currentlyDrawing === this.props.currentUser) {
+      // nativeEvent.preventDefault()
+      if (this.isPainting) {
+        const { clientX, clientY } = nativeEvent.targetTouches[0];
+        const offsetData = { clientX, clientY };
+        const positionData = {
+          start: { ...this.prevPos },
+          stop: {...offsetData}
+        };
 
-      this.line = {
-        prevPos: this.prevPos,
-        currPos: offsetData,
-        strokeStyle: this.userStrokeStyle
+        this.line = {
+          prevPos: this.prevPos,
+          currPos: offsetData,
+          strokeStyle: this.userStrokeStyle
+        }
+
+        this.touchPaint(this.prevPos, offsetData, this.userStrokeStyle);
+        this.sendPaintData()
       }
+    }
+}
 
-      this.touchPaint(this.prevPos, offsetData, this.userStrokeStyle);
-      this.sendPaintData()
+  touchPaint = (prevPos, currPos, strokeStyle) => {
+    if (this.props.currentlyDrawing === this.props.currentUser) {
+      // console.log('PAINT EXECUTING')
+      const { clientX, clientY } = currPos;
+      const { clientX: x, clientY: y } = prevPos;
+
+      this.ctx.beginPath();
+      this.ctx.strokeStyle = strokeStyle;
+      // Move the the prevPosition of the mouse
+      this.ctx.moveTo(x, y);
+      // Draw a line to the current position of the mouse
+      this.ctx.lineTo(clientX, clientY);
+      // Visualize the line using the strokeStyle
+      this.ctx.stroke();
+      this.prevPos = { clientX, clientY };
     }
   }
 
-  touchPaint = (prevPos, currPos, strokeStyle) => {
-    console.log('PAINT EXECUTING')
-    const { clientX, clientY } = currPos;
-    const { clientX: x, clientY: y } = prevPos;
-
-    this.ctx.beginPath();
-    this.ctx.strokeStyle = strokeStyle;
-    // Move the the prevPosition of the mouse
-    this.ctx.moveTo(x, y);
-    // Draw a line to the current position of the mouse
-    this.ctx.lineTo(clientX, clientY);
-    // Visualize the line using the strokeStyle
-    this.ctx.stroke();
-    this.prevPos = { clientX, clientY };
-  }
-
   paint = (prevPos, currPos, strokeStyle) => {
-    console.log('PAINT EXECUTING')
-    const { offsetX, offsetY } = currPos;
-    const { offsetX: x, offsetY: y } = prevPos;
+    if (this.props.currentlyDrawing === this.props.currentUser) {
+      const { offsetX, offsetY } = currPos;
+      const { offsetX: x, offsetY: y } = prevPos;
 
-    this.ctx.beginPath();
-    this.ctx.strokeStyle = strokeStyle;
-    // Move the the prevPosition of the mouse
-    this.ctx.moveTo(x, y);
-    // Draw a line to the current position of the mouse
-    this.ctx.lineTo(offsetX, offsetY);
-    // Visualize the line using the strokeStyle
-    this.ctx.stroke();
-    this.prevPos = { offsetX, offsetY };
+      this.ctx.beginPath();
+      this.ctx.strokeStyle = strokeStyle;
+      // Move the the prevPosition of the mouse
+      this.ctx.moveTo(x, y);
+      // Draw a line to the current position of the mouse
+      this.ctx.lineTo(offsetX, offsetY);
+      // Visualize the line using the strokeStyle
+      this.ctx.stroke();
+      this.prevPos = { offsetX, offsetY };
+    }
   }
 
   //make message into an object with options
@@ -137,7 +142,7 @@ export default class MainCanvas extends Component {
 
   render() {
     if (this.props.latestLineData.length < 1 && this.ctx) {
-      console.log('empty array', this.ctx.fillStyle);
+      // console.log('empty array', this.ctx.fillStyle);
       this.ctx.beginPath();
       this.ctx.rect(0, 0, 900, 450);
       this.ctx.fillStyle = 'white';

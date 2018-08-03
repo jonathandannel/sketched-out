@@ -67,7 +67,8 @@ MongoClient.connect(MONGODB_URI)
       gameStarted: false,
       startTimer: false,
       currentClue: '',
-      secondsLeft: 30
+      secondsLeft: 30,
+      correctGuesser: ''
     }
 
 
@@ -85,31 +86,33 @@ MongoClient.connect(MONGODB_URI)
       let i = (players.indexOf(GAME.currentlyDrawing) + 1) % players.length;
       GAME.currentlyDrawing = GAME.players[i]
     }
-    //
-    // guesserPoints = () => {
-    //   newGuessPoints = 100 - ((secondsLeft) * 3);
-    //   $("#guesser-points-display").fadeIn("slow", function() {
-    //       setTimeout(function() {
-    //         $("#guesser-points-display").fadeOut('fast')
-    //       }, 1000)
-    //   });
-    //   return newGuessPoints;
-    //   // add points to db
-    //   //user.correct_guesses ++
-    // }
-    //
-    // drawerPoints = () => {
-    //   newDrawPoints = 150 - ((secondsLeft) * 4);
-    //   setTimeout(function() {
-    //     $("#drawer-points-display").fadeIn("slow", function() {
-    //       setTimeout(function() {
-    //         $("#drawer-points-display").fadeOut('fast')
-    //       }, 1000)
-    //     })
-    //   }, 500)
-    //   return newDrawPoints;
-    //   //add points to db
-    // }
+
+    guesserPoints = () => {
+      newGuessPoints = 100 - ((GAME.  secondsLeft) * 3);
+      // $("#guesser-points-display").fadeIn("slow", function() {
+      //     setTimeout(function() {
+      //       $("#guesser-points-display").fadeOut('fast')
+      //     }, 1000)
+      // });
+      console.log("guesser got ", newGuessPoints, "points!")
+      return newGuessPoints;
+      // add points to db
+      //user.correct_guesses ++
+    }
+
+    drawerPoints = () => {
+      newDrawPoints = 150 - ((GAME. secondsLeft) * 4);
+      // setTimeout(function() {
+      //   $("#drawer-points-display").fadeIn("slow", function() {
+      //     setTimeout(function() {
+      //       $("#drawer-points-display").fadeOut('fast')
+      //     }, 1000)
+      //   })
+      // }, 500)
+      console.log("drawer got ", newDrawPoints, "points!")
+      return newDrawPoints;
+      //add points to db
+    }
 
 
     const startTimer = () => {
@@ -148,8 +151,8 @@ MongoClient.connect(MONGODB_URI)
     }
 
     const endRound = () => {
-      // drawerPoints();
-      // guesserPoints();
+      drawerPoints();
+      guesserPoints();
       GAME.secondsLeft = 0;
       GAME.gameStarted = false;
       clearInterval(timerInterval);
@@ -159,11 +162,9 @@ MongoClient.connect(MONGODB_URI)
         type: 'clearCanvas',
         content: ''
       }
-
       wss.clients.forEach((client) => {
         client.send(JSON.stringify(message))
       })
-
       startRound()
     }
 
@@ -197,6 +198,10 @@ MongoClient.connect(MONGODB_URI)
             ws.send(JSON.stringify(outgoingCanvas))
           break;
           case 'chatMessages':
+            if (message.content.text.includes(GAME.currentClue)) {
+              GAME.correctGuesser = message.content.username
+              endRound();
+            }
             wss.clients.forEach((client) => {
               client.send(data);
             })
