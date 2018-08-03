@@ -16,7 +16,7 @@ class App extends Component {
       latestCanvas: [],
       gameStarted: true,
       currentClue: '',
-      secondsLeft: 30
+      secondsLeft: 30,
     }
   }
 
@@ -120,6 +120,7 @@ class App extends Component {
           gameStarted={this.state.gameStarted}
           socket={this.socket}
           secondsLeft={this.state.secondsLeft}
+          currentlyDrawing={this.state.currentlyDrawing}
         />
       </div>
     )

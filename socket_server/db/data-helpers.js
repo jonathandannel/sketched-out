@@ -5,7 +5,6 @@
 module.exports = function makeDataHelpers(db) {
   return {
     saveUsers: newUser => {
-      console.log('newuser')
       return new Promise((resolve, reject) => {
         db.collection('users').insertOne(newUser, (err, newUser) => {
           if (err) {
@@ -16,7 +15,7 @@ module.exports = function makeDataHelpers(db) {
         })
       })
     },
-    
+
     getUsers: () => {
       return new Promise((resolve, reject) => {
         let users
@@ -24,7 +23,6 @@ module.exports = function makeDataHelpers(db) {
           if (err) {
             reject(err)
           } else {
-            console.log(users)
             resolve(users)
           }
         })

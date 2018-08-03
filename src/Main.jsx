@@ -42,6 +42,7 @@ class Main extends Component {
                 gameStarted={this.props.gameStarted}
                 socket={this.props.socket}
                 secondsLeft={this.props.secondsLeft}
+                currentlyDrawing={this.props.currentlyDrawing}
               />
             )}
           />
