@@ -65,9 +65,7 @@ export default class Room extends Component {
   render() {
     return (
       <div id="room-container">
-        <TimeBar
-          shouldAnimate={this.props.gameStarted} timeRemaining={this.props.secondsLeft}
-         />
+
         <span>Your clue is: <b>{this.props.currentClue}</b>
         </span>
       <div id="canvas-container">
@@ -78,6 +76,10 @@ export default class Room extends Component {
             onChange={this.changeColor}
           />
         </div>
+          <div>
+          <TimeBar
+            shouldAnimate={this.props.gameStarted} timeRemaining={this.props.secondsLeft}
+          />
           <MainCanvas
             className="canvas-area"
             sendMessage={this.props.sendMessage}
@@ -85,6 +87,8 @@ export default class Room extends Component {
             latestLineData={this.props.latestLineData}
             latestCanvas={this.props.latestCanvas}
           />
+
+          </div>
           <span id="chat-area">
             <Chat
               className="chat-area"
