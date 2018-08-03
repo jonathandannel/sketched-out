@@ -117,7 +117,7 @@ export default class MainCanvas extends Component {
       const { offsetX, offsetY } = currPos;
       const { offsetX: x, offsetY: y } = prevPos;
       this.ctx.lineWidth = this.props.brushSize;
-      
+
       this.ctx.beginPath();
       this.ctx.strokeStyle = strokeStyle;
       // Move the the prevPosition of the mouse
