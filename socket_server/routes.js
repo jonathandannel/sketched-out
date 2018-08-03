@@ -72,7 +72,9 @@ module.exports = function routes(server, db) {
         newUser = {
           id: randomID,
           username: username,
-          password: hashedPassword
+          password: hashedPassword,
+          correctGuesses: 0,
+          totalPoints: 0
         };
         foundUser = newUser
         return dataHelpers.saveUsers(newUser)
