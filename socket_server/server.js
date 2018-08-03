@@ -119,6 +119,7 @@ MongoClient.connect(MONGODB_URI)
       GAME.secondsLeft = 30;
       timerInterval = setInterval(() => {
         if (GAME.secondsLeft === 0) {
+          GAME.currentlyDrawing = null;
           endRound()
         } else {
           GAME.secondsLeft --;

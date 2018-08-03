@@ -6,7 +6,7 @@ import randomColor    from 'randomcolor';
 
 let user = {
   name: "Mo",
-  initial: name.slice(0, 1)
+  initial: name.slice(0, 1),
   avColor: randomColor()
 }
 

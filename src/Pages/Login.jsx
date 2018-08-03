@@ -104,7 +104,7 @@ class Login extends Component {
         })
       })
       .catch(err => {
-        alert(err);
+        e.preventDefault();
       })
   }
 }
