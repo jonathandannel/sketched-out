@@ -26,7 +26,6 @@ export default class MainCanvas extends Component {
     this.ctx.lineJoin = 'round';
     this.ctx.lineCap = 'round';
     this.ctx.lineWidth = 10
-
   }
 
   handleMouseDown = ({ nativeEvent })=> {
@@ -122,6 +121,10 @@ export default class MainCanvas extends Component {
     this.prevPos = { offsetX, offsetY };
   }
 
+  setBrushSize = (size) => {
+    this.ctx.lineWidth = size;
+  }
+
   //make message into an object with options
   sendPaintData = () => {
     this.props.sendMessage({
@@ -171,6 +174,12 @@ export default class MainCanvas extends Component {
             onTouchMove={this.onTouchMove}
             onTouchEnd={this.stopPainting}
           />
+          <div id='brush-sizes'>
+            <button onClick={() => this.setBrushSize(5)}>small</button>
+            <button onClick={() => this.setBrushSize(10)}>medium</button>
+            <button onClick={() => this.setBrushSize(15)}>large</button>
+            <button>undo</button>
+          </div>
         </div>
     )
   }
