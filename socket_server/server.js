@@ -251,6 +251,16 @@ MongoClient.connect(MONGODB_URI)
               client.send(JSON.stringify(clearCanvas));
             })
           break;
+          case 'changeBrushSize':
+            let outgoingMsg = {
+              type: 'changeBrushSize',
+              content: message.content
+            }
+
+            wss.clients.forEach((client) => {
+              client.send(JSON.stringify(outgoingMsg))
+            })
+          break;
         }
 
 

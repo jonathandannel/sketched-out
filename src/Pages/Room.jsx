@@ -86,6 +86,7 @@ export default class Room extends Component {
             lineColor={this.state.lineColor}
             latestLineData={this.props.latestLineData}
             latestCanvas={this.props.latestCanvas}
+            brushSize={this.props.brushSize}
           />
 
           </div>

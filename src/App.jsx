@@ -16,7 +16,8 @@ class App extends Component {
       latestCanvas: [],
       gameStarted: true,
       currentClue: '',
-      secondsLeft: 30
+      secondsLeft: 30,
+      brushSize: 10
     }
   }
 
@@ -79,6 +80,11 @@ class App extends Component {
             latestLineData: []
           })
         break;
+        case 'changeBrushSize':
+          this.setState({
+            brushSize: parsedMessage.content
+          })
+        break;
       }
     }
   }
@@ -120,6 +126,7 @@ class App extends Component {
           gameStarted={this.state.gameStarted}
           socket={this.socket}
           secondsLeft={this.state.secondsLeft}
+          brushSize={this.state.brushSize}
         />
       </div>
     )

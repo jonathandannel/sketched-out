@@ -26,7 +26,7 @@ export default class MainCanvas extends Component {
     this.ctx = this.canvas.getContext('2d');
     this.ctx.lineJoin = 'round';
     this.ctx.lineCap = 'round';
-    this.ctx.lineWidth = 10
+    this.ctx.lineWidth = this.props.brushSize
   }
 
   handleMouseDown = ({ nativeEvent })=> {
@@ -116,7 +116,8 @@ export default class MainCanvas extends Component {
     if (this.props.currentlyDrawing === this.props.currentUser) {
       const { offsetX, offsetY } = currPos;
       const { offsetX: x, offsetY: y } = prevPos;
-
+      this.ctx.lineWidth = this.props.brushSize;
+      
       this.ctx.beginPath();
       this.ctx.strokeStyle = strokeStyle;
       // Move the the prevPosition of the mouse
@@ -131,6 +132,11 @@ export default class MainCanvas extends Component {
 
   setBrushSize = (size) => {
     this.ctx.lineWidth = size;
+
+    this.props.sendMessage({
+      type: 'changeBrushSize',
+      content: size
+    })
   }
 
   userClearCanvas = () => {
