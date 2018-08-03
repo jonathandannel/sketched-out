@@ -87,7 +87,9 @@ MongoClient.connect(MONGODB_URI)
           console.log(message.content)
           let outgoingStartRound = {
             type: 'startingRound',
-            content: message.content.currentClue
+            content: {
+              currentClue: message.content.currentClue
+            }
           }
           ws.send(JSON.stringify(outgoingStartRound))
         }

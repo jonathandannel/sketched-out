@@ -33,3 +33,4 @@ class TimeBar extends Component {
 };
 
 export default TimeBar;
+

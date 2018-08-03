@@ -116,7 +116,9 @@ export default class Room extends Component {
     }, 30000)
     let roomState = {
       type: 'startingRound',
-      content: this.setClue(),
+      content: {
+        currentClue: this.setClue(),
+      }
     }
     this.props.sendMessage(roomState);
     //tell the socket who is drawing, the clue, and time started
