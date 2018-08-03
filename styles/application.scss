@@ -12,5 +12,9 @@ main {
 }
 
 body {
-  background-color: #cce5cd;
+  background-image: url("https://pixabay.com/get/e836b30a2ef1073ed1534705fb094f91e175e0d619ac104496f3c37ca6edb0bf/watercolour-1325656_1920.jpg");
+  // background: no-repeat center center fixed;
+  // background: linear-gradient(to bottom right, rgb(90, 141, 189), rgb(206, 105, 105));
+  background-size: cover;
 }
+

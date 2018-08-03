@@ -21,6 +21,11 @@ class App extends Component {
 
   componentDidMount() {
     this.Auth = new AuthService();
+    if (this.Auth.loggedIn()){
+      this.setState({
+        currentUser: this.Auth.getProfile().username
+      })
+    }
     this.socket = new WebSocket(`ws://localhost:8080`);
 
     this.socket.onopen = (e) => {
@@ -99,6 +104,7 @@ class App extends Component {
           userList={this.state.currentUsers}
           currentClue={this.state.currentClue}
           gameStarted={this.state.gameStarted}
+          socket={this.socket}
         />
       </div>
     )

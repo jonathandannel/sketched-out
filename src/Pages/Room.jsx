@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {SketchField, Tools} from "react-sketch";
+import { Link } from 'react-router-dom'
 import clueArray from '../lib/clues'
 import moment    from 'moment'
 import Button    from '@material-ui/core/Button';
@@ -8,6 +8,8 @@ import Chat      from '../Components/Chat.jsx';
 import TimeBar     from '../Components/TimeBar.jsx';
 import Modal     from '@material-ui/core/Modal';
 import MainCanvas from '../Components/MainCanvas.jsx';
+import AuthService from "../AuthService.jsx";
+
 
 // Not good practice to have variables assigned here ----------------------------
 // Mo will try to fix it
@@ -30,19 +32,26 @@ export default class Room extends Component {
       currentlyDrawing: roomPlayers[0],
       lineColor: 'white'
     }
+    this.Auth = new AuthService()
   }
 
   componentDidMount() {
-    this.startRound();
-    this.props.sendMessage({
-      type: 'roomJoin',
-      content: this.props.currentUser
-    })
+    //Waits for websocket to load before trying to send a message
+    //to avoid blank page 
+    let poller = setInterval(() => {
+      if (this.socket) {
+        this.props.sendMessage({
+          type: 'roomJoin',
+          content: this.props.currentUser
+        })
+        this.props.sendMessage({
+          type: 'receiveLatestCanvasData',
+          content: ''
+        })
+        clearInterval(poller);
+      }
+    }, 100);
 
-    this.props.sendMessage({
-      type: 'receiveLatestCanvasData',
-      content: ''
-    })
   }
 
 // Drawing Functions

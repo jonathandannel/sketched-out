@@ -6,6 +6,8 @@ export default class MainCanvas extends Component {
     this.handleMouseDown = this.handleMouseDown.bind(this)
     this.handleMouseMove = this.handleMouseMove.bind(this)
     this.stopPainting = this.stopPainting.bind(this)
+    this.onTouchStart = this.onTouchStart.bind(this)
+    this.onTouchMove = this.onTouchMove.bind(this)
   }
 
   isPainting = false;
@@ -28,6 +30,7 @@ export default class MainCanvas extends Component {
   }
 
   handleMouseDown = ({ nativeEvent })=> {
+    console.log({nativeEvent})
     if (this.props.currentlyDrawing === this.props.currentUser) {
       const { offsetX, offsetY } = nativeEvent;
       this.isPainting = true;
@@ -54,6 +57,53 @@ export default class MainCanvas extends Component {
       this.paint(this.prevPos, offsetData, this.userStrokeStyle);
       this.sendPaintData()
     }
+  }
+  onTouchStart = ({ nativeEvent })=> {
+    console.log({nativeEvent})
+    // nativeEvent.preventDefault()
+    if (this.props.currentlyDrawing === this.props.currentUser) {
+      const { clientX, clientY } = nativeEvent.targetTouches[0];
+      console.log( {clientX, clientY})
+      this.isPainting = true;
+      this.prevPos = { clientX, clientY };
+    }
+  }
+
+  onTouchMove = ({ nativeEvent }) => {
+    // nativeEvent.preventDefault()
+    if (this.isPainting) {
+      const { clientX, clientY } = nativeEvent.targetTouches[0];
+      const offsetData = { clientX, clientY };
+      const positionData = {
+        start: { ...this.prevPos },
+        stop: {...offsetData}
+      };
+
+      this.line = {
+        prevPos: this.prevPos,
+        currPos: offsetData,
+        strokeStyle: this.userStrokeStyle
+      }
+
+      this.touchPaint(this.prevPos, offsetData, this.userStrokeStyle);
+      this.sendPaintData()
+    }
+  }
+
+  touchPaint = (prevPos, currPos, strokeStyle) => {
+    console.log('PAINT EXECUTING')
+    const { clientX, clientY } = currPos;
+    const { clientX: x, clientY: y } = prevPos;
+
+    this.ctx.beginPath();
+    this.ctx.strokeStyle = strokeStyle;
+    // Move the the prevPosition of the mouse
+    this.ctx.moveTo(x, y);
+    // Draw a line to the current position of the mouse
+    this.ctx.lineTo(clientX, clientY);
+    // Visualize the line using the strokeStyle
+    this.ctx.stroke();
+    this.prevPos = { clientX, clientY };
   }
 
   paint = (prevPos, currPos, strokeStyle) => {
@@ -102,12 +152,16 @@ export default class MainCanvas extends Component {
     return (
         <div>
           <canvas
+            id='canvas'
             ref={(ref) => (this.canvas = ref)}
             style={ {background: 'white'} }
             onMouseDown={this.handleMouseDown}
             onMouseMove={this.handleMouseMove}
             onMouseUp={this.stopPainting}
             onMouseLeave={this.stopPainting}
+            onTouchStart={this.onTouchStart}
+            onTouchMove={this.onTouchMove}
+            onTouchEnd={this.stopPainting}
           />
         </div>
     )
