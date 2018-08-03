@@ -167,8 +167,6 @@ MongoClient.connect(MONGODB_URI)
       startRound()
     }
 
-
-
     /******************************/
 
     const wss = new SocketServer({
