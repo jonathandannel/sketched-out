@@ -31,6 +31,8 @@ export default class MainCanvas extends Component {
 
   handleMouseDown = ({ nativeEvent })=> {
     // console.log({nativeEvent})
+    console.log('cU:',this.props.currentUser)
+    console.log('cD:',this.props.currentlyDrawing)
     if (this.props.currentlyDrawing === this.props.currentUser) {
       const { offsetX, offsetY } = nativeEvent;
       this.isPainting = true;
@@ -113,7 +115,6 @@ export default class MainCanvas extends Component {
   }
 
   paint = (prevPos, currPos, strokeStyle) => {
-    if (this.props.currentlyDrawing === this.props.currentUser) {
       const { offsetX, offsetY } = currPos;
       const { offsetX: x, offsetY: y } = prevPos;
       this.ctx.lineWidth = this.props.brushSize;
@@ -127,7 +128,6 @@ export default class MainCanvas extends Component {
       // Visualize the line using the strokeStyle
       this.ctx.stroke();
       this.prevPos = { offsetX, offsetY };
-    }
   }
 
   setBrushSize = (size) => {

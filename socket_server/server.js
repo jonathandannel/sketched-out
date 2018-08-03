@@ -48,22 +48,12 @@ MongoClient.connect(MONGODB_URI)
 
     /********* ROOM STATE *********/
 
-    // const users = [];
-    // const canvas = [];
-    // const roomState = {
-    //   type: "",
-    //   content: {
-    //     currentClue: "",
-    //   }
-    // }
-
-    const players = ['ONE', 'TWO', 'three'];
 
     const GAME = {
       roomId: 1,
-      players: players,
+      players: [],
       canvas: [],
-      currentlyDrawing: players[0],
+      currentlyDrawing: null,
       gameStarted: false,
       startTimer: false,
       currentClue: '',
@@ -83,8 +73,13 @@ MongoClient.connect(MONGODB_URI)
     }
 
     const setCurrentlyDrawing = () => {
-      let i = (players.indexOf(GAME.currentlyDrawing) + 1) % players.length;
-      GAME.currentlyDrawing = GAME.players[i]
+      if (GAME.currentlyDrawing === null){
+        GAME.currentlyDrawing = GAME.players[0]
+      } else {
+        let i = (GAME.players.indexOf(GAME.currentlyDrawing) + 1) % GAME.players.length;
+        GAME.currentlyDrawing = GAME.players[i]
+      }
+      console.log("set current drawer", GAME.currentlyDrawing)
     }
 
     guesserPoints = () => {
@@ -219,7 +214,7 @@ MongoClient.connect(MONGODB_URI)
             })
           break;
           case 'roomJoin':
-            players.push(message.content)
+            GAME.players.push(message.content)
             let outgoing = {
               type: 'userList',
               content: GAME.players

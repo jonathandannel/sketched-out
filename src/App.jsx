@@ -127,6 +127,7 @@ class App extends Component {
           socket={this.socket}
           secondsLeft={this.state.secondsLeft}
           brushSize={this.state.brushSize}
+          currentlyDrawing={this.state.currentlyDrawing}
         />
       </div>
     )

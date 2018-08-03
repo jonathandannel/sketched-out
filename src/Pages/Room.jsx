@@ -87,6 +87,8 @@ export default class Room extends Component {
             latestLineData={this.props.latestLineData}
             latestCanvas={this.props.latestCanvas}
             brushSize={this.props.brushSize}
+            currentlyDrawing={this.props.currentlyDrawing}
+            currentUser={this.props.currentUser}
           />
 
           </div>
