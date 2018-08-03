@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Button from '@material-ui/core/Button';
 
 export default class MainCanvas extends Component {
   constructor(props) {
@@ -197,10 +198,22 @@ export default class MainCanvas extends Component {
             onTouchEnd={this.stopPainting}
           />
           <div id='brush-sizes'>
-            <button onClick={() => this.setBrushSize(5)}>small</button>
-            <button onClick={() => this.setBrushSize(10)}>medium</button>
-            <button onClick={() => this.setBrushSize(15)}>large</button>
-            <button onClick={() => this.userClearCanvas()}>undo</button>
+
+            <Button
+              variant="fab" color="black" aria-label="S"
+              onClick={() => this.setBrushSize(5)}> S
+            </Button>
+            <Button
+              variant="fab" color="black" aria-label="M"
+              onClick={() => this.setBrushSize(10)}> M
+            </Button>
+            <Button
+              variant="fab" color="black" aria-label="L"
+              onClick={() => this.setBrushSize(15)}> L
+            </Button>
+
+            <Button onClick={() => this.userClearCanvas()}>Undo</Button>
+
           </div>
         </div>
     )
