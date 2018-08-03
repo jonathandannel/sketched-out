@@ -226,6 +226,16 @@ MongoClient.connect(MONGODB_URI)
               client.send(JSON.stringify(outgoingStartRound))
             })
           break;
+          case 'userClearCanvas':
+            GAME.canvas = [];
+            let clearCanvas = {
+              type: 'clearCanvas',
+              content: ''
+            }
+            wss.clients.forEach((client) => {
+              client.send(JSON.stringify(clearCanvas));
+            })
+          break;
         }
 
 
