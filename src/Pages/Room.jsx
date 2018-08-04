@@ -82,10 +82,10 @@ export default class Room extends Component {
         <Button onClick={this.startRound}>Start</Button>
         <span className="clue-for-drawer">{this.displayClue()}</span>
         <span className="display-drawers">{this.displayUsers()}</span>
-
-          <TimeBar
+        <TimeBar
             shouldAnimate={this.props.gameStarted} timeRemaining={this.props.secondsLeft}
           />
+          
       <div id="canvas-container">
 
           <div className='brush-canvas'>

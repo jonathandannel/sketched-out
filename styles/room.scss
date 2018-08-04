@@ -20,7 +20,7 @@
   margin-bottom: 4px;
   padding-right: 3px;
   margin-left: 1rem;
-  border-radius: 5px;
+  border-radius: 2px;
 
   input {
     width: 100%;
@@ -29,13 +29,13 @@
 }
 
 #canvas {
-  box-shadow: 2px 2px gainsboro;
-  border-radius: 5px;
+  box-shadow: 2px 2px 40px rgb(100,100,100);
+  border-radius: 2px;
+  cursor: url(./styles/inkpen.png), auto;
 }
 
 #canvas:before {
-  border: 1px solid rgb(96, 96, 96);
-  background: rgb(200, 200, 200);
+  box-shadow: inset 2px 2px 50px darkslategrey;
   z-index: -1;
   position: absolute;
   top: -9px;
@@ -43,7 +43,6 @@
   right: -10px;
   bottom: -10px;
   content: '';
-  border-radius: 15px;
 }
 
 #timer {
@@ -74,5 +73,27 @@
 .brush-canvas{
   display: flex;
   justify-content: flex-start;
-  overflow: hidden;
+  overflow: visible;
+  .MuiButton-fab-55{
+    margin: 10px;
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    transition-duration: 0.1s;
+    transition-property: transform;
+    background: ghostwhite;
+  }
+  #small-brush{
+    margin-left: 0px;
+  }
+  .MuiButton-fab-55:hover {
+  opacity: 1;
+  transform: scale(1.2);
+  background: ghostwhite;
 }
+
+}
+
+#brush-sizes{
+  position: absolute;
+}
+

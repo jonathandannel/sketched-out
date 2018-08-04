@@ -17,6 +17,7 @@ colors = ["#f44336", "#fc9ca9", "#9c27b0", "#3f51b5", "#2196f3", "#4caf50", "#ff
         <div>
           <CirclePicker
             id="circle-picker"
+            class="waves-effect waves-button" 
             width="min-content"
             circleSize={this.circleSize}
             colors={this.colors}

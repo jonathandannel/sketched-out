@@ -195,6 +195,7 @@ export default class MainCanvas extends Component {
 
     return (
         <div>
+          <div>
           <canvas
             id='canvas'
             ref={(ref) => (this.canvas = ref)}
@@ -207,19 +208,24 @@ export default class MainCanvas extends Component {
             onTouchMove={this.onTouchMove}
             onTouchEnd={this.stopPainting}
           />
+          </div>
           <div id='brush-sizes'>
 
             <Button
-              variant="fab" color="black" aria-label="S"
-              onClick={() => this.setBrushSize(5)}> S
+              id="small-brush"
+              variant="fab" aria-label="S"
+              onClick={() => this.setBrushSize(5)}>
+              <img src="./styles/inkpen.png" alt="inkpen" height="23" width="23" /> 
             </Button>
             <Button
-              variant="fab" color="black" aria-label="M"
-              onClick={() => this.setBrushSize(10)}> M
+              variant="fab" aria-label="M"
+              onClick={() => this.setBrushSize(10)}>
+              <img src="./styles/inkpen.png" alt="inkpen" height="30" width="30" /> 
             </Button>
             <Button
-              variant="fab" color="black" aria-label="L"
-              onClick={() => this.setBrushSize(15)}> L
+              variant="fab" aria-label="L"
+              onClick={() => this.setBrushSize(15)}>
+              <img src="./styles/inkpen.png" alt="inkpen" height="37" width="37" /> 
             </Button>
 
             <Button onClick={() => this.userClearCanvas()}>Undo</Button>
