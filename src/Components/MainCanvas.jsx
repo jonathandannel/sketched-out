@@ -31,8 +31,6 @@ export default class MainCanvas extends Component {
 
   handleMouseDown = ({ nativeEvent })=> {
     // console.log({nativeEvent})
-    console.log('cU:',this.props.currentUser)
-    console.log('cD:',this.props.currentlyDrawing)
     if (this.props.currentlyDrawing === this.props.currentUser) {
       const { offsetX, offsetY } = nativeEvent;
       this.isPainting = true;
@@ -67,7 +65,6 @@ export default class MainCanvas extends Component {
     // nativeEvent.preventDefault()
     if (this.props.currentlyDrawing === this.props.currentUser) {
       const { clientX, clientY } = nativeEvent.targetTouches[0];
-      console.log( {clientX, clientY})
       this.isPainting = true;
       this.prevPos = { clientX, clientY };
     }
