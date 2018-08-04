@@ -213,6 +213,14 @@ MongoClient.connect(MONGODB_URI)
             wss.clients.forEach((client) => {
               client.send(JSON.stringify(outgoing));
             })
+            console.log("Room join", GAME.players)
+          break;
+          case 'roomLeave':
+            let index = GAME.players.indexOf(message.content);
+            if (index > -1) {
+              GAME.players.splice(index, 1);
+              console.log("ROOM EXIT MESSAGE", GAME.players)
+            }
           break;
           case 'beginRound':
             startRound();
@@ -252,7 +260,6 @@ MongoClient.connect(MONGODB_URI)
 
       ws.on("close", () => {
         console.log("Client disconnected")
-
       })
 
 
@@ -269,31 +276,3 @@ MongoClient.connect(MONGODB_URI)
     console.error(`Failed to connect: ${MONGODB_URI}`)
     throw err
   })
-      //
-      //
-      //
-      //
-      //
-      // getTimeRemaining = () => {
-      //   if (GAME.gameStarted) {
-      //   secondsLeft = 30 - Math.floor(moment().diff(GAME.startTime) / 1000)
-      //   console.log(secondsLeft, "sec left");
-      //   } if (secondsLeft === 0) {
-      //   } if (secondsLeft > 0) {
-      //     setTimeout(() => {
-      //       getTimeRemaining();
-      //       }, 1000)
-      //   }
-      //   return secondsLeft
-      // }
-      //
-      // case 'startingRound':
-      //   console.log(message.content)
-      //   let outgoingStartRound = {
-      //     type: 'startingRound',
-      //     content: message.content.currentClue
-      //   }
-      //   wss.clients.forEach((client) => {
-      //     client.send(JSON.stringify(outgoingStartRound))
-      //   })
-      // break;
