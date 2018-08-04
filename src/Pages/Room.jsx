@@ -59,6 +59,13 @@ export default class Room extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this.props.sendMessage({
+          type: 'roomLeave',
+          content: this.props.currentUser
+        })
+  }
+
 // Drawing Functions
 
   changeColor = (color) => {
