@@ -1,18 +1,15 @@
 import React, {Component} from 'react';
-import { Link } from 'react-router-dom'
-import clueArray from '../lib/clues'
-import moment    from 'moment'
-import Button    from '@material-ui/core/Button';
-import Brushes   from '../Components/Brushes.jsx';
-import Chat      from '../Components/Chat.jsx';
+import { Link }    from 'react-router-dom'
+import clueArray   from '../lib/clues'
+import moment      from 'moment'
+import Button      from '@material-ui/core/Button';
+import Brushes     from '../Components/Brushes.jsx';
+import Chat        from '../Components/Chat.jsx';
 import TimeBar     from '../Components/TimeBar.jsx';
-import Modal     from '@material-ui/core/Modal';
-import MainCanvas from '../Components/MainCanvas.jsx';
+import Modal       from '@material-ui/core/Modal';
+import MainCanvas  from '../Components/MainCanvas.jsx';
 import AuthService from "../AuthService.jsx";
 
-
-// Not good practice to have variables assigned here ----------------------------
-// Mo will try to fix it
 
 
 export default class Room extends Component {
@@ -41,13 +38,30 @@ export default class Room extends Component {
         clearInterval(poller);
       }
     }, 100);
+  }
 
+  displayClue = () => {
+    if (this.props.currentUser === this.props.currentlyDrawing) {
+      return (
+          <div>Your clue is: <b>{this.props.currentClue}</b></div>
+        )
+    }
+  }
+
+  displayUsers = () => {
+    if (this.props.currentlyDrawing) {
+      return (
+        <div>
+        <h2>It's {this.props.currentlyDrawing}'s turn! </h2>
+        <h3>Next up: {this.props.nextGuesser}</h3>
+        </div>
+        )
+    }
   }
 
 // Drawing Functions
 
   changeColor = (color) => {
-    console.log("old colour", this.state.lineColor)
     this.setState({lineColor: color.hex})
   }
 
@@ -65,10 +79,11 @@ export default class Room extends Component {
   render() {
     return (
       <div id="room-container">
+        <Button onClick={this.startRound}>Start</Button>
+        <span className="clue-for-drawer">{this.displayClue()}</span>
+        <span className="display-drawers">{this.displayUsers()}</span>
 
-        <span>Your clue is: <b>{this.props.currentClue}</b>
-        </span>
-        <TimeBar
+          <TimeBar
             shouldAnimate={this.props.gameStarted} timeRemaining={this.props.secondsLeft}
           />
       <div id="canvas-container">
@@ -100,10 +115,9 @@ export default class Room extends Component {
               currentUser={this.props.currentUser}
             />
           </span>
-          <button onClick={this.startRound}>Start</button>
+          
         </div>
       </div>
-
     )
   }
 }

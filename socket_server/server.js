@@ -54,6 +54,7 @@ MongoClient.connect(MONGODB_URI)
       players: [],
       canvas: [],
       currentlyDrawing: null,
+      nextGuesser: null,
       gameStarted: false,
       startTimer: false,
       currentClue: '',
@@ -74,22 +75,20 @@ MongoClient.connect(MONGODB_URI)
 
     const setCurrentlyDrawing = () => {
       if (GAME.currentlyDrawing === null){
-        GAME.currentlyDrawing = GAME.players[0]
-      } else {
-        let i = (GAME.players.indexOf(GAME.currentlyDrawing) + 1) % GAME.players.length;
+        let i = 0
         GAME.currentlyDrawing = GAME.players[i]
+        GAME.nextGuesser = GAME.players[i + 1]
+      } else {
+        i = (GAME.players.indexOf(GAME.currentlyDrawing) + 1) % GAME.players.length;
+        GAME.currentlyDrawing = GAME.players[i]
+        let j = (i + 1) % GAME.players.length;
+        GAME.nextGuesser = GAME.players[j]
       }
-      console.log("set current drawer", GAME.currentlyDrawing)
+      console.log("next", GAME.nextGuesser)
     }
 
     guesserPoints = () => {
       newGuessPoints = 100 - ((GAME.  secondsLeft) * 3);
-      // $("#guesser-points-display").fadeIn("slow", function() {
-      //     setTimeout(function() {
-      //       $("#guesser-points-display").fadeOut('fast')
-      //     }, 1000)
-      // });
-      console.log("guesser got ", newGuessPoints, "points!")
       return newGuessPoints;
       // add points to db
       //user.correct_guesses ++
@@ -97,14 +96,6 @@ MongoClient.connect(MONGODB_URI)
 
     drawerPoints = () => {
       newDrawPoints = 150 - ((GAME. secondsLeft) * 4);
-      // setTimeout(function() {
-      //   $("#drawer-points-display").fadeIn("slow", function() {
-      //     setTimeout(function() {
-      //       $("#drawer-points-display").fadeOut('fast')
-      //     }, 1000)
-      //   })
-      // }, 500)
-      console.log("drawer got ", newDrawPoints, "points!")
       return newDrawPoints;
       //add points to db
     }
@@ -160,6 +151,7 @@ MongoClient.connect(MONGODB_URI)
     const endRound = () => {
       drawerPoints();
       guesserPoints();
+      GAME.correctGuesser = '';
       GAME.secondsLeft = 0;
       GAME.gameStarted = false;
       clearInterval(timerInterval);
@@ -189,7 +181,6 @@ MongoClient.connect(MONGODB_URI)
 
         switch (message.type) {
           case 'latestLineData':
-            console.log(message.content)
             message.content.forEach((line) => {
               GAME.canvas.push(line);
             });
@@ -259,7 +250,11 @@ MongoClient.connect(MONGODB_URI)
         }
 
 
-      ws.on("close", () => console.log("Client disconnected"));
+      ws.on("close", () => {
+        console.log("Client disconnected")
+
+      })
+
 
     });
   })

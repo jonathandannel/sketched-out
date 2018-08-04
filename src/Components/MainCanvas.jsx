@@ -9,6 +9,7 @@ export default class MainCanvas extends Component {
     this.stopPainting = this.stopPainting.bind(this)
     this.onTouchStart = this.onTouchStart.bind(this)
     this.onTouchMove = this.onTouchMove.bind(this)
+    this.something = this.something.bind(this)
   }
 
   isPainting = false;
@@ -31,8 +32,6 @@ export default class MainCanvas extends Component {
 
   handleMouseDown = ({ nativeEvent })=> {
     // console.log({nativeEvent})
-    console.log('cU:',this.props.currentUser)
-    console.log('cD:',this.props.currentlyDrawing)
     if (this.props.currentlyDrawing === this.props.currentUser) {
       const { offsetX, offsetY } = nativeEvent;
       this.isPainting = true;
@@ -67,7 +66,6 @@ export default class MainCanvas extends Component {
     // nativeEvent.preventDefault()
     if (this.props.currentlyDrawing === this.props.currentUser) {
       const { clientX, clientY } = nativeEvent.targetTouches[0];
-      console.log( {clientX, clientY})
       this.isPainting = true;
       this.prevPos = { clientX, clientY };
     }
@@ -166,7 +164,12 @@ export default class MainCanvas extends Component {
     this.isPainting = false;
     this.userLines = []
   }
-
+  something = () => {
+    let stuff = (
+      <div>aaaaaaaaaaa</div>
+    )
+    return stuff
+  }
   render() {
     if (this.props.latestLineData.length < 1 && this.ctx) {
       // console.log('empty array', this.ctx.fillStyle);
@@ -174,6 +177,7 @@ export default class MainCanvas extends Component {
       this.ctx.rect(0, 0, 900, 450);
       this.ctx.fillStyle = 'white';
       this.ctx.fill()
+      
     }
 
     if (this.props.latestLineData.length > 0) {

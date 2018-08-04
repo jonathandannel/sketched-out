@@ -47,7 +47,6 @@ export default class Leaderboard extends Component {
         this.setState({users: json})
       })
       .catch( error => {
-        debugger
         console.log(error)
       })
   }

@@ -44,6 +44,8 @@ class Main extends Component {
                 secondsLeft={this.props.secondsLeft}
                 brushSize={this.props.brushSize}
                 currentlyDrawing={this.props.currentlyDrawing}
+                nextGuesser={this.props.nextGuesser}
+                players= {this.props.players}
               />
             )}
           />

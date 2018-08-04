@@ -68,6 +68,12 @@ class App extends Component {
           this.setState({
             currentlyDrawing: parsedMessage.content.currentlyDrawing
           })
+          this.setState({
+            nextGuesser: parsedMessage.content.nextGuesser
+          })
+          this.setState({
+            players: parsedMessage.content.players
+          })
         break;
         case 'timer':
           this.setState({
@@ -128,6 +134,8 @@ class App extends Component {
           secondsLeft={this.state.secondsLeft}
           brushSize={this.state.brushSize}
           currentlyDrawing={this.state.currentlyDrawing}
+          nextGuesser={this.state.nextGuesser}
+          players={this.state.players}
         />
       </div>
     )
