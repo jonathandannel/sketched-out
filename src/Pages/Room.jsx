@@ -86,20 +86,23 @@ export default class Room extends Component {
   render() {
     return (
       <div id="room-container">
+        <Button onClick={this.startRound}>Start</Button>
         <span className="clue-for-drawer">{this.displayClue()}</span>
         <span className="display-drawers">{this.displayUsers()}</span>
-      <div id="canvas-container">
-        <div id="brush-container">
-          <Brushes
-            className="brush-area color-picker"
-            lineColor={this.state.lineColor}
-            onChange={this.changeColor}
-          />
-        </div>
-          <div>
+
           <TimeBar
             shouldAnimate={this.props.gameStarted} timeRemaining={this.props.secondsLeft}
           />
+      <div id="canvas-container">
+
+          <div className='brush-canvas'>
+          <div id="brush-container">
+            <Brushes
+              className="brush-area color-picker"
+              lineColor={this.state.lineColor}
+              onChange={this.changeColor}
+            />
+          </div>
           <MainCanvas
             className="canvas-area"
             sendMessage={this.props.sendMessage}
@@ -119,7 +122,7 @@ export default class Room extends Component {
               currentUser={this.props.currentUser}
             />
           </span>
-          <button onClick={this.startRound}>Start</button>
+          
         </div>
       </div>
     )

@@ -9,6 +9,7 @@ export default class MainCanvas extends Component {
     this.stopPainting = this.stopPainting.bind(this)
     this.onTouchStart = this.onTouchStart.bind(this)
     this.onTouchMove = this.onTouchMove.bind(this)
+    this.something = this.something.bind(this)
   }
 
   isPainting = false;
@@ -163,7 +164,12 @@ export default class MainCanvas extends Component {
     this.isPainting = false;
     this.userLines = []
   }
-
+  something = () => {
+    let stuff = (
+      <div>aaaaaaaaaaa</div>
+    )
+    return stuff
+  }
   render() {
     if (this.props.latestLineData.length < 1 && this.ctx) {
       // console.log('empty array', this.ctx.fillStyle);
@@ -171,6 +177,7 @@ export default class MainCanvas extends Component {
       this.ctx.rect(0, 0, 900, 450);
       this.ctx.fillStyle = 'white';
       this.ctx.fill()
+      
     }
 
     if (this.props.latestLineData.length > 0) {
