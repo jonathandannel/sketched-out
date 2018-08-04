@@ -42,11 +42,8 @@ class Main extends Component {
                 gameStarted={this.props.gameStarted}
                 socket={this.props.socket}
                 secondsLeft={this.props.secondsLeft}
-<<<<<<< HEAD
                 brushSize={this.props.brushSize}
-=======
                 currentlyDrawing={this.props.currentlyDrawing}
->>>>>>> mo/drawer-permission
               />
             )}
           />

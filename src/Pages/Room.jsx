@@ -68,18 +68,19 @@ export default class Room extends Component {
 
         <span>Your clue is: <b>{this.props.currentClue}</b>
         </span>
-      <div id="canvas-container">
-        <div id="brush-container">
-          <Brushes
-            className="brush-area color-picker"
-            lineColor={this.state.lineColor}
-            onChange={this.changeColor}
-          />
-        </div>
-          <div>
-          <TimeBar
+        <TimeBar
             shouldAnimate={this.props.gameStarted} timeRemaining={this.props.secondsLeft}
           />
+      <div id="canvas-container">
+
+          <div className='brush-canvas'>
+          <div id="brush-container">
+            <Brushes
+              className="brush-area color-picker"
+              lineColor={this.state.lineColor}
+              onChange={this.changeColor}
+            />
+          </div>
           <MainCanvas
             className="canvas-area"
             sendMessage={this.props.sendMessage}
@@ -90,7 +91,6 @@ export default class Room extends Component {
             currentlyDrawing={this.props.currentlyDrawing}
             currentUser={this.props.currentUser}
           />
-
           </div>
           <span id="chat-area">
             <Chat
