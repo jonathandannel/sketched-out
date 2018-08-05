@@ -7,7 +7,8 @@
 @import 'time-bar';
 
 main {
-  font-family: arial;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
   font-size: 1em;
 }
 
@@ -18,7 +19,8 @@ body {
   // background: linear-gradient(to bottom right, rgb(90, 141, 189), rgb(206, 105, 105));
   background-size: cover;
   margin: 0px;
-  box-shadow: inset 2px 2px 150px rgb(102, 102, 102);
+  box-shadow: inset 2px 2px 50px rgb(102, 102, 102);
+  // font-family: 'Montserrat', sans-serif;
 }
 
 @media (max-width: 1000px){

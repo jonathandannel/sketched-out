@@ -15,7 +15,12 @@ class TimeBar extends Component {
 
     return (
         <div id="progress">
-          <Line percent={percent} id="time-bar"  />
+          <Line 
+            strokeColor='#2196f3'
+            strokeWidth='1'
+            trailWidth='1'
+            strokeLinecap='square'
+            percent={percent} id="time-bar"/>
         </div>
     )
   }
