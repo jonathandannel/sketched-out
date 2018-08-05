@@ -17,7 +17,7 @@ export default class Room extends Component {
     super(props);
     this.socket = props.socket
     this.state = {
-      lineColor: 'white'
+      lineColor: 'black'
     }
     this.Auth = new AuthService()
   }
@@ -92,7 +92,7 @@ export default class Room extends Component {
         <TimeBar
             shouldAnimate={this.props.gameStarted} timeRemaining={this.props.secondsLeft}
           />
-          
+
       <div id="canvas-container">
 
           <div className='brush-canvas'>
@@ -120,9 +120,10 @@ export default class Room extends Component {
               sendMessage={this.props.sendMessage}
               chatMessages={this.props.chatMessages}
               currentUser={this.props.currentUser}
+              currentClue={this.props.currentClue}
             />
           </span>
-          
+
         </div>
       </div>
     )

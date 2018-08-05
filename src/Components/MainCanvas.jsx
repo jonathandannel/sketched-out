@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
+import DeleteIcon from '@material-ui/icons/Delete';
+
 
 export default class MainCanvas extends Component {
   constructor(props) {
@@ -33,11 +36,11 @@ export default class MainCanvas extends Component {
   handleMouseDown = ({ nativeEvent })=> {
     // console.log({nativeEvent})
     if (this.props.currentlyDrawing === this.props.currentUser) {
-      const { offsetX, offsetY } = nativeEvent;
-      this.prevPos = { offsetX, offsetY };
-      const offsetData = { offsetX, offsetY };
-      this.paint(offsetData, offsetData, this.userStrokeStyle);
       this.isPainting = true;
+      const { offsetX, offsetY } = nativeEvent;
+      const offsetData = { offsetX, offsetY };
+      this.prevPos = { offsetX, offsetY };
+      this.paint(offsetData, offsetData, this.userStrokeStyle);
     }
   }
 
@@ -161,10 +164,10 @@ export default class MainCanvas extends Component {
   }
 
   stopPainting = ({ nativeEvent }) => {
-    this.isPainting = false;
     const { offsetX, offsetY } = nativeEvent;
     this.prevPos = { offsetX, offsetY };
     this.userLines = []
+    this.isPainting = false;
   }
 
   something = () => {
@@ -213,7 +216,6 @@ export default class MainCanvas extends Component {
           />
           </div>
           <div id='brush-sizes'>
-
             <Button
               id="small-brush"
               variant="fab" aria-label="S"
@@ -231,7 +233,12 @@ export default class MainCanvas extends Component {
               <img src="./styles/inkpen.png" alt="inkpen" height="37" width="37" />
             </Button>
 
-            <Button onClick={() => this.userClearCanvas()}>Undo</Button>
+            <Button
+              onClick={() => this.userClearCanvas()}
+              variant="contained" >
+              Clear
+              <DeleteIcon />
+            </Button>
 
           </div>
         </div>

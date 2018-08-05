@@ -7,14 +7,27 @@ export default class MessageList extends Component {
   }
 
   getMessages = () => {
+
     return this.props.chatMessages.map((message) => {
-      return (
+
+      if (this.props.currentClue === message.text) {
+        return (
           <Paper>
-            <div id="single-message">
+            <div className='correct-guess single-message'>
+              {message.username}: {message.text + ' (+50 pts)'} <i class="fas fa-check"></i>
+            </div>
+          </Paper>
+        )
+      } else {
+        return (
+          <Paper>
+            <div className='message single-message'>
               {message.username}: {message.text}
             </div>
           </Paper>
-      )
+        )
+      }
+
     })
   }
 
