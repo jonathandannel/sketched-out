@@ -12,8 +12,8 @@
 }
 
 #chat-area {
-  background-color: #cbd0d8;
-  width: 20%;
+  background-color: white;
+  width: 100%;
   font-size: 1.2rem;
   display: flex;
   flex-direction: column-reverse;
@@ -21,6 +21,7 @@
   padding-right: 3px;
   margin-left: 1rem;
   border-radius: 2px;
+  height: 450px;
 
   input {
     width: 100%;
@@ -107,5 +108,44 @@
 }
 
 #brush-sizes{
-  position: absolute;
+  display: flex;
+  justify-content: space-between;
+}
+
+.userTurnDisplay{
+  width: 942px;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.userDisplay{
+  display: flex;
+  justify-content: space-around;
+}
+
+.clue-for-drawer{
+  display: flex;
+  align-items: center;
+  padding-left: 42px;
+}
+
+.fa-trash{
+  font-size: 20px;
+  margin: 0;
+  color: black
+}
+
+.chatDummy{
+  content: '';
+  width: 20%;
+
+}
+
+.chat-and-start{
+  height: 100%
+}
+
+.start-button{
+  width: 100%
 }

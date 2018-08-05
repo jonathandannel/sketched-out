@@ -41,9 +41,9 @@ export default class NavBar extends Component {
       <AppBar>
         <Toolbar className='navbar'>
           <div>
-              <Link to='/' className='homeLink'>
-                <h1 className='title'>SKETCHED OUT</h1>
-              </Link>
+            <Link to='/' className='homeLink'>
+              <h1 className='title'>SKETCHED OUT</h1>
+            </Link>
           </div>
           {user} 
           {buttons}
