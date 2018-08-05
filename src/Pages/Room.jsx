@@ -122,7 +122,7 @@ export default class Room extends Component {
               currentUser={this.props.currentUser}
             />
           </span>
-          
+
         </div>
       </div>
     )
