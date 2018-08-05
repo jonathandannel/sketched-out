@@ -31,7 +31,7 @@
 #canvas {
   box-shadow: 2px 2px 40px rgb(100,100,100);
   border-radius: 2px;
-  cursor: url(./styles/inkpen.png), auto;
+  cursor: url(./styles/inkpen.png) 0 50, auto;
 }
 
 #canvas:before {
@@ -96,4 +96,3 @@
 #brush-sizes{
   position: absolute;
 }
-

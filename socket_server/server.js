@@ -88,7 +88,7 @@ MongoClient.connect(MONGODB_URI)
     }
 
     guesserPoints = () => {
-      if (correctGuesser !== '') {
+      if (GAME.correctGuesser !== '') {
         GAME.players.map(player => {
         newGuessPoints = 100 - ((GAME.secondsLeft) * 3);
           if (player.username === GAME.correctGuesser) {
@@ -101,14 +101,14 @@ MongoClient.connect(MONGODB_URI)
     }
 
     drawerPoints = () => {
-      if(correctGuesser !== '') {
+      if (GAME.correctGuesser !== '') {
         newDrawPoints = 150 - ((GAME.secondsLeft) * 4);
         GAME.players.map(player => {
           if (player.username === GAME.currentlyDrawing) {
             player.points += newDrawPoints;
           }
         return newDrawPoints;
-        }
+        })
       }
     }
 
@@ -251,7 +251,7 @@ MongoClient.connect(MONGODB_URI)
                   // ADD PLAYER'S POINTS TO THE DATABASE -------
                 }
               }
-            }
+            })
           break;
           case 'beginRound':
             startRound();
@@ -294,7 +294,7 @@ MongoClient.connect(MONGODB_URI)
       })
 
 
-    });
+    })
   })
 
 
