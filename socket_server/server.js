@@ -74,20 +74,16 @@ MongoClient.connect(MONGODB_URI)
     }
 
     const setCurrentlyDrawing = () => {
-      if (GAME.currentlyDrawing === null){
-        let i = 0
-        GAME.currentlyDrawing = GAME.players[i].username
-        if (GAME.players.length === 1) {
-          GAME.nextGuesser = GAME.currentlyDrawing;
-        }
+      GAME.currentlyDrawing = GAME.players[0].username;
+
+      if (GAME.players.length === 1) {
+        GAME.nextGuesser = GAME.players[0].username;
       } else {
-        i = (GAME.players.indexOf(GAME.currentlyDrawing) + 1) % GAME.players.length;
-        GAME.currentlyDrawing = GAME.players[i].username
-        let j = (i + 1) % GAME.players.length;
-        GAME.nextGuesser = GAME.players[j].username
+        GAME.nextGuesser = GAME.players[1].username;
       }
-      console.log("next", GAME.nextGuesser)
-    }
+      let first = GAME.players.shift()
+      GAME.players.push(first);
+   }
 
     guesserPoints = () => {
       if (GAME.correctGuesser !== '') {
