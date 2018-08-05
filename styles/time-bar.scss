@@ -3,10 +3,18 @@
   // margin: 5px auto;
   // height: 15px;
   // border-radius: 10px;
+  width: 900px;
+  position: absolute;
 }
 
 #time-bar path {
-  transition: stroke-dashoffset 2s ease 0s, stroke 2s linear !important;
+  transition: stroke-dashoffset 0s ease 0s, stroke-dasharray 1s ease 0s, stroke, stroke-width ease 0.3s!important;
+}
+
+#time-bar{
+  padding-bottom: 6px;
+  border-radius: 2px;
 }
 
 
+//transition: stroke-dashoffset 0s ease 0s, stroke-dasharray 1s ease 0s, stroke, stroke-width ease 0.3s!important;

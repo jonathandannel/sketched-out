@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
-import DeleteIcon from '@material-ui/icons/Delete';
+
 
 
 export default class MainCanvas extends Component {
@@ -216,30 +216,28 @@ export default class MainCanvas extends Component {
           />
           </div>
           <div id='brush-sizes'>
+            <div>
             <Button
               id="small-brush"
               variant="fab" aria-label="S"
               onClick={() => this.setBrushSize(5)}>
-              <img src="./styles/inkpen.png" alt="inkpen" height="23" width="23" />
+              <img src="./styles/inkpen.png" alt="inkpen" height="10" width="10" /> 
             </Button>
             <Button
               variant="fab" aria-label="M"
-              onClick={() => this.setBrushSize(8)}>
-              <img src="./styles/inkpen.png" alt="inkpen" height="30" width="30" />
+              onClick={() => this.setBrushSize(10)}>
+              <img src="./styles/inkpen.png" alt="inkpen" height="22" width="22" /> 
             </Button>
             <Button
               variant="fab" aria-label="L"
-              onClick={() => this.setBrushSize(12)}>
-              <img src="./styles/inkpen.png" alt="inkpen" height="37" width="37" />
+              onClick={() => this.setBrushSize(15)}>
+              <img src="./styles/inkpen.png" alt="inkpen" height="34" width="34" /> 
             </Button>
-
-            <Button
-              onClick={() => this.userClearCanvas()}
-              variant="contained" >
-              Clear
-              <DeleteIcon />
-            </Button>
-
+            </div>
+            <div>
+            <Button variant="fab" onClick={() => this.userClearCanvas()}>
+              <p className='fas fa-trash'></p></Button>
+            </div>
           </div>
         </div>
     )

@@ -49,11 +49,17 @@ export default class Room extends Component {
   }
 
   displayUsers = () => {
-    if (this.props.currentlyDrawing) {
+    if (this.props.currentUser === this.props.currentlyDrawing ) {
       return (
         <div>
-        <h2>It's {this.props.currentlyDrawing}'s turn! </h2>
-        <h3>Next up: {this.props.nextGuesser}</h3>
+        <span>It's your turn! </span>
+        <span>Next up: {this.props.nextGuesser}</span>
+        </div>
+        )
+    } else {
+      return (
+        <div>
+        <span>Next up: {this.props.nextGuesser}</span>
         </div>
         )
     }
@@ -86,16 +92,18 @@ export default class Room extends Component {
   render() {
     return (
       <div id="room-container">
-        <Button onClick={this.startRound}>Start</Button>
-        <span className="clue-for-drawer">{this.displayClue()}</span>
-        <span className="display-drawers">{this.displayUsers()}</span>
-        <TimeBar
-            shouldAnimate={this.props.gameStarted} timeRemaining={this.props.secondsLeft}
-          />
-
+        <div className='userDisplay'>
+        <div className='userTurnDisplay'>
+          <span className="clue-for-drawer">{this.displayClue()}</span>
+          <span className="display-drawers">{this.displayUsers()}</span>
+        </div>
+        <div className='chatDummy'>
+        </div>
+        </div>
+          
       <div id="canvas-container">
-
           <div className='brush-canvas'>
+
           <div id="brush-container">
             <Brushes
               className="brush-area color-picker"
@@ -103,6 +111,11 @@ export default class Room extends Component {
               onChange={this.changeColor}
             />
           </div>
+          <div>
+          <TimeBar
+            shouldAnimate={this.props.gameStarted} 
+            timeRemaining={this.props.secondsLeft}
+          />
           <MainCanvas
             className="canvas-area"
             sendMessage={this.props.sendMessage}
@@ -114,6 +127,8 @@ export default class Room extends Component {
             currentUser={this.props.currentUser}
           />
           </div>
+          </div>
+          <div className='chat-and-start'>
           <span id="chat-area">
             <Chat
               className="chat-area"
@@ -123,7 +138,8 @@ export default class Room extends Component {
               currentClue={this.props.currentClue}
             />
           </span>
-
+            <Button className='start-button' onClick={this.startRound}>Start</Button>
+          </div>
         </div>
       </div>
     )
