@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Paper }from '@material-ui/core';
 
 export default class RoomScores extends Component {
   constructor(props) {
@@ -13,12 +14,12 @@ export default class RoomScores extends Component {
   render() {
     const players = this.props.players.map((player) => {
       return (
-        <div>{player.username} - {player.points}</div>
+        <Paper><div>{player.username}: {player.points}</div></Paper>
       )
     })
 
     return (
-      <div>
+      <div id="score-area">
         {players}
       </div>
     )
