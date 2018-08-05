@@ -161,9 +161,12 @@ MongoClient.connect(MONGODB_URI)
         type: 'clearCanvas',
         content: ''
       }
+
       wss.clients.forEach((client) => {
         client.send(JSON.stringify(message))
       })
+
+      wss
       startRound()
     }
 
@@ -198,6 +201,17 @@ MongoClient.connect(MONGODB_URI)
           case 'chatMessages':
             if (message.content.text.includes(GAME.currentClue)) {
               GAME.correctGuesser = message.content.username
+              setTimeout(() => {
+                wss.clients.forEach((client) => {
+                  client.send(JSON.stringify({
+                    type: 'chatMessages',
+                    content: {
+                      username: 'Sketchbot',
+                      text: `${message.content.username} guessed correctly!`
+                    }
+                  }))
+                })
+              }, 300)
               endRound();
             }
             wss.clients.forEach((client) => {
