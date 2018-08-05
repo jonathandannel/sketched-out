@@ -5,6 +5,7 @@ import NavBar      from './Components/NavBar.jsx';
 import AuthService from "./AuthService.jsx";
 
 
+
 class App extends Component {
   constructor(props) {
     super(props)
@@ -16,6 +17,7 @@ class App extends Component {
       latestCanvas: [],
       gameStarted: true,
       currentClue: '',
+      correctGuesser: '',
       secondsLeft: 30,
       brushSize: 10
     }
@@ -55,6 +57,9 @@ class App extends Component {
           this.setState({
             currentUsers: parsedMessage.content
           })
+          this.setState({
+            players: parsedMessage.content
+          })
         break;
         case 'latestCanvas':
           this.setState({
@@ -78,6 +83,11 @@ class App extends Component {
         case 'timer':
           this.setState({
             secondsLeft: parsedMessage.content
+          })
+        break;
+        case 'playSound':
+          this.setState({
+            correctGuesser: parsedMessage.content
           })
         break;
         case 'clearCanvas':
@@ -107,6 +117,7 @@ class App extends Component {
       currentUser: ''
     })
   }
+
 
   sendMessage = message => {
     this.socket.send(JSON.stringify(message));

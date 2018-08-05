@@ -12,9 +12,7 @@ const WebSocket         = require('ws');
 const routes            = require('./routes')
 const server            = express();
 const httpServer        = http.createServer(server);
-const moment = require('moment');
-
-
+const moment            = require('moment');
 const clues             = require('../src/lib/clues.js')
 
 
@@ -76,28 +74,42 @@ MongoClient.connect(MONGODB_URI)
     const setCurrentlyDrawing = () => {
       if (GAME.currentlyDrawing === null){
         let i = 0
-        GAME.currentlyDrawing = GAME.players[i]
-        GAME.nextGuesser = GAME.players[i + 1]
+        GAME.currentlyDrawing = GAME.players[i].username
+        if (GAME.players.length === 1) {
+          GAME.nextGuesser = GAME.currentlyDrawing;
+        }
       } else {
         i = (GAME.players.indexOf(GAME.currentlyDrawing) + 1) % GAME.players.length;
-        GAME.currentlyDrawing = GAME.players[i]
+        GAME.currentlyDrawing = GAME.players[i].username
         let j = (i + 1) % GAME.players.length;
-        GAME.nextGuesser = GAME.players[j]
+        GAME.nextGuesser = GAME.players[j].username
       }
       console.log("next", GAME.nextGuesser)
     }
 
     guesserPoints = () => {
-      newGuessPoints = 100 - ((GAME.  secondsLeft) * 3);
-      return newGuessPoints;
-      // add points to db
-      //user.correct_guesses ++
+      if (correctGuesser !== '') {
+        GAME.players.map(player => {
+        newGuessPoints = 100 - ((GAME.secondsLeft) * 3);
+          if (player.username === GAME.correctGuesser) {
+            player.points += newGuessPoints;
+            player.correctGuesses ++;
+          }
+        })
+        return newGuessPoints;
+      }
     }
 
     drawerPoints = () => {
-      newDrawPoints = 150 - ((GAME. secondsLeft) * 4);
-      return newDrawPoints;
-      //add points to db
+      if(correctGuesser !== '') {
+        newDrawPoints = 150 - ((GAME.secondsLeft) * 4);
+        GAME.players.map(player => {
+          if (player.username === GAME.currentlyDrawing) {
+            player.points += newDrawPoints;
+          }
+        return newDrawPoints;
+        }
+      }
     }
 
 
@@ -219,7 +231,8 @@ MongoClient.connect(MONGODB_URI)
             })
           break;
           case 'roomJoin':
-            GAME.players.push(message.content)
+            let newPlayer = {username: message.content, points: 0, correctGuesses: 0}
+            GAME.players.push(newPlayer)
             let outgoing = {
               type: 'userList',
               content: GAME.players
@@ -230,10 +243,14 @@ MongoClient.connect(MONGODB_URI)
             console.log("Room join", GAME.players)
           break;
           case 'roomLeave':
-            let index = GAME.players.indexOf(message.content);
-            if (index > -1) {
-              GAME.players.splice(index, 1);
-              console.log("ROOM EXIT MESSAGE", GAME.players)
+            GAME.players.map(player => {
+              if (player.username === message.content) {
+                let index = GAME.players.indexOf(player);
+                if (index > -1) {
+                  GAME.players.splice(index, 1);
+                  // ADD PLAYER'S POINTS TO THE DATABASE -------
+                }
+              }
             }
           break;
           case 'beginRound':
