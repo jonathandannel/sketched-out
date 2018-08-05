@@ -19,7 +19,8 @@ class App extends Component {
       currentClue: '',
       correctGuesser: '',
       secondsLeft: 30,
-      brushSize: 10
+      brushSize: 10,
+      players: []
     }
   }
 

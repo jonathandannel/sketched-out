@@ -9,8 +9,7 @@ import TimeBar     from '../Components/TimeBar.jsx';
 import Modal       from '@material-ui/core/Modal';
 import MainCanvas  from '../Components/MainCanvas.jsx';
 import AuthService from "../AuthService.jsx";
-
-
+import RoomScores from '../Components/RoomScores.jsx';
 
 export default class Room extends Component {
   constructor(props) {
@@ -123,7 +122,11 @@ export default class Room extends Component {
               currentClue={this.props.currentClue}
             />
           </span>
-
+          <span id="room-scores">
+            <RoomScores
+              players={this.props.players}
+            />
+          </span>
         </div>
       </div>
     )
