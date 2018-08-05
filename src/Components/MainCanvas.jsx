@@ -165,8 +165,9 @@ export default class MainCanvas extends Component {
 
   stopPainting = ({ nativeEvent }) => {
     const { offsetX, offsetY } = nativeEvent;
+    const offsetData = { offsetX, offsetY };
     this.prevPos = { offsetX, offsetY };
-    this.userLines = []
+    this.paint(offsetData, offsetData, this.userStrokeStyle);
     this.isPainting = false;
   }
 
