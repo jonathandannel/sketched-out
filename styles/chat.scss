@@ -7,14 +7,15 @@
 }
 
 .single-message {
-  padding-top: 5px;
+  margin-top: 1px;
+  padding-top: 10px;
   padding-left: 4%;
   font-size: 20px;
   height: 30px;
   font-size: 15px;
   transition-property: background-color;
-  transition-duration: 4s;
-  transition-delay: 2s;
+  transition-duration: 5s;
+  transition-delay: 5s;
 }
 
 #chat-list-and-input {
@@ -23,12 +24,12 @@
 }
 
 .correct-guess {
-  animation: messageFlash 700ms ease-in;
+  animation: messageFlash 1600ms ease-in;
 }
 
 
 @keyframes messageFlash {
   0% {background: auto;}
-  40% {background: lime;}
+  40% {background: #8bd684;}
   80% {background: auto;}
 }

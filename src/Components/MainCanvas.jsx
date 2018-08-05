@@ -224,12 +224,12 @@ export default class MainCanvas extends Component {
             </Button>
             <Button
               variant="fab" aria-label="M"
-              onClick={() => this.setBrushSize(10)}>
+              onClick={() => this.setBrushSize(8)}>
               <img src="./styles/inkpen.png" alt="inkpen" height="30" width="30" />
             </Button>
             <Button
               variant="fab" aria-label="L"
-              onClick={() => this.setBrushSize(15)}>
+              onClick={() => this.setBrushSize(12)}>
               <img src="./styles/inkpen.png" alt="inkpen" height="37" width="37" />
             </Button>
 
