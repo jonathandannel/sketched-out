@@ -46,6 +46,7 @@ class Main extends Component {
                 currentlyDrawing={this.props.currentlyDrawing}
                 nextGuesser={this.props.nextGuesser}
                 players={this.props.players}
+                guesserPoints={this.props.guesserPoints}
               />
             )}
           />

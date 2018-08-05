@@ -14,7 +14,7 @@ export default class MessageList extends Component {
         return (
           <Paper>
             <div className='correct-guess single-message'>
-              {message.username}: {message.text + ' (+50 pts)'} <i class="fas fa-check"></i>
+              {message.username}: {message.text + `(+${this.props.guesserPoints}pts)`} <i class="fas fa-check"></i>
             </div>
           </Paper>
         )

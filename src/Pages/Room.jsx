@@ -135,15 +135,16 @@ export default class Room extends Component {
               chatMessages={this.props.chatMessages}
               currentUser={this.props.currentUser}
               currentClue={this.props.currentClue}
+              guesserPoints={this.props.guesserPoints}
             />
           </span>
             <Button className='start-button' onClick={this.startRound}>Start</Button>
-            <span id="room-scores">
-              <RoomScores
-                players={this.props.players}
-              />
-            </span>
         </div>
+        <span id="room-scores">
+          <RoomScores
+            players={this.props.players}
+          />
+        </span>
       </div>
     </div>
     )

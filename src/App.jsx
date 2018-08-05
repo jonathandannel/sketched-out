@@ -20,7 +20,8 @@ class App extends Component {
       correctGuesser: '',
       secondsLeft: 30,
       brushSize: 10,
-      players: []
+      players: [],
+      guesserPoints: 0
     }
   }
 
@@ -102,6 +103,11 @@ class App extends Component {
             brushSize: parsedMessage.content
           })
         break;
+        case 'guesserPoints':
+          this.setState({
+            guesserPoints: parsedMessage.content
+          })
+        break;
       }
     }
   }
@@ -148,6 +154,7 @@ class App extends Component {
           currentlyDrawing={this.state.currentlyDrawing}
           nextGuesser={this.state.nextGuesser}
           players={this.state.players}
+          guesserPoints={this.state.guesserPoints}
         />
       </div>
     )

@@ -57,7 +57,9 @@ MongoClient.connect(MONGODB_URI)
       startTimer: false,
       currentClue: '',
       secondsLeft: 30,
-      correctGuesser: ''
+      correctGuesser: '',
+      drawerPoints: 0,
+      guesserPoints: 0
     }
 
 
@@ -107,8 +109,8 @@ MongoClient.connect(MONGODB_URI)
           if (player.username === GAME.currentlyDrawing) {
             player.points += newDrawPoints;
           }
-        return newDrawPoints;
         })
+        return newDrawPoints;
       }
     }
 
@@ -134,7 +136,7 @@ MongoClient.connect(MONGODB_URI)
     }
 
     const startRound = () => {
-      GAME.secondsLeft = 30
+      GAME.secondsLeft = 30;
       let outgoing = {
         type: 'timer',
         content: GAME.secondsLeft
@@ -161,8 +163,9 @@ MongoClient.connect(MONGODB_URI)
     }
 
     const endRound = () => {
-      drawerPoints();
-      guesserPoints();
+      GAME.drawerPoints = drawerPoints();
+      console.log(GAME.drawerPoints, "GAME DRAWERPOINTS")
+      GAME.guesserPoints = guesserPoints();
       GAME.correctGuesser = '';
       GAME.secondsLeft = 0;
       GAME.gameStarted = false;
@@ -174,11 +177,19 @@ MongoClient.connect(MONGODB_URI)
         content: ''
       }
 
+      let guesserPointDistribution = {
+        type: 'guesserPoints',
+        content: GAME.guesserPoints
+      }
+
       wss.clients.forEach((client) => {
         client.send(JSON.stringify(message))
       })
 
-      wss
+      wss.clients.forEach((client) => {
+        client.send(JSON.stringify(guesserPointDistribution))
+      })
+
       startRound()
     }
 
@@ -219,7 +230,14 @@ MongoClient.connect(MONGODB_URI)
                     type: 'chatMessages',
                     content: {
                       username: 'Sketchbot',
-                      text: `${message.content.username} guessed correctly!`
+                      text: `${message.content.username} guessed correctly! (Awarded ${GAME.guesserPoints} points.)`
+                    }
+                  }))
+                  client.send(JSON.stringify({
+                    type: 'chatMessages',
+                    content: {
+                      username: 'Sketchbot',
+                      text: `${GAME.currentlyDrawing} got ${GAME.drawerPoints} points for an awesome drawing!`
                     }
                   }))
                 })

@@ -11,6 +11,7 @@ export default class Chat extends Component {
           <MessageList
             chatMessages={this.props.chatMessages}
             currentClue={this.props.currentClue}
+            guesserPoints={this.props.guesserPoints}
           />
         </div>
         <div id="message-input">
