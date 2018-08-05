@@ -34,10 +34,10 @@ export default class MainCanvas extends Component {
     // console.log({nativeEvent})
     if (this.props.currentlyDrawing === this.props.currentUser) {
       const { offsetX, offsetY } = nativeEvent;
-      this.isPainting = true;
       this.prevPos = { offsetX, offsetY };
       const offsetData = { offsetX, offsetY };
-      this.paint(this.prevPos, offsetData, this.userStrokeStyle);
+      this.paint(offsetData, offsetData, this.userStrokeStyle);
+      this.isPainting = true;
     }
   }
 
@@ -160,10 +160,13 @@ export default class MainCanvas extends Component {
     this.latestLineIndex = this.userLines.length - 1
   }
 
-  stopPainting = (e) => {
+  stopPainting = ({ nativeEvent }) => {
     this.isPainting = false;
+    const { offsetX, offsetY } = nativeEvent;
+    this.prevPos = { offsetX, offsetY };
     this.userLines = []
   }
+
   something = () => {
     let stuff = (
       <div>aaaaaaaaaaa</div>
@@ -177,7 +180,7 @@ export default class MainCanvas extends Component {
       this.ctx.rect(0, 0, 900, 450);
       this.ctx.fillStyle = 'white';
       this.ctx.fill()
-      
+
     }
 
     if (this.props.latestLineData.length > 0) {
@@ -215,17 +218,17 @@ export default class MainCanvas extends Component {
               id="small-brush"
               variant="fab" aria-label="S"
               onClick={() => this.setBrushSize(5)}>
-              <img src="./styles/inkpen.png" alt="inkpen" height="23" width="23" /> 
+              <img src="./styles/inkpen.png" alt="inkpen" height="23" width="23" />
             </Button>
             <Button
               variant="fab" aria-label="M"
               onClick={() => this.setBrushSize(10)}>
-              <img src="./styles/inkpen.png" alt="inkpen" height="30" width="30" /> 
+              <img src="./styles/inkpen.png" alt="inkpen" height="30" width="30" />
             </Button>
             <Button
               variant="fab" aria-label="L"
               onClick={() => this.setBrushSize(15)}>
-              <img src="./styles/inkpen.png" alt="inkpen" height="37" width="37" /> 
+              <img src="./styles/inkpen.png" alt="inkpen" height="37" width="37" />
             </Button>
 
             <Button onClick={() => this.userClearCanvas()}>Undo</Button>
