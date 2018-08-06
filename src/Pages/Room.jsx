@@ -129,6 +129,7 @@ export default class Room extends Component {
           </div>
           <div className='chat-and-start'>
           <span id="chat-area">
+
             <Chat
               className="chat-area"
               sendMessage={this.props.sendMessage}
@@ -137,8 +138,12 @@ export default class Room extends Component {
               currentClue={this.props.currentClue}
               guesserPoints={this.props.guesserPoints}
             />
+            <div id="chat-title"> CHAT
+            </div>
           </span>
+          <div className='start-button-container'>
             <Button className='start-button' onClick={this.startRound}>Start</Button>
+            </div>
         </div>
         <span id="room-scores">
           <RoomScores

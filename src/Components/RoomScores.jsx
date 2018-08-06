@@ -20,6 +20,9 @@ export default class RoomScores extends Component {
 
     return (
       <div id="score-area">
+        <div id='score-title'>
+          LEADERBOARD
+        </div>
         {players}
       </div>
     )

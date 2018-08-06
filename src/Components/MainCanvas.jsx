@@ -167,7 +167,7 @@ export default class MainCanvas extends Component {
     const { offsetX, offsetY } = nativeEvent;
     const offsetData = { offsetX, offsetY };
     this.prevPos = { offsetX, offsetY };
-    this.paint(offsetData, offsetData, this.userStrokeStyle);
+    // this.paint(offsetData, offsetData, this.userStrokeStyle);
     this.isPainting = false;
   }
 
@@ -236,7 +236,10 @@ export default class MainCanvas extends Component {
             </Button>
             </div>
             <div>
-            <Button variant="fab" onClick={() => this.userClearCanvas()}>
+            <Button 
+              className='trash-button' 
+              variant="fab" 
+              onClick={() => this.userClearCanvas()}>
               <p className='fas fa-trash'></p></Button>
             </div>
           </div>
