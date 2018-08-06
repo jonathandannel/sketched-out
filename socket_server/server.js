@@ -59,7 +59,8 @@ MongoClient.connect(MONGODB_URI)
       secondsLeft: 30,
       correctGuesser: '',
       drawerPoints: 0,
-      guesserPoints: 0
+      guesserPoints: 0,
+      lastDrawerWin: ''
     }
 
 
@@ -220,6 +221,7 @@ MongoClient.connect(MONGODB_URI)
           case 'chatMessages':
             if (message.content.text.includes(GAME.currentClue)) {
               GAME.correctGuesser = message.content.username
+              GAME.lastDrawerWin = GAME.currentlyDrawing;
               setTimeout(() => {
                 wss.clients.forEach((client) => {
                   client.send(JSON.stringify({
@@ -233,11 +235,11 @@ MongoClient.connect(MONGODB_URI)
                     type: 'chatMessages',
                     content: {
                       username: 'Sketchbot',
-                      text: `${GAME.currentlyDrawing} got ${GAME.drawerPoints} points for an awesome drawing!`
+                      text: `${GAME.lastDrawerWin} got ${GAME.drawerPoints} points for an awesome drawing!`
                     }
                   }))
                 })
-              }, 300)
+              }, 100)
               endRound();
             }
             wss.clients.forEach((client) => {

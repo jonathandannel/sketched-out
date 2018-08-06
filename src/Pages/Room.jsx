@@ -137,6 +137,7 @@ export default class Room extends Component {
               currentUser={this.props.currentUser}
               currentClue={this.props.currentClue}
               guesserPoints={this.props.guesserPoints}
+              currentlyDrawing={this.props.currentlyDrawing}
             />
             <div id="chat-title"> CHAT
             </div>
