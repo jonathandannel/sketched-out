@@ -26,7 +26,8 @@ class App extends Component {
       secondsLeft: 30,
       brushSize: 10,
       players: [],
-      guesserPoints: 0
+      guesserPoints: 0,
+      countdown: false
     }
   }
 
@@ -87,6 +88,9 @@ class App extends Component {
           this.setState({
             players: parsedMessage.content.players
           })
+          this.setState({
+            countdown: true
+          })
         break;
         case 'timer':
           this.setState({
@@ -112,6 +116,14 @@ class App extends Component {
             guesserPoints: parsedMessage.content
           })
         break;
+        case 'startCountdown':
+          console.log('startcountdown', parsedMessage.type)
+          this.setState({
+            countdown: true
+          }, () => {
+            console.log(this.state.countdown,'true?')
+          })
+        break;
       }
     }
   }
@@ -123,12 +135,17 @@ class App extends Component {
     }, cb())
   }
 
-  clearUser = () =>{
+  clearUser = () => {
     this.setState({
       currentUser: ''
     })
   }
 
+  resetCountdown = () => {
+    this.setState({
+      countdown: false
+    })
+  }
 
   sendMessage = message => {
     this.socket.send(JSON.stringify(message));
@@ -159,6 +176,8 @@ class App extends Component {
           nextGuesser={this.state.nextGuesser}
           players={this.state.players}
           guesserPoints={this.state.guesserPoints}
+          countdown={this.state.countdown}
+          resetCountdown={this.resetCountdown}
         />
       </div>
     )

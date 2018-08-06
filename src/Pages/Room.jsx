@@ -20,7 +20,8 @@ export default class Room extends Component {
     super(props);
     this.socket = props.socket
     this.state = {
-      lineColor: 'black'
+      lineColor: 'black',
+      seconds: 3
     }
     this.Auth = new AuthService()
   }
@@ -68,6 +69,26 @@ export default class Room extends Component {
     }
   }
 
+  countThree = () => {
+    console.log('cd,', this.props.countdown)
+    let timer = setInterval(() => {
+      console.log('cd after set interval,', this.props.countdown)
+      this.setState(prevState => {
+        return {seconds: prevState.seconds - 1}
+      });
+      if(this.state.seconds <= -1){
+
+        clearInterval(timer)
+        this.props.resetCountdown()
+        console.log(this.props.countdown, 'false?')
+        this.setState({
+          seconds: 3
+        })
+      }
+    }, 1000)
+  }
+  
+
   componentWillUnmount() {
     this.props.sendMessage({
           type: 'roomLeave',
@@ -87,6 +108,7 @@ export default class Room extends Component {
       content: ''
     })
     startSound.play();
+    this.countThree()
   }
 
 
@@ -94,12 +116,16 @@ export default class Room extends Component {
 
 
   render() {
+    if (this.props.countdown === true){
+      this.countThree()
+    }
     return (
       <div id="room-container">
         <div className='userDisplay'>
         <div className='userTurnDisplay'>
           <span className="clue-for-drawer">{this.displayClue()}</span>
           <span className="display-drawers">{this.displayUsers()}</span>
+          <div>Time {this.state.seconds}</div>
         </div>
         <div className='chatDummy'>
         </div>

@@ -143,13 +143,20 @@ MongoClient.connect(MONGODB_URI)
     }
 
     const startRound = () => {
+      let startCountdown = {
+        type: 'startCountdown',
+        content: ''
+      }  
+      wss.clients.forEach((client) => {
+        client.send(JSON.stringify(startCountdown))
+      })
+
       GAME.secondsLeft = 30;
       GAME.currentlyDrawing = '';
       let outgoing = {
         type: 'timer',
         content: GAME.secondsLeft
-      }
-
+      } 
       wss.clients.forEach((client) => {
         client.send(JSON.stringify(outgoing))
       })
@@ -171,6 +178,7 @@ MongoClient.connect(MONGODB_URI)
       }, 3000)
 
     }
+
 
     const endRound = () => {
       GAME.drawerPoints = drawerPoints();
@@ -198,6 +206,15 @@ MongoClient.connect(MONGODB_URI)
       wss.clients.forEach((client) => {
         client.send(JSON.stringify(guesserPointDistribution))
       })
+
+      let startCountdown = {
+        type: 'startCountdown',
+        content: ''
+      }  
+      wss.clients.forEach((client) => {
+        client.send(JSON.stringify(startCountdown))
+      })
+
 
       startRound()
     }
