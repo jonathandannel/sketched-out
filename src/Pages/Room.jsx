@@ -11,6 +11,10 @@ import MainCanvas  from '../Components/MainCanvas.jsx';
 import AuthService from "../AuthService.jsx";
 import RoomScores from '../Components/RoomScores.jsx';
 
+const startSound = new Audio();
+startSound.src = "./src/Sounds/BoxingBellRing.mp3";
+startSound.volume = 0.5;
+
 export default class Room extends Component {
   constructor(props) {
     super(props);
@@ -82,6 +86,7 @@ export default class Room extends Component {
       type: 'beginRound',
       content: ''
     })
+    startSound.play();
   }
 
 

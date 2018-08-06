@@ -16,6 +16,7 @@ const moment            = require('moment');
 const clues             = require('../src/lib/clues.js')
 
 
+
 // Database Connection
 const MongoClient = require('mongodb').MongoClient
 const MONGODB_URI = "mongodb://localhost:27017/sketchedout"
@@ -67,6 +68,7 @@ MongoClient.connect(MONGODB_URI)
           // GAME Functions
 
     let timerInterval = null;
+    
 
     const getClue = () => {
       let currentClue = clues[Math.floor(Math.random() * (clues.length + 1))];
@@ -94,6 +96,12 @@ MongoClient.connect(MONGODB_URI)
             player.correctGuesses ++;
           }
         })
+        wss.clients.forEach((client) => {
+          client.send(JSON.stringify({
+            type: 'playPointSound',
+          }))
+        })
+      
         return newGuessPoints;
       }
     }
@@ -279,6 +287,9 @@ MongoClient.connect(MONGODB_URI)
             wss.clients.forEach((client) => {
               client.send(JSON.stringify(outgoingStartRound))
             })
+          break;
+          case 'soundmsg':
+            let pointSound = message.content;
           break;
           case 'userClearCanvas':
             GAME.canvas = [];

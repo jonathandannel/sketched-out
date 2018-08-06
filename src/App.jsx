@@ -4,7 +4,12 @@ import Main        from './Main.jsx';
 import NavBar      from './Components/NavBar.jsx';
 import AuthService from "./AuthService.jsx";
 
+// const preload = () => {
+//   let pointsSound = loadSound("../Sounds/magic_wand_pinf_006.mp3")
+// }
 
+const pointSound = new Audio();
+pointSound.src = "./src/Sounds/Button_Click.mp3"
 
 class App extends Component {
   constructor(props) {
@@ -26,6 +31,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+
     this.Auth = new AuthService();
     if (this.Auth.loggedIn()){
       this.setState({
@@ -87,10 +93,8 @@ class App extends Component {
             secondsLeft: parsedMessage.content
           })
         break;
-        case 'playSound':
-          this.setState({
-            correctGuesser: parsedMessage.content
-          })
+        case 'playPointSound':
+          pointSound.play();
         break;
         case 'clearCanvas':
           console.log('clearcanvas called');
