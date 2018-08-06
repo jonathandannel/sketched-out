@@ -40,7 +40,7 @@ export default class MainCanvas extends Component {
       const { offsetX, offsetY } = nativeEvent;
       const offsetData = { offsetX, offsetY };
       this.prevPos = { offsetX, offsetY };
-      this.paint(offsetData, offsetData, this.userStrokeStyle);
+      this.paint(this.prevPos, this.prevPos, this.userStrokeStyle);
     }
   }
 
@@ -166,8 +166,6 @@ export default class MainCanvas extends Component {
   stopPainting = ({ nativeEvent }) => {
     const { offsetX, offsetY } = nativeEvent;
     const offsetData = { offsetX, offsetY };
-    this.prevPos = { offsetX, offsetY };
-    this.paint(offsetData, offsetData, this.userStrokeStyle);
     this.isPainting = false;
   }
 
