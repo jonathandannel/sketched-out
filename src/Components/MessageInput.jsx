@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { TextField, DialogContent } from '@material-ui/core';
 
 export default class Chat extends Component {
   constructor(props) {
@@ -20,11 +21,12 @@ export default class Chat extends Component {
 
   render() {
     return (
-        <input
-          id="message-input"
-          placeholder="guess"
-          onKeyDown={this.handleInput}
-        />
+        <TextField 
+          autoFocus
+          className={'message-input'}
+          margin="dense"
+          placeholder='Guess!'
+          onKeyDown={this.handleInput} />
     )
   }
 }

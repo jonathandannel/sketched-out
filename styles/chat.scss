@@ -1,17 +1,20 @@
-#message-input {
-  font-size: 15px;
+.message-input {
+
+
 }
-
+.message-input-box{
+  box-shadow: 0px -2px 6px 0px rgba(0, 0, 0, 0.2), 0px 0px 3px 0px rgba(0, 0, 0, 0.12);
+  display: flex;
+  justify-content: center;
+}
 #chat-messages {
-
+  padding: 0rem 0rem 0.25rem 0rem;
 }
 
 .single-message {
   margin-top: 1px;
-  padding-top: 10px;
-  padding-left: 4%;
+  padding: 0.75rem;
   font-size: 20px;
-  height: 30px;
   font-size: 15px;
   transition-property: background-color;
   transition-duration: 5s;

@@ -8,11 +8,11 @@
 }
 
 #time-bar path {
-  transition: stroke-dashoffset 0s ease 0s, stroke-dasharray 1s ease 0s, stroke, stroke-width ease 0.3s!important;
+  transition: stroke-dashoffset 0.3s ease 0s, stroke 0.3s linear, 0.3s, 1.5s!important;
 }
 
 #time-bar{
-  padding-bottom: 6px;
+  padding-bottom: 7px;
   border-radius: 2px;
 }
 
