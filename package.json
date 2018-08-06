@@ -53,7 +53,6 @@
     "jsonwebtoken": "^8.3.0",
     "jwt-decode": "^2.2.0",
     "moment": "^2.22.2",
-    "mongo-seeding": "^2.2.0",
     "mongodb": "^2.2.36",
     "progressbar.js": "^1.0.1",
     "randomcolor": "^0.5.3",

@@ -6,6 +6,7 @@ export default class Chat extends Component {
 
   render() {
     return (
+
       <div id="chat-list-and-input">
         <div id="chat-messages">
           <MessageList
@@ -14,13 +15,14 @@ export default class Chat extends Component {
             guesserPoints={this.props.guesserPoints}
           />
         </div>
-        <div id="message-input">
+        <div className="message-input-box">
           <MessageInput
             currentUser={this.props.currentUser}
             sendMessage={this.props.sendMessage}
             />
         </div>
       </div>
+    
     )
   }
 }
