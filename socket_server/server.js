@@ -69,7 +69,7 @@ MongoClient.connect(MONGODB_URI)
           // GAME Functions
 
     let timerInterval = null;
-    
+
 
     const getClue = () => {
       let currentClue = clues[Math.floor(Math.random() * (clues.length + 1))];
@@ -102,7 +102,7 @@ MongoClient.connect(MONGODB_URI)
             type: 'playPointSound',
           }))
         })
-      
+
         return newGuessPoints;
       }
     }
@@ -151,7 +151,9 @@ MongoClient.connect(MONGODB_URI)
       wss.clients.forEach((client) => {
         client.send(JSON.stringify(outgoing))
       })
+
       let gameTimeout = setTimeout(()=> {
+        GAME.canvas = [];
         startTimer();
         setCurrentlyDrawing()
         getClue();

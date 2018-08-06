@@ -55,8 +55,8 @@ export default class Room extends Component {
     if (this.props.currentUser === this.props.currentlyDrawing ) {
       return (
         <div>
-        <span>It's your turn! </span>
-        <span>Next up: {this.props.nextGuesser}</span>
+          <span>It's your turn! </span>
+          <span>Next up: {this.props.nextGuesser}</span>
         </div>
         )
     } else {
