@@ -18,11 +18,12 @@ export default class Chat extends Component {
         <div className="message-input-box">
           <MessageInput
             currentUser={this.props.currentUser}
+            currentlyDrawing={this.props.currentlyDrawing}
             sendMessage={this.props.sendMessage}
             />
         </div>
       </div>
-    
+
     )
   }
 }

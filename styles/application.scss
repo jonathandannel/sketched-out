@@ -7,6 +7,7 @@
 @import 'time-bar';
 
 main {
+  margin-top: 50px;
   font-family: 'Roboto', sans-serif;
   font-weight: bold;
   font-size: 1em;
@@ -24,8 +25,7 @@ body {
 }
 
 @media (max-width: 1000px){
-  body{
-    display: flex;
-    justify-content: flex-start
+  #room-container{
+    margin-left: 2%;
   }
 }

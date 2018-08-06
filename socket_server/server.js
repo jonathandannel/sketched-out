@@ -60,7 +60,8 @@ MongoClient.connect(MONGODB_URI)
       secondsLeft: 30,
       correctGuesser: '',
       drawerPoints: 0,
-      guesserPoints: 0
+      guesserPoints: 0,
+      lastDrawerWin: ''
     }
 
 
@@ -68,7 +69,7 @@ MongoClient.connect(MONGODB_URI)
           // GAME Functions
 
     let timerInterval = null;
-    
+
 
     const getClue = () => {
       let currentClue = clues[Math.floor(Math.random() * (clues.length + 1))];
@@ -101,7 +102,7 @@ MongoClient.connect(MONGODB_URI)
             type: 'playPointSound',
           }))
         })
-      
+
         return newGuessPoints;
       }
     }
@@ -150,7 +151,9 @@ MongoClient.connect(MONGODB_URI)
       wss.clients.forEach((client) => {
         client.send(JSON.stringify(outgoing))
       })
+
       let gameTimeout = setTimeout(()=> {
+        GAME.canvas = [];
         startTimer();
         setCurrentlyDrawing()
         getClue();
@@ -228,6 +231,7 @@ MongoClient.connect(MONGODB_URI)
           case 'chatMessages':
             if (message.content.text.includes(GAME.currentClue)) {
               GAME.correctGuesser = message.content.username
+              GAME.lastDrawerWin = GAME.currentlyDrawing;
               setTimeout(() => {
                 wss.clients.forEach((client) => {
                   client.send(JSON.stringify({
@@ -241,11 +245,11 @@ MongoClient.connect(MONGODB_URI)
                     type: 'chatMessages',
                     content: {
                       username: 'Sketchbot',
-                      text: `${GAME.currentlyDrawing} got ${GAME.drawerPoints} points for an awesome drawing!`
+                      text: `${GAME.lastDrawerWin} got ${GAME.drawerPoints} points for an awesome drawing!`
                     }
                   }))
                 })
-              }, 300)
+              }, 100)
               endRound();
             }
             wss.clients.forEach((client) => {

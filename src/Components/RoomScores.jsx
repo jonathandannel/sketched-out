@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import { Paper }from '@material-ui/core';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 
 export default class RoomScores extends Component {
   constructor(props) {
@@ -10,11 +13,18 @@ export default class RoomScores extends Component {
     console.log(this.props.players)
   }
 
-
   render() {
-    const players = this.props.players.map((player) => {
+
+    const sorted = this.props.players.slice().sort((a, b) => {
+      return b.points - a.points
+    })
+
+    const players = sorted.map((player) => {
       return (
-        <Paper><div>{player.username}: {player.points}</div></Paper>
+          <div id='score-item'>
+            <div>{player.username}</div>
+            <div>{player.points}</div>
+          </div>
       )
     })
 
@@ -23,7 +33,7 @@ export default class RoomScores extends Component {
         <div id='score-title'>
           LEADERBOARD
         </div>
-        {players}
+          {players}
       </div>
     )
   }

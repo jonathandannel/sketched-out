@@ -1,8 +1,9 @@
 #room-container {
   display: flex;
+  width: 1800px;
   flex-direction: column;
-  margin-top: 30px;
-  margin-left: 5px;
+  margin-top: 50px;
+  margin-left: 5%;
 }
 
 #canvas-container {
@@ -13,7 +14,7 @@
 
 #chat-area {
   background-color: white;
-  width: 100%;
+  width: 300px;
   font-size: 1.2rem;
   display: flex;
   flex-direction: column-reverse;
@@ -26,7 +27,7 @@
   justify-content: space-between;
 
   input {
-    width: 225px;
+    width: 270px;
     font-size: 15px;
   }
   #chat-title{
@@ -41,8 +42,8 @@
 }
 
 #score-area {
-  background-color: #cbd0d8;
-  width: 225px;
+  background-color: white;
+  width: 300px;
   height: 450px;
   font-size: 1.2rem;
   display: flex;
@@ -62,7 +63,14 @@
   }
 }
 
-
+#score-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 14px;
+}
 
 #canvas {
   box-shadow: 2px 2px 40px rgb(100,100,100);
@@ -117,7 +125,7 @@
     transition-duration: 0.1s;
     transition-property: transform;
     background: ghostwhite;
-    
+
   }
   #small-brush{
     margin-left: 0px;
@@ -199,7 +207,9 @@
 }
 
 .start-button-container{
-  margin-left: 30px;
+
+  background: lightgreen;
+  width: 100%
 }
 
 .start-button {
@@ -229,6 +239,6 @@
 }
   75% {
     -webkit-transform: scale(0.98);
-    transform: scale(0.98);  
+    transform: scale(0.98);
 }
 }
