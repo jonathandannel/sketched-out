@@ -1,12 +1,8 @@
 import React, {Component} from 'react';
-import { Link }    from 'react-router-dom'
-import clueArray   from '../lib/clues'
-import moment      from 'moment'
 import Button      from '@material-ui/core/Button';
 import Brushes     from '../Components/Brushes.jsx';
 import Chat        from '../Components/Chat.jsx';
 import TimeBar     from '../Components/TimeBar.jsx';
-import Modal       from '@material-ui/core/Modal';
 import MainCanvas  from '../Components/MainCanvas.jsx';
 import AuthService from "../AuthService.jsx";
 import RoomScores from '../Components/RoomScores.jsx';
