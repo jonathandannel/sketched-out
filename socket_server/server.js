@@ -14,6 +14,7 @@ const server            = express();
 const httpServer        = http.createServer(server);
 const moment            = require('moment');
 const clues             = require('../src/lib/clues.js')
+const dbHelpers         = require('./db/data-helpers')
 
 
 
@@ -24,6 +25,7 @@ const MONGODB_URI = "mongodb://localhost:27017/sketchedout"
 MongoClient.connect(MONGODB_URI)
   .then(db => {
     console.log(`Connected to mongodb: ${MONGODB_URI}`)
+    const dataHelpers = dbHelpers(db)
 
     server.use((req, res, next) => {
       res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
@@ -86,7 +88,7 @@ MongoClient.connect(MONGODB_URI)
       }
       let first = GAME.players.shift()
       GAME.players.push(first);
-   }
+    }
 
     guesserPoints = () => {
       if (GAME.correctGuesser !== '') {
@@ -270,11 +272,17 @@ MongoClient.connect(MONGODB_URI)
           break;
           case 'roomLeave':
             GAME.players.map(player => {
+
               if (player.username === message.content) {
                 let index = GAME.players.indexOf(player);
                 if (index > -1) {
                   GAME.players.splice(index, 1);
                   // ADD PLAYER'S POINTS TO THE DATABASE -------
+                  // console.log(player)
+                  db.collection('users').updateOne({
+                    username: player.username},
+                    {$inc: {totalPoints: player.points, correctGuesses: player.correctGuesses}
+                  }, (err, item) => console.log(err || item))
                 }
               }
             })
@@ -321,11 +329,8 @@ MongoClient.connect(MONGODB_URI)
       ws.on("close", () => {
         console.log("Client disconnected")
       })
-
-
     })
   })
-
 
     httpServer.listen(PORT, "0.0.0.0", "localhost", () =>
       console.log(`==> Sketched Out websocket server listening on ${PORT}`)
