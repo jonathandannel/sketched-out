@@ -133,6 +133,7 @@ MongoClient.connect(MONGODB_URI)
 
     const startRound = () => {
       GAME.secondsLeft = 30;
+      GAME.currentlyDrawing = '';
       let outgoing = {
         type: 'timer',
         content: GAME.secondsLeft
@@ -160,7 +161,6 @@ MongoClient.connect(MONGODB_URI)
 
     const endRound = () => {
       GAME.drawerPoints = drawerPoints();
-      console.log(GAME.drawerPoints, "GAME DRAWERPOINTS")
       GAME.guesserPoints = guesserPoints();
       GAME.correctGuesser = '';
       GAME.secondsLeft = 0;
