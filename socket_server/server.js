@@ -277,8 +277,6 @@ MongoClient.connect(MONGODB_URI)
                 let index = GAME.players.indexOf(player);
                 if (index > -1) {
                   GAME.players.splice(index, 1);
-                  // ADD PLAYER'S POINTS TO THE DATABASE -------
-                  // console.log(player)
                   db.collection('users').updateOne({
                     username: player.username},
                     {$inc: {totalPoints: player.points, correctGuesses: player.correctGuesses}
