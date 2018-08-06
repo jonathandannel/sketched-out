@@ -7,21 +7,23 @@ export default class Chat extends Component {
   }
 
   handleInput = (e) => {
-    if (e.key === 'Enter' && e.target.value.length > 0) {
-      this.props.sendMessage({
-        type: 'chatMessages',
-        content: {
-          username: this.props.currentUser,
-          text: e.target.value
-        }
-      })
-      e.target.value = '';
+    if (this.props.currentUser !== this.props.currentlyDrawing) {
+      if (e.key === 'Enter' && e.target.value.length > 0) {
+        this.props.sendMessage({
+          type: 'chatMessages',
+          content: {
+            username: this.props.currentUser,
+            text: e.target.value
+          }
+        })
+        e.target.value = '';
+      }
     }
   }
 
   render() {
     return (
-        <TextField 
+        <TextField
           autoFocus
           className={'message-input'}
           margin="dense"
