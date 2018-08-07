@@ -4,6 +4,7 @@ import Brushes     from '../Components/Brushes.jsx';
 import Chat        from '../Components/Chat.jsx';
 import TimeBar     from '../Components/TimeBar.jsx';
 import Modal       from '@material-ui/core/Modal';
+import Paper from '@material-ui/core/Paper';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import MainCanvas  from '../Components/MainCanvas.jsx';
 import AuthService from "../AuthService.jsx";
@@ -45,26 +46,23 @@ export default class Room extends Component {
   displayClue = () => {
     if (this.props.currentUser === this.props.currentlyDrawing) {
       return (
-          <div>Your clue is: <b>{this.props.currentClue}</b></div>
+          <div>Draw: {this.props.currentClue}</div>
         )
     }
   }
 
-  displayUsers = () => {
-    if (this.props.currentUser === this.props.currentlyDrawing ) {
-      return (
-        <div>
-          <span>It's your turn! </span>
-          <span>Next up: {this.props.nextGuesser}</span>
-        </div>
-        )
-    } else {
-      return (
-        <div>
-        <span>Next up: {this.props.nextGuesser}</span>
-        </div>
-        )
-    }
+  displayCurrentDrawer = () => {
+    let drawing = this.props.currentlyDrawing === this.props.currentUser ?
+                  '(YOU)' : this.props.currentlyDrawing
+    return (
+      <div>Now Drawing: {drawing}</div>
+    )
+  }
+
+  displayNextGuesser = () => {
+    return (
+      <div>Up Next: {this.props.nextGuesser}</div>
+    )
   }
 
   countThree = () => {
@@ -126,13 +124,27 @@ export default class Room extends Component {
   render() {
     return (
       <div id="room-container">
-        <div className='userDisplay'>
-        <div className='userTurnDisplay'>
-          <span className="clue-for-drawer">{this.displayClue()}</span>
-          <h1 id="countdown">{this.showCountdown()}</h1>
-          <span className="display-drawers">{this.displayUsers()}</span>
+
+        <div className="game-info">
+
+          <div className='drawer-display'>
+            <Paper className='drawer-paper'>{this.displayCurrentDrawer()}</Paper>
+          </div>
+          <div className='above-canvas'>
+            <div className='drawer-display'>
+              <Paper className='clue-paper'>{this.displayClue()}</Paper>
+            </div>
+            <div className='countdown-timer'>
+              {this.showCountdown()}
+            </div>
+            <div className='drawer-display'>
+              <Paper className='next-player-paper'>{this.displayNextGuesser()}</Paper>
+            </div>
+          </div>
+        <div className='dummyChatDiv'></div>
+
         </div>
-        </div>
+
 
       <div id="canvas-container">
             <span id="room-scores">

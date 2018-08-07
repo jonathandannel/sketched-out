@@ -5,11 +5,49 @@
   margin-top: 50px;
 }
 
+.game-info {
+  display: flex;
+  justify-content: space-around;
+  .above-canvas{
+    width: 900px;
+    display: flex;
+    justify-content: space-between;
+    .clue-paper{
+      width: 200px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .next-player-paper{
+      width: 200px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  .dummyChatDiv{
+    content: '';
+    width: 300px;
+  }
+  .drawer-paper{
+    width: 300px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+}
+
 #canvas-container {
   display: flex;
   justify-content: space-around;
   padding-top: 1rem;
 }
+
+
 
 #chat-area {
   background-color: white;
