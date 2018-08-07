@@ -39,13 +39,12 @@
     justify-content: center;
     align-items: center;
   }
-
 }
 
 #canvas-container {
   display: flex;
   justify-content: space-around;
-  padding-top: 1rem;
+  padding-top: 1.5rem;
 }
 
 
@@ -56,9 +55,8 @@
   font-size: 1.2rem;
   display: flex;
   flex-direction: column-reverse;
+
   margin-bottom: 4px;
-  // padding-right: 3px;
-  margin-left: 1rem;
   border-radius: 2px;
   height: 450px;
   display: flex;
@@ -89,7 +87,6 @@
   flex-direction: column;
   margin-bottom: 4px;
   // padding-right: 3px;
-  margin-left: 1rem;
   border-radius: 2px;
   #score-title{
     background-color: #9c27b0;
@@ -298,6 +295,8 @@
 }
 
 .countdown-timer {
+  height: 40px;
+  transform: scale(1.2);
 }
 
 .numbers{

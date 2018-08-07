@@ -151,12 +151,10 @@ export default class Room extends Component {
 
 
         <div id="canvas-container">
-            <span id="room-scores">
               <RoomScores
                 players={this.props.players}
               />
-            </span>
-
+          <div>
           <TimeBar
             shouldAnimate={this.props.gameStarted}
             timeRemaining={this.props.secondsLeft}
@@ -172,6 +170,7 @@ export default class Room extends Component {
             currentUser={this.props.currentUser}
             changeColor={this.changeColor}
           />
+        </div>
           <div className='chat-and-start'>
           <span id="chat-area">
             <Chat
@@ -190,8 +189,7 @@ export default class Room extends Component {
             <Button className='start-button' onClick={this.startRound}>Start</Button>
             </div>
         </div>
-
-      </div>
+    </div>
     </div>
     )
   }
