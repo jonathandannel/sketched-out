@@ -26,7 +26,8 @@ class App extends Component {
       secondsLeft: 30,
       brushSize: 10,
       players: [],
-      guesserPoints: 0
+      guesserPoints: 0,
+      countdownTicks: null
     }
   }
 
@@ -112,6 +113,11 @@ class App extends Component {
             guesserPoints: parsedMessage.content
           })
         break;
+        case 'startCountdown':
+          this.setState({
+            countdownTicks: parsedMessage.content
+          });
+        break;
       }
     }
   }
@@ -128,6 +134,8 @@ class App extends Component {
       currentUser: ''
     })
   }
+
+
 
 
   sendMessage = message => {
@@ -159,6 +167,7 @@ class App extends Component {
           nextGuesser={this.state.nextGuesser}
           players={this.state.players}
           guesserPoints={this.state.guesserPoints}
+          countdownTicks={this.state.countdownTicks}
         />
       </div>
     )

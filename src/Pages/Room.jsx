@@ -89,6 +89,11 @@ export default class Room extends Component {
     startSound.play();
   }
 
+  showCountdown = () => {
+    if (this.props.countdownTicks > 0) {
+      return this.props.countdownTicks
+    }
+  }
 
 // Game Logic Functions
 
@@ -106,15 +111,9 @@ export default class Room extends Component {
         </div>
 
       <div id="canvas-container">
+          <h1>{this.showCountdown()}</h1>
           <div className='brush-canvas'>
 
-          <div id="brush-container">
-            <Brushes
-              className="brush-area color-picker"
-              lineColor={this.state.lineColor}
-              onChange={this.changeColor}
-            />
-          </div>
           <div>
           <TimeBar
             shouldAnimate={this.props.gameStarted}
@@ -134,7 +133,6 @@ export default class Room extends Component {
           </div>
           <div className='chat-and-start'>
           <span id="chat-area">
-
             <Chat
               className="chat-area"
               sendMessage={this.props.sendMessage}
@@ -156,6 +154,13 @@ export default class Room extends Component {
             players={this.props.players}
           />
         </span>
+      </div>
+      <div id="brush-container">
+        <Brushes
+          className="brush-area color-picker"
+          lineColor={this.state.lineColor}
+          onChange={this.changeColor}
+        />
       </div>
     </div>
     )
