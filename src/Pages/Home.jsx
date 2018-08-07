@@ -12,10 +12,11 @@ export default class Home extends Component {
     return <div className="homepage-bg">
         
         <Leaderboard />
-        <Button>
-          <Link to="room">JOIN THE GAME</Link>
-        </Button>
-        
+        <div className="join-button-div">
+          <Button id="join-button">
+            <Link to="room">JOIN THE GAME <img id="join-btn-img" src="./styles/inkpen.png" alt="inkpen"/></Link>
+          </Button>
+        </div>
       </div>;
   }
 }

@@ -39,3 +39,29 @@
   min-height: 100vh
 }
 
+.join-button-div {
+  width: 45%;
+  height: 40vh;
+  margin: 100px;
+  margin: auto;
+  display: block;
+  float: left;
+}
+
+.MuiButton-label-41.join-button {
+  
+}
+
+#join-button {
+  color: white !important;
+  background-color: rgb(199, 170, 223) !important;
+  font-weight: bold !important; 
+  margin: auto !important;
+    :hover {
+      background-color: rgb(146, 115, 172) !important;
+    }
+}
+
+.join-btn-img {
+  height: 50px;;
+}
