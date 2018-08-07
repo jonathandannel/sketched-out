@@ -3,7 +3,6 @@
   width: 1800px;
   flex-direction: column;
   margin-top: 50px;
-  margin-left: 5%;
 }
 
 #canvas-container {
@@ -38,6 +37,7 @@
     justify-content: center;
     height: 2.5rem;
     align-items: center;
+    font-size: 1rem;
   }
 }
 
@@ -60,6 +60,7 @@
     justify-content: center;
     height: 2.5rem;
     align-items: center;
+    font-size: 1rem;
   }
 }
 
@@ -69,6 +70,7 @@
   justify-content: space-between;
   padding-top: 10px;
   padding-left: 10px;
+  font-size: 15px;
   padding-right: 14px;
 }
 
@@ -94,6 +96,7 @@
 }
 
 #brush-container {
+  margin-top: 15px;
   margin-right: 10px;
   padding: 2px;
   border-radius: 5px;
@@ -139,6 +142,7 @@
 }
 
 #brush-sizes{
+  margin-top: 5px;
   display: flex;
   justify-content: space-between;
 }
@@ -180,6 +184,7 @@
 }
 .trash-button {
   display: inline-block;
+  margin-top: 5px;
   vertical-align: middle;
   -webkit-transform: perspective(1px) translateZ(0);
   transform: perspective(1px) translateZ(0);
@@ -241,4 +246,8 @@
     -webkit-transform: scale(0.98);
     transform: scale(0.98);
 }
+}
+
+#countdown {
+
 }
