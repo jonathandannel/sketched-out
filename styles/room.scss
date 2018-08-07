@@ -96,7 +96,7 @@
 }
 
 #brush-container {
-  margin-top: 20px;
+  margin-top: 15px;
   margin-right: 10px;
   padding: 2px;
   border-radius: 5px;
@@ -142,6 +142,7 @@
 }
 
 #brush-sizes{
+  margin-top: 5px;
   display: flex;
   justify-content: space-between;
 }
@@ -183,6 +184,7 @@
 }
 .trash-button {
   display: inline-block;
+  margin-top: 5px;
   vertical-align: middle;
   -webkit-transform: perspective(1px) translateZ(0);
   transform: perspective(1px) translateZ(0);
