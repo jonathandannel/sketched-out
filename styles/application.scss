@@ -23,6 +23,10 @@ body {
   margin: 0px;
   box-shadow: inset 2px 2px 50px rgb(102, 102, 102);
   // font-family: 'Montserrat', sans-serif;
+
+  transform: scale(1.0);
+  transform-origin: 0 0;
+   // add prefixed versions too.
 }
 
 @media (max-width: 1000px){

@@ -91,9 +91,9 @@ export default class Room extends Component {
 
   componentWillUnmount() {
     this.props.sendMessage({
-          type: 'roomLeave',
-          content: this.props.currentUser
-        })
+      type: 'roomLeave',
+      content: this.props.currentUser
+    })
   }
 
 // Drawing Functions
@@ -115,8 +115,9 @@ export default class Room extends Component {
     if (this.props.countdownTicks > 0) {
       return (
         <div>
-          <CircularProgress variant="static" value={this.props.countdownTicks * 3 * 10}> </CircularProgress>
-          {this.props.countdownTicks}
+          <div className="numbers">{this.props.countdownTicks}</div>
+          <CircularProgress variant="static" value={this.props.countdownTicks * 3 * 10}>
+          </CircularProgress>
         </div>
       )
     }
@@ -124,18 +125,16 @@ export default class Room extends Component {
 
 // Game Logic Functions
 
-
   render() {
     return (
       <div id="room-container">
 
         <div className="game-info">
-
           <div className='drawer-display'>
             <Paper className='drawer-paper'>{this.displayCurrentDrawer()}</Paper>
           </div>
           <div className='above-canvas'>
-            <div className='drawer-display'>
+            <div className='clue-display'>
               {this.displayClue()}
             </div>
             <div className='countdown-timer'>
@@ -145,12 +144,13 @@ export default class Room extends Component {
               <Paper className='next-player-paper'>{this.displayNextGuesser()}</Paper>
             </div>
           </div>
-        <div className='dummyChatDiv'></div>
+        <div className='dummyChatDiv'>
+        </div>
 
         </div>
 
 
-      <div id="canvas-container">
+        <div id="canvas-container">
             <span id="room-scores">
               <RoomScores
                 players={this.props.players}

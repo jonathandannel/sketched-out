@@ -1,6 +1,7 @@
 #room-container {
   display: flex;
-  width: 1800px;
+  width: 100%;
+  height: 100%;
   flex-direction: column;
   margin-top: 50px;
 }
@@ -177,6 +178,12 @@
   background: ghostwhite;
 }
 
+.space-div {
+  margin-left: 10px;
+  margin-right: 20px;
+}
+
+
 }
 
 #brush-sizes{
@@ -288,4 +295,21 @@
 
 #countdown {
 
+}
+
+.countdown-timer {
+}
+
+.numbers{
+      transform: translate(16px, 29.5px);
+}
+
+.circular-timer{
+    height: 40px!important
+}
+
+.clue-display{
+  content: '';
+  width: 200px;
+  height: 50px;
 }
