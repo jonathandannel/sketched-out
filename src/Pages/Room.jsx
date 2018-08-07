@@ -46,8 +46,12 @@ export default class Room extends Component {
   displayClue = () => {
     if (this.props.currentUser === this.props.currentlyDrawing) {
       return (
-          <div>Draw: {this.props.currentClue}</div>
+          <Paper className='clue-paper'>
+            Draw: {this.props.currentClue}
+          </Paper>
         )
+    } else {
+      return null;
     }
   }
 
@@ -132,7 +136,7 @@ export default class Room extends Component {
           </div>
           <div className='above-canvas'>
             <div className='drawer-display'>
-              <Paper className='clue-paper'>{this.displayClue()}</Paper>
+              {this.displayClue()}
             </div>
             <div className='countdown-timer'>
               {this.showCountdown()}
