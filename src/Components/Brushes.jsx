@@ -3,7 +3,7 @@ import {CirclePicker}     from 'react-color';
 
 export default class Brushes extends Component {
 
-circleSize = 28;
+circleSize = 35;
 circleSpacing = 2;
 colors = ["#f44336", "#fc9ca9", "#9c27b0", "#3f51b5", "#2196f3", "#4caf50", "#fffc72", "#ffc107", "#795548", "#607d8b", "#000000",]
 
@@ -17,6 +17,7 @@ colors = ["#f44336", "#fc9ca9", "#9c27b0", "#3f51b5", "#2196f3", "#4caf50", "#ff
         <div>
           <CirclePicker
             id="circle-picker"
+            width='max-content'
             circleSize={this.circleSize}
             colors={this.colors}
             onChange={(color) => {this.props.onChange(color)}}
