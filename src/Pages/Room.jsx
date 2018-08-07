@@ -87,7 +87,7 @@ export default class Room extends Component {
       }
     }, 1000)
   }
-  
+
 
   componentWillUnmount() {
     this.props.sendMessage({
