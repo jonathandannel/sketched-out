@@ -4,14 +4,16 @@ const LeaderboardScoreRow = (props) => (
   <tr>
     <td>{props.username}</td>
     <td>{props.totalPoints}</td>
+    <td>{props.correctGuesses}</td>
   </tr>
 )
 const LeaderboardScores = props => (
-  <table>
+  <table className="home-leaderboard">
     <thead>
       <tr>
         <th>User</th>
         <th>Score</th>
+        <th>Correct Guesses</th>
       </tr>
     </thead>
     <tbody>
@@ -19,6 +21,7 @@ const LeaderboardScores = props => (
         <LeaderboardScoreRow 
           username={user.username} 
           totalPoints={user.totalPoints} 
+          correctGuesses={user.correctGuesses}
           key={i}/>
         ))
       }
@@ -51,6 +54,10 @@ export default class Leaderboard extends Component {
       })
   }
   render() {
-    return <LeaderboardScores users={this.state.users}/>
+    return (
+      <div className="leaderboard-div">
+        <LeaderboardScores users={this.state.users}/>
+      </div>
+    )
   }
 }

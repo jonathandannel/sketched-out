@@ -1,0 +1,31 @@
+.home-leaderboard {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.home-leaderboard td {
+    height: 15px;
+    width: auto;
+    text-align: left;
+}
+
+.home-leaderboard th {
+  text-align: left;
+}
+
+.leaderboard-div { 
+  background-color: rgba(255, 255, 255, 1);
+  opacity: 1;
+  margin: auto;
+  float: right;
+  border: 1px solid black;
+  border-radius: 0px, 0px, 5px, 5px;
+  width: 45%;
+}
+
+.home-leaderboard thead {
+  color: white;
+  overflow: hidden;
+  background-color: #9c27b0;
+}
