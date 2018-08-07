@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
+import Brushes from './Brushes.jsx'
 
 
 
@@ -234,6 +235,13 @@ export default class MainCanvas extends Component {
               onClick={() => this.setBrushSize(15)}>
               <img src="./styles/inkpen.png" alt="inkpen" height="34" width="34" />
             </Button>
+            </div>
+            <div id="brush-container">
+              <Brushes
+                className="brush-area color-picker"
+                lineColor={this.props.lineColor}
+                onChange={this.props.changeColor}
+              />
             </div>
             <div>
             <Button

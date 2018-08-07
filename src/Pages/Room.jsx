@@ -154,6 +154,7 @@ export default class Room extends Component {
             brushSize={this.props.brushSize}
             currentlyDrawing={this.props.currentlyDrawing}
             currentUser={this.props.currentUser}
+            changeColor={this.changeColor}
           />
           </div>
           </div>
@@ -180,13 +181,6 @@ export default class Room extends Component {
             players={this.props.players}
           />
         </span>
-      </div>
-      <div id="brush-container">
-        <Brushes
-          className="brush-area color-picker"
-          lineColor={this.state.lineColor}
-          onChange={this.changeColor}
-        />
       </div>
     </div>
     )
