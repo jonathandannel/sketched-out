@@ -3,7 +3,6 @@ import { Link }    from 'react-router-dom'
 import clueArray   from '../lib/clues'
 import moment      from 'moment'
 import Button      from '@material-ui/core/Button';
-import Brushes     from '../Components/Brushes.jsx';
 import Chat        from '../Components/Chat.jsx';
 import TimeBar     from '../Components/TimeBar.jsx';
 import Modal       from '@material-ui/core/Modal';
@@ -26,7 +25,10 @@ export default class Room extends Component {
     this.Auth = new AuthService()
   }
 
-  componentDidMount() {
+  startTimer = () => {
+    if (this.props.countdown === true){
+      this.countThree()
+    }
     //Waits for websocket to load before trying to send a message
     //to avoid blank page
     let poller = setInterval(() => {
@@ -42,6 +44,13 @@ export default class Room extends Component {
         clearInterval(poller);
       }
     }, 100);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (!this.props.countdown && nextProps.countdown) {
+      console.log('here')
+      this.startTimer();
+    }
   }
 
   displayClue = () => {
@@ -75,16 +84,17 @@ export default class Room extends Component {
       console.log('cd after set interval,', this.props.countdown)
       this.setState(prevState => {
         return {seconds: prevState.seconds - 1}
-      });
-      if(this.state.seconds <= -1){
+      }, (() => {
+        console.log('in interval')
+        if(this.state.seconds <= 0){
 
-        clearInterval(timer)
-        this.props.resetCountdown()
-        console.log(this.props.countdown, 'false?')
-        this.setState({
-          seconds: 3
-        })
-      }
+          this.props.resetCountdown()
+          console.log(this.props.countdown, 'false?')
+          this.setState({
+            seconds: 3
+          }, () => clearInterval(timer))
+        }
+      }));
     }, 1000)
   }
   
@@ -98,16 +108,13 @@ export default class Room extends Component {
 
 // Drawing Functions
 
-  changeColor = (color) => {
-    this.setState({lineColor: color.hex})
-  }
-
   startRound = () => {
     this.props.sendMessage({
       type: 'beginRound',
       content: ''
     })
     startSound.play();
+    this.props.resetCountdown(true);
     this.countThree()
   }
 
@@ -116,9 +123,7 @@ export default class Room extends Component {
 
 
   render() {
-    if (this.props.countdown === true){
-      this.countThree()
-    }
+
     return (
       <div id="room-container">
         <div className='userDisplay'>
@@ -134,13 +139,6 @@ export default class Room extends Component {
       <div id="canvas-container">
           <div className='brush-canvas'>
 
-          <div id="brush-container">
-            <Brushes
-              className="brush-area color-picker"
-              lineColor={this.state.lineColor}
-              onChange={this.changeColor}
-            />
-          </div>
           <div>
           <TimeBar
             shouldAnimate={this.props.gameStarted}
@@ -155,6 +153,7 @@ export default class Room extends Component {
             brushSize={this.props.brushSize}
             currentlyDrawing={this.props.currentlyDrawing}
             currentUser={this.props.currentUser}
+            lineColor={this.state.lineColor}
           />
           </div>
           </div>

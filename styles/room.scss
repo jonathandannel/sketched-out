@@ -89,15 +89,17 @@
   content: '';
 }
 
-#timer {
-  float: center;
+.button-brush{
+  display: flex
 }
 
-#brush-container {
-  margin-right: 10px;
-  padding: 2px;
-  border-radius: 5px;
-  height: 440px;
+.circle-picker{
+  display: flex;
+  margin-top: 18px;
+  margin-left: 10px
+}
+#timer {
+  float: center;
 }
 
 #drawer-points-display {

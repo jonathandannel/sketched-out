@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
+import Brushes     from '../Components/Brushes.jsx';
+
 
 
 
@@ -13,6 +15,7 @@ export default class MainCanvas extends Component {
     this.onTouchStart = this.onTouchStart.bind(this)
     this.onTouchMove = this.onTouchMove.bind(this)
     this.something = this.something.bind(this)
+    this.changeColor = this.changeColor.bind(this)
   }
 
   isPainting = false;
@@ -31,6 +34,10 @@ export default class MainCanvas extends Component {
     this.ctx.lineJoin = 'round';
     this.ctx.lineCap = 'round';
     this.ctx.lineWidth = this.props.brushSize
+  }
+
+  changeColor = (color) => {
+    this.setState({lineColor: color.hex})
   }
 
   handleMouseDown = ({ nativeEvent })=> {
@@ -217,7 +224,7 @@ export default class MainCanvas extends Component {
           />
           </div>
           <div id='brush-sizes'>
-            <div>
+            <div className='button-brush'>
             <Button
               id="small-brush"
               variant="fab" aria-label="S"
@@ -234,6 +241,11 @@ export default class MainCanvas extends Component {
               onClick={() => this.setBrushSize(15)}>
               <img src="./styles/inkpen.png" alt="inkpen" height="34" width="34" />
             </Button>
+            <Brushes
+              className="brush-area color-picker"
+              lineColor={this.props.lineColor}
+              onChange={this.changeColor}
+            />
             </div>
             <div>
             <Button

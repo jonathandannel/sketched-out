@@ -141,10 +141,17 @@ class App extends Component {
     })
   }
 
-  resetCountdown = () => {
-    this.setState({
-      countdown: false
-    })
+  resetCountdown = (val) => {
+    if (val) {
+      this.setState({
+        countdown: true
+      })
+    } else {
+      this.setState({
+        countdown: false
+      })
+    }
+    
   }
 
   sendMessage = message => {
