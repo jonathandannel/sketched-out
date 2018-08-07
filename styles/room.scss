@@ -3,7 +3,6 @@
   width: 1800px;
   flex-direction: column;
   margin-top: 50px;
-  margin-left: 5%;
 }
 
 #canvas-container {
@@ -38,6 +37,7 @@
     justify-content: center;
     height: 2.5rem;
     align-items: center;
+    font-size: 1rem;
   }
 }
 
@@ -60,6 +60,7 @@
     justify-content: center;
     height: 2.5rem;
     align-items: center;
+    font-size: 1rem;
   }
 }
 
@@ -69,6 +70,7 @@
   justify-content: space-between;
   padding-top: 10px;
   padding-left: 10px;
+  font-size: 15px;
   padding-right: 14px;
 }
 

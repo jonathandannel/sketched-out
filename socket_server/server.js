@@ -71,6 +71,7 @@ MongoClient.connect(MONGODB_URI)
           // GAME Functions
 
     let timerInterval = null;
+    let countdownInterval = null;
 
 
     const getClue = () => {
@@ -123,6 +124,7 @@ MongoClient.connect(MONGODB_URI)
 
 
     const startTimer = () => {
+
       GAME.secondsLeft = 30;
       timerInterval = setInterval(() => {
         if (GAME.secondsLeft === 0) {
@@ -143,20 +145,26 @@ MongoClient.connect(MONGODB_URI)
     }
 
     const startRound = () => {
-      let startCountdown = {
-        type: 'startCountdown',
-        content: ''
-      }  
-      wss.clients.forEach((client) => {
-        client.send(JSON.stringify(startCountdown))
-      })
+      let count = 3;
+        countdownInterval = setInterval(() => {
+          if (count > - 1) {
+            wss.clients.forEach((client) => {
+              let message = {
+                type: 'startCountdown',
+                content: count
+              }
+              client.send(JSON.stringify(message))
+            })
+            count --;
+          }
+        }, 1000)
 
       GAME.secondsLeft = 30;
       GAME.currentlyDrawing = '';
       let outgoing = {
         type: 'timer',
         content: GAME.secondsLeft
-      } 
+      }
       wss.clients.forEach((client) => {
         client.send(JSON.stringify(outgoing))
       })
@@ -175,7 +183,14 @@ MongoClient.connect(MONGODB_URI)
           client.send(JSON.stringify(message));
         })
         console.log(GAME)
-      }, 3000)
+        clearInterval(countdownInterval)
+        wss.clients.forEach((client) => {
+          client.send(JSON.stringify({
+            type: 'clearCountdown',
+            content: ''
+          }))
+        })
+      }, 4000)
 
     }
 
@@ -210,7 +225,7 @@ MongoClient.connect(MONGODB_URI)
       let startCountdown = {
         type: 'startCountdown',
         content: ''
-      }  
+      }
       wss.clients.forEach((client) => {
         client.send(JSON.stringify(startCountdown))
       })
