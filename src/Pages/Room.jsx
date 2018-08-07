@@ -7,6 +7,7 @@ import Brushes     from '../Components/Brushes.jsx';
 import Chat        from '../Components/Chat.jsx';
 import TimeBar     from '../Components/TimeBar.jsx';
 import Modal       from '@material-ui/core/Modal';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import MainCanvas  from '../Components/MainCanvas.jsx';
 import AuthService from "../AuthService.jsx";
 import RoomScores from '../Components/RoomScores.jsx';
@@ -113,7 +114,12 @@ export default class Room extends Component {
 
   showCountdown = () => {
     if (this.props.countdownTicks > 0) {
-      return this.props.countdownTicks
+      return (
+        <div>
+          <CircularProgress variant="static" value={this.props.countdownTicks * 3 * 10}> </CircularProgress>
+          {this.props.countdownTicks}
+        </div>
+      )
     }
   }
 
@@ -126,14 +132,12 @@ export default class Room extends Component {
         <div className='userDisplay'>
         <div className='userTurnDisplay'>
           <span className="clue-for-drawer">{this.displayClue()}</span>
+          <h1 id="countdown">{this.showCountdown()}</h1>
           <span className="display-drawers">{this.displayUsers()}</span>
-        </div>
-        <div className='chatDummy'>
         </div>
         </div>
 
       <div id="canvas-container">
-          <h1>{this.showCountdown()}</h1>
           <div className='brush-canvas'>
 
           <div>
