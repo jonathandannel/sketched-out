@@ -11,7 +11,6 @@ export default class MainCanvas extends Component {
     this.stopPainting = this.stopPainting.bind(this)
     this.onTouchStart = this.onTouchStart.bind(this)
     this.onTouchMove = this.onTouchMove.bind(this)
-    this.something = this.something.bind(this)
   }
 
   isPainting = false;
@@ -34,11 +33,25 @@ export default class MainCanvas extends Component {
 
   handleMouseDown = ({ nativeEvent })=> {
     if (this.props.currentlyDrawing === this.props.currentUser) {
-      this.isPainting = true;
       const { offsetX, offsetY } = nativeEvent;
-      // const offsetData = { offsetX, offsetY };
+      this.isPainting = true;
       this.prevPos = { offsetX, offsetY };
+      const offsetData = { offsetX, offsetY };
+
+      const positionData = {
+        start: { ...this.prevPos },
+        stop: {...offsetData}
+      };
+
+      this.line = {
+        prevPos: positionData.start,
+        currPos: positionData.stop,
+        strokeStyle: this.userStrokeStyle
+      }
+
       this.paint(this.prevPos, this.prevPos, this.userStrokeStyle);
+      this.sendPaintData();
+
     }
   }
 
@@ -97,17 +110,13 @@ export default class MainCanvas extends Component {
 
   touchPaint = (prevPos, currPos, strokeStyle) => {
     if (this.props.currentlyDrawing === this.props.currentUser) {
-      // console.log('PAINT EXECUTING')
       const { clientX, clientY } = currPos;
       const { clientX: x, clientY: y } = prevPos;
 
       this.ctx.beginPath();
       this.ctx.strokeStyle = strokeStyle;
-      // Move the the prevPosition of the mouse
       this.ctx.moveTo(x, y);
-      // Draw a line to the current position of the mouse
       this.ctx.lineTo(clientX, clientY);
-      // Visualize the line using the strokeStyle
       this.ctx.stroke();
       this.prevPos = { clientX, clientY };
     }
@@ -117,14 +126,10 @@ export default class MainCanvas extends Component {
       const { offsetX, offsetY } = currPos;
       const { offsetX: x, offsetY: y } = prevPos;
       this.ctx.lineWidth = this.props.brushSize;
-
       this.ctx.beginPath();
       this.ctx.strokeStyle = strokeStyle;
-      // Move the the prevPosition of the mouse
       this.ctx.moveTo(x, y);
-      // Draw a line to the current position of the mouse
       this.ctx.lineTo(offsetX, offsetY);
-      // Visualize the line using the strokeStyle
       this.ctx.stroke();
       this.prevPos = { offsetX, offsetY };
   }
