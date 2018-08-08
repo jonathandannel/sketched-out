@@ -19,7 +19,7 @@ module.exports = function makeDataHelpers(db) {
     getUsers: () => {
       return new Promise((resolve, reject) => {
         let users
-        db.collection('users').find().limit(10).toArray((err, users) => {
+        db.collection('users').find().limit(5).toArray((err, users) => {
           if (err) {
             reject(err)
           } else {
