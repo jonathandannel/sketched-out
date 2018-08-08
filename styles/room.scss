@@ -255,18 +255,29 @@
 
 .start-button-container{
 
-  background: lightgreen;
+  background: #c7b8d8;
   width: 100%
 }
 
 .start-button {
+  margin-top: 5px;
   width: 100%;
   display: inline-block;
   vertical-align: middle;
   -webkit-transform: perspective(1px) translateZ(0);
   transform: perspective(1px) translateZ(0);
   box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-animation-name: start-button;
+  animation-name: start-button;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  background: #e0b5be!important;
 }
+
 .start-button:hover {
   -webkit-animation-name: start-button;
   animation-name: start-button;
@@ -276,7 +287,7 @@
   animation-timing-function: linear;
   -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
-  background: #4caf50!important;
+  background: #ffe5ea!important;
 }
 
 @keyframes start-button {
@@ -311,4 +322,8 @@
   content: '';
   width: 200px;
   height: 50px;
+}
+
+.MuiButtonBase-root-64 {
+  width: 100%;
 }

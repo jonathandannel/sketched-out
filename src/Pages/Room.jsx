@@ -9,6 +9,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import MainCanvas  from '../Components/MainCanvas.jsx';
 import AuthService from "../AuthService.jsx";
 import RoomScores from '../Components/RoomScores.jsx';
+import StartButton from '../Components/StartButton.jsx';
 
 const startSound = new Audio();
 startSound.src = "./src/Sounds/BoxingBellRing.mp3";
@@ -23,6 +24,7 @@ export default class Room extends Component {
       seconds: 3
     }
     this.Auth = new AuthService()
+    this.startBtn = React.createRef();
   }
 
   componentDidMount() {
@@ -109,6 +111,7 @@ export default class Room extends Component {
     })
     startSound.play();
     this.countThree()
+    this.startBtn
   }
 
   showCountdown = () => {
@@ -186,8 +189,8 @@ export default class Room extends Component {
             </div>
           </span>
           <div className='start-button-container'>
-            <Button className='start-button' onClick={this.startRound}>Start</Button>
-            </div>
+            <StartButton startRound={this.startRound} />
+          </div>
         </div>
     </div>
     </div>
