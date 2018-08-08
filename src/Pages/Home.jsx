@@ -13,14 +13,15 @@ export default class Home extends Component {
       <div className="homepage-bg">
         
         <div className="join-button-div">
-          <Button id="join-button">
-            <Link to="room">JOIN THE GAME <img id="join-btn-img" src="./styles/inkpen.png" alt="inkpen"/></Link>
+          <Button className='join-button'>
+            <Link className='join-text' to="room">JOIN THE GAME <img id="join-btn-img" src="./styles/inkpen.png" alt="inkpen"/></Link>
           </Button>
+          <div className="rules-button-div">
+            <SimpleModalWrapped />
+          </div>
+          </div>
         <Leaderboard />
-        </div>
-        <div className="rules-button-div">
-          <SimpleModalWrapped />
-        </div>
+
       </div>
     )
   }

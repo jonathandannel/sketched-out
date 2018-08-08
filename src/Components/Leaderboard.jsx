@@ -1,32 +1,45 @@
 import React, { Component } from "react";
 
 const LeaderboardScoreRow = (props) => (
-  <tr>
-    <td>{props.username}</td>
-    <td>{props.totalPoints}</td>
-    <td>{props.correctGuesses}</td>
-  </tr>
+  <div className="card-leaderboard">
+    <header className="username-leaderboard">
+      <h2 className='username-header'>{props.username}</h2>
+    </header>
+    <div className='points-guesses-header'>
+      <div>Total Points</div>
+      <div>Correct Guesses</div>
+    </div>
+    <div className='points-guesses'>
+      <div className="total-points-leaderboard">
+        {props.totalPoints}
+      </div>
+
+      <div className="correct-guesses-points">
+        {props.correctGuesses}
+      </div>
+    </div>
+  </div>
 )
+
 const LeaderboardScores = props => (
-  <table className="home-leaderboard">
-    <thead>
-      <tr>
-        <th>User</th>
-        <th>Score</th>
-        <th>Correct Guesses</th>
-      </tr>
-    </thead>
-    <tbody>
-      { props.users.map( (user, i) => (
+  // <table className="home-leaderboard">
+  //   <thead>
+  //     <tr>
+  //       <th>User</th>
+  //       <th>Score</th>
+  //       <th>Correct Guesses</th>
+  //     </tr>
+  //   </thead>
+  //   <tbody>
+       props.users.map( (user, i) => (
         <LeaderboardScoreRow 
           username={user.username} 
           totalPoints={user.totalPoints} 
           correctGuesses={user.correctGuesses}
           key={i}/>
         ))
-      }
-    </tbody>
-  </table>
+  //   </tbody>
+  // </table>
 );
 
 
@@ -56,6 +69,7 @@ export default class Leaderboard extends Component {
   render() {
     return (
       <div className="leaderboard-div">
+      <div className='leaderboard-title'>LEADERBOARD</div>
         <LeaderboardScores users={this.state.users}/>
       </div>
     )

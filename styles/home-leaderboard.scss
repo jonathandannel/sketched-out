@@ -1,30 +1,92 @@
-.home-leaderboard {
-  table-layout: fixed;
-  width: 100%;
-  border-collapse: collapse;
-}
+// .home-leaderboard {
+//   table-layout: fixed;
+//   width: 100%;
+//   border-collapse: collapse;
+// }
 
-.home-leaderboard td {
-    height: 15px;
-    width: auto;
-    text-align: left;
-}
+// .home-leaderboard td {
+//     height: 15px;
+//     width: auto;
+//     text-align: left;
+// }
 
-.home-leaderboard th {
-  text-align: left;
-}
+// .home-leaderboard th {
+//   text-align: left;
+// }
 
 .leaderboard-div { 
-  background-color: rgba(255, 255, 255, 1);
-  opacity: 1;
-  margin-right: 100px;
-  margin: auto;
+  // background-color: rgba(255, 255, 255, 1);
+  // opacity: 1;
+  // margin: auto;
   float: right;
-  border: 1px solid black;
-  border-radius: 0px, 0px, 5px, 5px;
-  width: 45%;
+  // border: 1px solid black;
+  // border-radius: 0px, 0px, 5px, 5px;
+  width: 300px;
+  // padding-right: 30px;
+  margin-right: 200px;
+  opacity: 0.85;
+  background: whitesmoke;
 }
 
+.leaderboard-title{
+  background: gainsboro;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2px;
+  font-size: 20px;
+}
+
+// .home-leaderboard thead {
+//   color: white;
+//   overflow: hidden;
+//   background-color: #9c27b0;
+// }
+
+.card-leaderboard{
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  border-radius: 2px;
+  transform: scale(0.85);
+  border: 1px solid gainsboro;
+}
+
+.username-leaderboard{
+  text-align: center;
+}
+
+.username-header{
+  padding: 10px 0px;
+  margin: 0;
+}
+
+.points-guesses-header{
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+  border-top: 1px solid gainsboro;
+  padding-top: 10px;
+}
+
+.points-guesses{
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 10px;
+}
+
+.homepage-bg{
+  display:flex;
+}
+
+.total-points-leaderboard{
+
+}
+
+.correct-guesses-points{
+  margin-right: 15px;
+}
 .home-leaderboard thead {
   color: white;
   overflow: hidden;
