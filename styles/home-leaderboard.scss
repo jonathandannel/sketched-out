@@ -1,31 +1,76 @@
-.home-leaderboard {
-  table-layout: fixed;
-  width: 100%;
-  border-collapse: collapse;
-}
+// .home-leaderboard {
+//   table-layout: fixed;
+//   width: 100%;
+//   border-collapse: collapse;
+// }
 
-.home-leaderboard td {
-    height: 15px;
-    width: auto;
-    text-align: left;
-}
+// .home-leaderboard td {
+//     height: 15px;
+//     width: auto;
+//     text-align: left;
+// }
 
-.home-leaderboard th {
-  text-align: left;
-}
+// .home-leaderboard th {
+//   text-align: left;
+// }
 
 .leaderboard-div { 
-  background-color: rgba(255, 255, 255, 1);
-  opacity: 1;
-  margin: auto;
+  // background-color: rgba(255, 255, 255, 1);
+  // opacity: 1;
+  // margin: auto;
   float: right;
-  border: 1px solid black;
-  border-radius: 0px, 0px, 5px, 5px;
-  width: 45%;
+  // border: 1px solid black;
+  // border-radius: 0px, 0px, 5px, 5px;
+  width: 30%;
+  // padding-right: 30px;
+  margin-right: 50px;
 }
 
-.home-leaderboard thead {
-  color: white;
-  overflow: hidden;
-  background-color: #9c27b0;
+// .home-leaderboard thead {
+//   color: white;
+//   overflow: hidden;
+//   background-color: #9c27b0;
+// }
+
+.card-leaderboard{
+  background-color: goldenrod;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  border-radius: 10px;
+}
+
+.username-leaderboard{
+  text-align: center;
+}
+
+.username-header{
+  padding-top: 10px;
+}
+
+.points-guesses-header{
+  display: flex;
+  justify-content: space-between;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+
+.points-guesses{
+  display: flex;
+  justify-content: space-between;
+  margin-left: 50px;
+  margin-right: 50px;
+  padding-bottom: 10px;
+}
+
+.homepage-bg{
+
+}
+
+.total-points-leaderboard{
+
+}
+
+.correct-guesses-points{
+  margin-right: 15px;
 }
