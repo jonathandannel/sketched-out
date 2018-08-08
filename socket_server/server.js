@@ -9,13 +9,12 @@ const http              = require("http");
 const randomstring      = require("randomstring");
 const bcrypt            = require("bcryptjs");
 const WebSocket         = require('ws');
-const routes            = require('./routes')
+const routes            = require('./routes');
 const server            = express();
 const httpServer        = http.createServer(server);
 const moment            = require('moment');
-const clues             = require('../src/lib/clues.js')
-const dbHelpers         = require('./db/data-helpers')
-
+const clues             = require('../src/lib/clues.js');
+const dbHelpers         = require('./db/data-helpers');
 
 
 // Database Connection
@@ -26,25 +25,15 @@ MongoClient.connect(MONGODB_URI)
   .then(db => {
     console.log(`Connected to mongodb: ${MONGODB_URI}`)
     const dataHelpers = dbHelpers(db)
-
     server.use((req, res, next) => {
       res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
       res.setHeader("Access-Control-Allow-Headers", "Content-type,Authorization");
       next();
     });
-
-    // if (err) throw err;
-    // var dbo = db.db("mydb");
-    // var query = { username: "Gerry" };
-    // dbo.collection("customers").find(query).toArray(function (err, result) {
-    //   if (err) throw err;
-    //   console.log(result);
-    // });
     server.use(bodyParser.json());
     server.use(bodyParser.urlencoded({
       extended: true
     }));
-
     routes(server, db)
 
     /********* ROOM STATE *********/
@@ -59,7 +48,7 @@ MongoClient.connect(MONGODB_URI)
       gameStarted: false,
       startTimer: false,
       currentClue: '',
-      secondsLeft: 30,
+      secondsLeft: 40,
       correctGuesser: '',
       drawerPoints: 0,
       guesserPoints: 0,
@@ -105,7 +94,6 @@ MongoClient.connect(MONGODB_URI)
             type: 'playPointSound',
           }))
         })
-
         return newGuessPoints;
       }
     }
@@ -122,10 +110,8 @@ MongoClient.connect(MONGODB_URI)
       }
     }
 
-
     const startTimer = () => {
-
-      GAME.secondsLeft = 30;
+      GAME.secondsLeft = 40;
       timerInterval = setInterval(() => {
         if (GAME.secondsLeft === 0) {
           endRound()
@@ -135,7 +121,6 @@ MongoClient.connect(MONGODB_URI)
             type: 'timer',
             content: GAME.secondsLeft
           }
-
           wss.clients.forEach((client) => {
             client.send(JSON.stringify(outgoing))
           })
@@ -158,8 +143,7 @@ MongoClient.connect(MONGODB_URI)
             count --;
           }
         }, 1000)
-
-      GAME.secondsLeft = 30;
+      GAME.secondsLeft = 40;
       GAME.currentlyDrawing = '';
       let outgoing = {
         type: 'timer',
@@ -168,7 +152,6 @@ MongoClient.connect(MONGODB_URI)
       wss.clients.forEach((client) => {
         client.send(JSON.stringify(outgoing))
       })
-
       let gameTimeout = setTimeout(()=> {
         GAME.canvas = [];
         startTimer();
@@ -198,7 +181,6 @@ MongoClient.connect(MONGODB_URI)
           }))
         })
       }, 4000)
-
     }
 
 
@@ -211,25 +193,20 @@ MongoClient.connect(MONGODB_URI)
       clearInterval(timerInterval);
       GAME.canvas = [];
       GAME.currentlyDrawing = '';
-
       let message = {
         type: 'clearCanvas',
         content: ''
       }
-
       let guesserPointDistribution = {
         type: 'guesserPoints',
         content: GAME.guesserPoints
       }
-
       wss.clients.forEach((client) => {
         client.send(JSON.stringify(message))
       })
-
       wss.clients.forEach((client) => {
         client.send(JSON.stringify(guesserPointDistribution))
       })
-
       let startCountdown = {
         type: 'startCountdown',
         content: ''
@@ -237,8 +214,6 @@ MongoClient.connect(MONGODB_URI)
       wss.clients.forEach((client) => {
         client.send(JSON.stringify(startCountdown))
       })
-
-
       startRound()
     }
 
@@ -250,10 +225,8 @@ MongoClient.connect(MONGODB_URI)
 
     wss.on("connection", (ws, req) => {
       console.log("==> User connected!");
-
       ws.on('message', (data) => {
         const message = JSON.parse(data);
-
         switch (message.type) {
           case 'latestLineData':
             message.content.forEach((line) => {
@@ -356,25 +329,20 @@ MongoClient.connect(MONGODB_URI)
               type: 'changeBrushSize',
               content: message.content
             }
-
             wss.clients.forEach((client) => {
               client.send(JSON.stringify(outgoingMsg))
             })
           break;
         }
-
-
       ws.on("close", () => {
         console.log("Client disconnected")
       })
     })
   })
-
     httpServer.listen(PORT, "0.0.0.0", "localhost", () =>
       console.log(`==> Sketched Out websocket server listening on ${PORT}`)
     )
   })
-
   .catch(err => {
     console.error(`Failed to connect: ${MONGODB_URI}`)
     throw err

@@ -30,7 +30,6 @@
 
 .mainContainer{
   padding-top: 100px;
-  // background: rgba(153, 209, 156, 0.1);
   min-height: 100vh
 }
 
@@ -44,16 +43,11 @@
   margin-top: 0;
 }
 
-.MuiButton-label-41.join-button {
-  
-}
-
 .join-button {
   color: white !important;
   background-color: rgb(170, 223, 223) !important;
   font-weight: bold !important; 
   margin: auto !important;
-
     :hover {
       background-color: rgb(170, 223, 223) !important;
     }
@@ -70,10 +64,6 @@
 
 #rules-modal-title {
   text-align: center;
-}
-
-.rules-button-div {
-
 }
 
 #rules-button {

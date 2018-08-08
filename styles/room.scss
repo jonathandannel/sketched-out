@@ -47,21 +47,17 @@
   padding-top: 1.5rem;
 }
 
-
-
 #chat-area {
   background-color: white;
   width: 300px;
   font-size: 1.2rem;
   display: flex;
   flex-direction: column-reverse;
-
   margin-bottom: 4px;
   border-radius: 2px;
   height: 450px;
   display: flex;
   justify-content: space-between;
-
   input {
     width: 270px;
     font-size: 15px;
@@ -86,7 +82,6 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 4px;
-  // padding-right: 3px;
   border-radius: 2px;
   #score-title{
     background-color: #9c27b0;
@@ -164,7 +159,6 @@
     transition-duration: 0.1s;
     transition-property: transform;
     background: ghostwhite;
-
   }
   #small-brush{
     margin-left: 0px;
@@ -179,8 +173,6 @@
   margin-left: 10px;
   margin-right: 20px;
 }
-
-
 }
 
 #brush-sizes{
@@ -194,7 +186,6 @@
   display: flex;
   justify-content: space-between;
 }
-
 
 .userDisplay{
   display: flex;
@@ -213,7 +204,6 @@
   margin: 0;
   color: black
 }
-
 
 @keyframes trash-button {
   50% {
@@ -247,7 +237,6 @@
 .chatDummy{
   content: '';
   width: 20%;
-
 }
 
 .chat-and-start{
@@ -303,21 +292,17 @@
 }
 }
 
-#countdown {
-
-}
-
 .countdown-timer {
   height: 40px;
   transform: scale(1.2);
 }
 
 .numbers{
-      transform: translate(16px, 29.5px);
+  transform: translate(16px, 29.5px);
 }
 
 .circular-timer{
-    height: 40px!important
+  height: 40px!important
 }
 
 .clue-display{

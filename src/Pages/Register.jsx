@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import { Redirect } from 'react-router-dom'
-import AuthService from "../AuthService.jsx";
+import { Redirect }       from 'react-router-dom';
+import AuthService        from "../AuthService.jsx";
 import {  Button,
           TextField,
           Dialog,
@@ -22,14 +22,14 @@ export default class Register extends Component {
       open: false,
     }
   }
+
   handleClickOpen = () => {
     this.setState({ open: true });
-  };
+  }
 
   handleClose = () => {
     this.setState({ open: false });
-  };
-
+  }
 
   render() {
     if (this.Auth.loggedIn()){
@@ -77,6 +77,7 @@ export default class Register extends Component {
       </div>
     )
   }
+
   handleUser(e) {
 
     this.setState(
@@ -97,7 +98,6 @@ export default class Register extends Component {
 
   handleFormSubmit(e) {
     e.preventDefault();
-
     this.Auth.register(this.state.username, this.state.password)
       .then(res => {
         this.props.setUser(this.Auth.getProfile().username, () => {

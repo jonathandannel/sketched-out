@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom'
-// import './Login.css';
-import AuthService from "../AuthService.jsx";
+import { Redirect }         from 'react-router-dom'
+import AuthService          from "../AuthService.jsx";
 import {  Button,
   TextField,
   Dialog,
@@ -25,11 +24,11 @@ class Login extends Component {
   }
   handleClickOpen = () => {
     this.setState({ open: true });
-  };
+  }
 
   handleClose = () => {
     this.setState({ open: false });
-  };
+  }
 
   render() {
     if (this.Auth.loggedIn()){
