@@ -35,7 +35,6 @@ export default class MainCanvas extends Component {
   }
 
   handleMouseDown = ({ nativeEvent })=> {
-    // console.log({nativeEvent})
     if (this.props.currentlyDrawing === this.props.currentUser) {
       this.isPainting = true;
       const { offsetX, offsetY } = nativeEvent;
@@ -165,19 +164,12 @@ export default class MainCanvas extends Component {
   }
 
   stopPainting = ({ nativeEvent }) => {
-    const { offsetX, offsetY } = nativeEvent;
-    const offsetData = { offsetX, offsetY };
-    // this.prevPos = { offsetX, offsetY };
-    // this.paint(offsetData, offsetData, this.userStrokeStyle);
-    this.isPainting = false;
+    if (this.isPainting) {
+      this.isPainting = false;
+      this.sendPaintData();
+    }
   }
 
-  something = () => {
-    let stuff = (
-      <div>aaaaaaaaaaa</div>
-    )
-    return stuff
-  }
   render() {
     if (this.props.latestLineData.length < 1 && this.ctx) {
       // console.log('empty array', this.ctx.fillStyle);
