@@ -61,13 +61,13 @@ export default class Room extends Component {
     let drawing = this.props.currentlyDrawing === this.props.currentUser ?
                   '(YOU)' : this.props.currentlyDrawing
     return (
-      <div>Now Drawing: {drawing}</div>
+      <div className='display-drawer'>Now Drawing: {drawing}</div>
     )
   }
 
   displayNextGuesser = () => {
     return (
-      <div>Up Next: {this.props.nextGuesser}</div>
+      <div className='display-next-drawer'>Up Next: {this.props.nextGuesser}</div>
     )
   }
 
@@ -119,7 +119,10 @@ export default class Room extends Component {
       return (
         <div>
           <div className="numbers">{this.props.countdownTicks}</div>
-          <CircularProgress variant="static" value={this.props.countdownTicks * 3 * 10}>
+          <CircularProgress 
+            className='circular-progress'
+            variant="static" 
+            value={this.props.countdownTicks * 3 * 10}>
           </CircularProgress>
         </div>
       )

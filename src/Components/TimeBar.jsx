@@ -10,7 +10,7 @@ class TimeBar extends Component {
     return (
         <div id="progress">
           <Line
-            strokeColor='#2196f3'
+            strokeColor='#fa8072'
             strokeWidth='1'
             trailWidth='1'
             strokeLinecap='square'

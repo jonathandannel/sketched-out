@@ -11,7 +11,6 @@ export default class Home extends Component {
   render() {
     return (
       <div className="homepage-bg">
-        
         <div className="join-button-div">
           <Button className='join-button'>
             <Link className='join-text' to="room">JOIN THE GAME <img id="join-btn-img" src="./styles/inkpen.png" alt="inkpen"/></Link>

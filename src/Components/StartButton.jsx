@@ -28,7 +28,7 @@ export default class StartButton extends Component {
 
   render() {
     return (
-      <div>
+      <div className='start-button'>
         {this.showStartButton()}
       </div>
     )

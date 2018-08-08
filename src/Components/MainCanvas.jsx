@@ -213,19 +213,21 @@ export default class MainCanvas extends Component {
           />
           </div>
           <div id='brush-sizes'>
-            <div>
+            <div id='brush-all'>
             <Button
-              id="small-brush"
+              className='brushes'
               variant="fab" aria-label="S"
               onClick={() => this.setBrushSize(5)}>
               <img src="./styles/inkpen.png" alt="inkpen" height="10" width="10" />
             </Button>
             <Button
+              className='brushes'
               variant="fab" aria-label="M"
               onClick={() => this.setBrushSize(10)}>
               <img src="./styles/inkpen.png" alt="inkpen" height="22" width="22" />
             </Button>
             <Button
+              className='brushes'
               variant="fab" aria-label="L"
               onClick={() => this.setBrushSize(15)}>
               <img src="./styles/inkpen.png" alt="inkpen" height="34" width="34" />
