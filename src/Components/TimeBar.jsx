@@ -1,21 +1,15 @@
 import React, {Component} from 'react';
 import { Line, Circle }   from 'rc-progress';
 
-
-
 class TimeBar extends Component {
-
-
-
 
   render() {
 
     let percent = Math.floor(this.props.timeRemaining / 30 * 100)
 
-
     return (
         <div id="progress">
-          <Line 
+          <Line
             strokeColor='#2196f3'
             strokeWidth='1'
             trailWidth='1'
@@ -27,4 +21,3 @@ class TimeBar extends Component {
 }
 
 export default TimeBar;
-

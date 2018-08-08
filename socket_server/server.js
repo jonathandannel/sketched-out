@@ -182,6 +182,13 @@ MongoClient.connect(MONGODB_URI)
         wss.clients.forEach((client) => {
           client.send(JSON.stringify(message));
         })
+        let clear = {
+          type: 'clearCanvas',
+          content: ''
+        }
+        wss.clients.forEach((client) => {
+          client.send(JSON.stringify(clear));
+        })
         console.log(GAME)
         clearInterval(countdownInterval)
         wss.clients.forEach((client) => {
@@ -203,6 +210,7 @@ MongoClient.connect(MONGODB_URI)
       GAME.gameStarted = false;
       clearInterval(timerInterval);
       GAME.canvas = [];
+      GAME.currentlyDrawing = '';
 
       let message = {
         type: 'clearCanvas',
@@ -272,7 +280,7 @@ MongoClient.connect(MONGODB_URI)
                     type: 'chatMessages',
                     content: {
                       username: 'Sketchbot',
-                      text: `${message.content.username} guessed correctly! (Awarded ${GAME.guesserPoints} points.)`
+                      text: `${message.content.username} guessed correctly! (+${GAME.guesserPoints} points)`
                     }
                   }))
                   client.send(JSON.stringify({

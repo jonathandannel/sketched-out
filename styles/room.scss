@@ -1,15 +1,53 @@
 #room-container {
   display: flex;
-  width: 1800px;
+  width: 100%;
+  height: 100%;
   flex-direction: column;
-  margin-top: 50px;
+  margin-top: 20px;
+}
+
+.game-info {
+  display: flex;
+  justify-content: space-around;
+  .above-canvas{
+    width: 900px;
+    display: flex;
+    justify-content: space-between;
+    .clue-paper{
+      width: 200px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .next-player-paper{
+      width: 200px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  .dummyChatDiv{
+    content: '';
+    width: 300px;
+  }
+  .drawer-paper{
+    width: 300px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 #canvas-container {
   display: flex;
   justify-content: space-around;
-  padding-top: 1rem;
+  padding-top: 1.5rem;
 }
+
+
 
 #chat-area {
   background-color: white;
@@ -17,9 +55,8 @@
   font-size: 1.2rem;
   display: flex;
   flex-direction: column-reverse;
+
   margin-bottom: 4px;
-  // padding-right: 3px;
-  margin-left: 1rem;
   border-radius: 2px;
   height: 450px;
   display: flex;
@@ -50,7 +87,6 @@
   flex-direction: column;
   margin-bottom: 4px;
   // padding-right: 3px;
-  margin-left: 1rem;
   border-radius: 2px;
   #score-title{
     background-color: #9c27b0;
@@ -139,6 +175,12 @@
   background: ghostwhite;
 }
 
+.space-div {
+  margin-left: 10px;
+  margin-right: 20px;
+}
+
+
 }
 
 #brush-sizes{
@@ -157,6 +199,7 @@
 .userDisplay{
   display: flex;
   justify-content: space-around;
+  background-image: url("./styles/coloured-pencils-opaque.jpg")
 }
 
 .clue-for-drawer{
@@ -212,19 +255,31 @@
 }
 
 .start-button-container{
-
-  background: lightgreen;
-  width: 100%
+  background: #50ff84;
+  width: 100%;
+  box-shadow: 2px 2px 40px rgb(100,100,100);
 }
 
 .start-button {
+  margin-top: 5px;
+  color: white;
   width: 100%;
   display: inline-block;
   vertical-align: middle;
   -webkit-transform: perspective(1px) translateZ(0);
   transform: perspective(1px) translateZ(0);
   box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-animation-name: start-button;
+  animation-name: start-button;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  background: #9c27b0!important;
 }
+
 .start-button:hover {
   -webkit-animation-name: start-button;
   animation-name: start-button;
@@ -234,7 +289,7 @@
   animation-timing-function: linear;
   -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
-  background: #4caf50!important;
+  background: #ffe5ea!important;
 }
 
 @keyframes start-button {
@@ -250,4 +305,36 @@
 
 #countdown {
 
+}
+
+.countdown-timer {
+  height: 40px;
+  transform: scale(1.2);
+}
+
+.numbers{
+      transform: translate(16px, 29.5px);
+}
+
+.circular-timer{
+    height: 40px!important
+}
+
+.clue-display{
+  content: '';
+  width: 200px;
+  height: 50px;
+}
+
+.MuiButtonBase-root-64 {
+  width: 100%;
+}
+
+.MuiButton-label-41{
+  color: #000000;
+  font-weight: bold;
+}
+
+.spacer {
+  height: 4px;
 }

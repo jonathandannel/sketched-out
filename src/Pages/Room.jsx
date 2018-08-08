@@ -4,10 +4,12 @@ import Brushes     from '../Components/Brushes.jsx';
 import Chat        from '../Components/Chat.jsx';
 import TimeBar     from '../Components/TimeBar.jsx';
 import Modal       from '@material-ui/core/Modal';
+import Paper from '@material-ui/core/Paper';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import MainCanvas  from '../Components/MainCanvas.jsx';
 import AuthService from "../AuthService.jsx";
 import RoomScores from '../Components/RoomScores.jsx';
+import StartButton from '../Components/StartButton.jsx';
 
 const startSound = new Audio();
 startSound.src = "./src/Sounds/BoxingBellRing.mp3";
@@ -22,6 +24,7 @@ export default class Room extends Component {
       seconds: 3
     }
     this.Auth = new AuthService()
+    this.startBtn = React.createRef();
   }
 
   componentDidMount() {
@@ -45,26 +48,27 @@ export default class Room extends Component {
   displayClue = () => {
     if (this.props.currentUser === this.props.currentlyDrawing) {
       return (
-          <div>Your clue is: <b>{this.props.currentClue}</b></div>
+          <Paper className='clue-paper'>
+            Draw: {this.props.currentClue}
+          </Paper>
         )
+    } else {
+      return null;
     }
   }
 
-  displayUsers = () => {
-    if (this.props.currentUser === this.props.currentlyDrawing ) {
-      return (
-        <div>
-          <span>It's your turn! </span>
-          <span>Next up: {this.props.nextGuesser}</span>
-        </div>
-        )
-    } else {
-      return (
-        <div>
-        <span>Next up: {this.props.nextGuesser}</span>
-        </div>
-        )
-    }
+  displayCurrentDrawer = () => {
+    let drawing = this.props.currentlyDrawing === this.props.currentUser ?
+                  '(YOU)' : this.props.currentlyDrawing
+    return (
+      <div>Now Drawing: {drawing}</div>
+    )
+  }
+
+  displayNextGuesser = () => {
+    return (
+      <div>Up Next: {this.props.nextGuesser}</div>
+    )
   }
 
   countThree = () => {
@@ -89,9 +93,9 @@ export default class Room extends Component {
 
   componentWillUnmount() {
     this.props.sendMessage({
-          type: 'roomLeave',
-          content: this.props.currentUser
-        })
+      type: 'roomLeave',
+      content: this.props.currentUser
+    })
   }
 
 // Drawing Functions
@@ -107,14 +111,16 @@ export default class Room extends Component {
     })
     startSound.play();
     this.countThree()
+    this.startBtn
   }
 
   showCountdown = () => {
     if (this.props.countdownTicks > 0) {
       return (
         <div>
-          <CircularProgress variant="static" value={this.props.countdownTicks * 3 * 10}> </CircularProgress>
-          {this.props.countdownTicks}
+          <div className="numbers">{this.props.countdownTicks}</div>
+          <CircularProgress variant="static" value={this.props.countdownTicks * 3 * 10}>
+          </CircularProgress>
         </div>
       )
     }
@@ -122,25 +128,36 @@ export default class Room extends Component {
 
 // Game Logic Functions
 
-
   render() {
     return (
       <div id="room-container">
-        <div className='userDisplay'>
-        <div className='userTurnDisplay'>
-          <span className="clue-for-drawer">{this.displayClue()}</span>
-          <h1 id="countdown">{this.showCountdown()}</h1>
-          <span className="display-drawers">{this.displayUsers()}</span>
-        </div>
+
+        <div className="game-info">
+          <div className='drawer-display'>
+            <Paper className='drawer-paper'>{this.displayCurrentDrawer()}</Paper>
+          </div>
+          <div className='above-canvas'>
+            <div className='clue-display'>
+              {this.displayClue()}
+            </div>
+            <div className='countdown-timer'>
+              {this.showCountdown()}
+            </div>
+            <div className='drawer-display'>
+              <Paper className='next-player-paper'>{this.displayNextGuesser()}</Paper>
+            </div>
+          </div>
+        <div className='dummyChatDiv'>
         </div>
 
-      <div id="canvas-container">
-            <span id="room-scores">
+        </div>
+
+
+        <div id="canvas-container">
               <RoomScores
                 players={this.props.players}
               />
-            </span>
-
+          <div>
           <TimeBar
             shouldAnimate={this.props.gameStarted}
             timeRemaining={this.props.secondsLeft}
@@ -156,6 +173,7 @@ export default class Room extends Component {
             currentUser={this.props.currentUser}
             changeColor={this.changeColor}
           />
+        </div>
           <div className='chat-and-start'>
           <span id="chat-area">
             <Chat
@@ -170,12 +188,12 @@ export default class Room extends Component {
             <div id="chat-title"> CHAT
             </div>
           </span>
+          <div class="spacer"></div>
           <div className='start-button-container'>
-            <Button className='start-button' onClick={this.startRound}>Start</Button>
-            </div>
+            <StartButton startRound={this.startRound} />
+          </div>
         </div>
-
-      </div>
+    </div>
     </div>
     )
   }
