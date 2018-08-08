@@ -39,7 +39,6 @@ export default class MainCanvas extends Component {
     if (this.props.currentlyDrawing === this.props.currentUser) {
       this.isPainting = true;
       const { offsetX, offsetY } = nativeEvent;
-      const offsetData = { offsetX, offsetY };
       this.prevPos = { offsetX, offsetY };
       this.paint(this.prevPos, this.prevPos, this.userStrokeStyle);
     }
