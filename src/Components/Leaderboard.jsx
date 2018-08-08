@@ -69,6 +69,7 @@ export default class Leaderboard extends Component {
   render() {
     return (
       <div className="leaderboard-div">
+      <div className='leaderboard-title'>LEADERBOARD</div>
         <LeaderboardScores users={this.state.users}/>
       </div>
     )
