@@ -3,8 +3,6 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import Brushes from './Brushes.jsx'
 
-
-
 export default class MainCanvas extends Component {
   constructor(props) {
     super(props)
@@ -35,7 +33,6 @@ export default class MainCanvas extends Component {
   }
 
   handleMouseDown = ({ nativeEvent })=> {
-    // console.log({nativeEvent})
     if (this.props.currentlyDrawing === this.props.currentUser) {
       this.isPainting = true;
       const { offsetX, offsetY } = nativeEvent;
@@ -169,16 +166,8 @@ export default class MainCanvas extends Component {
       this.isPainting = false;
       this.sendPaintData();
     }
-    // this.prevPos = { offsetX, offsetY };
-    // this.paint(offsetData, offsetData, this.userStrokeStyle);
   }
 
-  something = () => {
-    let stuff = (
-      <div>aaaaaaaaaaa</div>
-    )
-    return stuff
-  }
   render() {
     if (this.props.latestLineData.length < 1 && this.ctx) {
       // console.log('empty array', this.ctx.fillStyle);
