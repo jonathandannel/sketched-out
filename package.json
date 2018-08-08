@@ -1,9 +1,6 @@
 {
   "name": "react-simple-boilerplate",
   "version": "1.0.0",
-  "engines": {
-    "node": "8.9.4"
-  },
   "description": "Simple and lightweight Boilerplate for ReactJS projects",
   "scripts": {
     "lint": "eslint --ext .jsx,.js src",
@@ -29,7 +26,7 @@
   },
   "homepage": "https://github.com/noahlotzer/react-simple-boilerplate",
   "engines": {
-    "node": ">=6.0.0"
+    "node": "8.9.4"
   },
   "devDependencies": {
     "babel-core": "6.26.3",
