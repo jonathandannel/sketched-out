@@ -3,7 +3,7 @@
   width: 100%;
   height: 100%;
   flex-direction: column;
-  margin-top: 50px;
+  margin-top: 20px;
 }
 
 .game-info {
@@ -326,4 +326,8 @@
 
 .MuiButtonBase-root-64 {
   width: 100%;
+}
+
+.spacer {
+  height: 4px;
 }

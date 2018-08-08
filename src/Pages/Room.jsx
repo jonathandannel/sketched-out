@@ -188,6 +188,7 @@ export default class Room extends Component {
             <div id="chat-title"> CHAT
             </div>
           </span>
+          <div class="spacer"></div>
           <div className='start-button-container'>
             <StartButton startRound={this.startRound} />
           </div>
