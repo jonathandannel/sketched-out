@@ -9,7 +9,8 @@ new WebpackDevServer(webpack(config), {
       poll: 1000,
       ignored: /node_modules/
     },
-    historyApiFallback: true
+    historyApiFallback: true,
+    disableHostCheck: true
   })
   .listen(3000, '0.0.0.0', function (err, result) {
     if (err) {
