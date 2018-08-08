@@ -67,7 +67,7 @@
     font-size: 15px;
   }
   #chat-title{
-    background-color: #ffc107;
+    background-color: #6296ea;
     color:white;
     border-radius: 2px 2px 0px 0px;
     display: flex;
@@ -255,13 +255,14 @@
 }
 
 .start-button-container{
-
-  background: #c7b8d8;
-  width: 100%
+  background: #c2a1ea;
+  width: 100%;
+  box-shadow: 2px 2px 40px rgb(100,100,100);
 }
 
 .start-button {
   margin-top: 5px;
+  color: white;
   width: 100%;
   display: inline-block;
   vertical-align: middle;
@@ -276,7 +277,7 @@
   animation-timing-function: linear;
   -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
-  background: #e0b5be!important;
+  background: #9c27b0!important;
 }
 
 .start-button:hover {
@@ -327,6 +328,11 @@
 
 .MuiButtonBase-root-64 {
   width: 100%;
+}
+
+.MuiButton-label-41{
+  color: #000000;
+  font-weight: bold;
 }
 
 .spacer {

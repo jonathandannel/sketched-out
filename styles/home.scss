@@ -35,25 +35,31 @@
 }
 
 .join-button-div {
-  width: 45%;
+  width: 250px;
   height: 40vh;
-  margin: 100px;
-  margin: auto;
-  display: block;
   float: left;
+  display: flex;
+  margin: auto;
+  flex-direction: column;
+  margin-top: 0;
 }
 
 .MuiButton-label-41.join-button {
   
 }
 
-#join-button {
+.join-button {
   color: white !important;
-  background-color: rgb(199, 170, 223) !important;
+  background-color: rgb(170, 223, 223) !important;
   font-weight: bold !important; 
   margin: auto !important;
+
     :hover {
-      background-color: rgb(146, 115, 172) !important;
+      background-color: rgb(170, 223, 223) !important;
+    }
+    .join-text{
+      text-decoration: none;
+      color: black;
     }
 }
 
@@ -72,7 +78,7 @@
 
 #rules-button {
   color: white !important;
-  background-color: rgb(199, 170, 223) !important;
+  background-color: rgb(170, 223, 223) !important;
   font-weight: bold !important; 
   margin: auto !important;
   width: 200px !important;
