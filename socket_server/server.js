@@ -280,7 +280,7 @@ MongoClient.connect(MONGODB_URI)
                     type: 'chatMessages',
                     content: {
                       username: 'Sketchbot',
-                      text: `${message.content.username} guessed correctly! (Awarded ${GAME.guesserPoints} points.)`
+                      text: `${message.content.username} guessed correctly! (+${GAME.guesserPoints} points)`
                     }
                   }))
                   client.send(JSON.stringify({

@@ -8,13 +8,15 @@ export default class MessageList extends Component {
 
   getMessages = () => {
 
-    return this.props.chatMessages.map((message) => {
+    let latestMessages = this.props.chatMessages.slice(-6);
+    let checkStyle = {'padding-left': '3px'}
 
-      if (this.props.currentClue === message.text) {
+    return latestMessages.map((message) => {
+      if (this.props.currentClue === message.text || message.username === 'Sketchbot') {
         return (
           <Paper>
             <div className='correct-guess single-message'>
-              {message.username}: {message.text + `(+${this.props.guesserPoints}pts)`} <i class="fas fa-check"></i>
+              {message.username}: {message.text} <i class="fas fa-check" style={checkStyle}></i>
             </div>
           </Paper>
         )
@@ -27,7 +29,6 @@ export default class MessageList extends Component {
           </Paper>
         )
       }
-
     })
   }
 
