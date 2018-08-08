@@ -1,15 +1,11 @@
 import React, {Component} from 'react';
-import Leaderboard from './Components/Leaderboard.jsx';
-import Main        from './Main.jsx';
-import NavBar      from './Components/NavBar.jsx';
-import AuthService from "./AuthService.jsx";
-
-// const preload = () => {
-//   let pointsSound = loadSound("../Sounds/magic_wand_pinf_006.mp3")
-// }
+import Leaderboard        from './Components/Leaderboard.jsx';
+import Main               from './Main.jsx';
+import NavBar             from './Components/NavBar.jsx';
+import AuthService        from "./AuthService.jsx";
 
 const pointSound = new Audio();
-pointSound.src = "./src/Sounds/Button_Click.mp3"
+pointSound.src = "./src/Sounds/Button_Click.mp3";
 
 class App extends Component {
   constructor(props) {
@@ -23,7 +19,7 @@ class App extends Component {
       gameStarted: true,
       currentClue: '',
       correctGuesser: '',
-      secondsLeft: 30,
+      secondsLeft: 40,
       brushSize: 10,
       players: [],
       guesserPoints: 0,
@@ -32,7 +28,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-
     this.Auth = new AuthService();
     if (this.Auth.loggedIn()){
       this.setState({
@@ -44,10 +39,8 @@ class App extends Component {
     this.socket.onopen = (e) => {
       console.log('==> Socket connection started!')
     }
-
     this.socket.onmessage = (e) => {
       const parsedMessage = JSON.parse(e.data)
-      // console.log(parsedMessage);
 
       switch (parsedMessage.type) {
         case 'latestLineData':
@@ -149,8 +142,6 @@ class App extends Component {
     })
   }
 
-
-
   sendMessage = message => {
     this.socket.send(JSON.stringify(message));
   }
@@ -186,6 +177,5 @@ class App extends Component {
     )
   }
 }
-
 
 export default App;

@@ -47,8 +47,6 @@
   padding-top: 1.5rem;
 }
 
-
-
 #chat-area {
   background-color: white;
   width: 300px;
@@ -61,7 +59,6 @@
   height: 450px;
   display: flex;
   justify-content: space-between;
-
   input {
     width: 270px;
     font-size: 15px;
@@ -178,10 +175,27 @@
   display: flex;
   justify-content: flex-start;
   overflow: visible;
-  .space-div {
-    margin-left: 10px;
-    margin-right: 20px;
+  .MuiButton-fab-55{
+    margin: 10px;
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    transition-duration: 0.1s;
+    transition-property: transform;
+    background: ghostwhite;
   }
+  #small-brush{
+    margin-left: 0px;
+  }
+  .MuiButton-fab-55:hover {
+  opacity: 1;
+  transform: scale(1.2);
+  background: ghostwhite;
+}
+
+.space-div {
+  margin-left: 10px;
+  margin-right: 20px;
+}
 }
 
 #brush-sizes{
@@ -195,7 +209,6 @@
   display: flex;
   justify-content: space-between;
 }
-
 
 .userDisplay{
   display: flex;
@@ -214,7 +227,6 @@
   margin: 0;
   color: black
 }
-
 
 @keyframes trash-button {
   50% {
@@ -249,7 +261,6 @@
 .chatDummy{
   content: '';
   width: 20%;
-
 }
 
 .chat-and-start{
@@ -306,21 +317,17 @@
 }
 }
 
-#countdown {
-
-}
-
 .countdown-timer {
   height: 40px;
   transform: scale(1.2);
 }
 
 .numbers{
-      transform: translate(16px, 29.5px);
+  transform: translate(16px, 29.5px);
 }
 
 .circular-timer{
-    height: 40px!important
+  height: 40px!important
 }
 .circular-progress{
   color: #47cece!important

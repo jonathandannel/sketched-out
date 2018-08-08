@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import { Switch, Route } from 'react-router-dom'
-import Home     from './Pages/Home.jsx';
-import Room     from './Pages/Room.jsx';
+import { Switch, Route }  from 'react-router-dom'
+import Home         from './Pages/Home.jsx';
+import Room         from './Pages/Room.jsx';
 import { Button }   from '@material-ui/core/';
-import Login    from './Pages/Login.jsx';
-import Register from './Pages/Register.jsx';
+import Login        from './Pages/Login.jsx';
+import Register     from './Pages/Register.jsx';
 
 
 class Main extends Component {
@@ -60,4 +60,3 @@ class Main extends Component {
 
 export default Main;
 
-/* This is how you pass props through router, anon function */

@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
+import CircularProgress   from '@material-ui/core/CircularProgress';
 import Button      from '@material-ui/core/Button';
 import Brushes     from '../Components/Brushes.jsx';
 import Chat        from '../Components/Chat.jsx';
 import TimeBar     from '../Components/TimeBar.jsx';
 import Modal       from '@material-ui/core/Modal';
-import Paper from '@material-ui/core/Paper';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import Paper       from '@material-ui/core/Paper';
 import MainCanvas  from '../Components/MainCanvas.jsx';
 import AuthService from "../AuthService.jsx";
-import RoomScores from '../Components/RoomScores.jsx';
+import RoomScores  from '../Components/RoomScores.jsx';
 import StartButton from '../Components/StartButton.jsx';
 
 const startSound = new Audio();
@@ -152,10 +152,7 @@ export default class Room extends Component {
           </div>
         <div className='dummyChatDiv'>
         </div>
-
         </div>
-
-
         <div id="canvas-container">
               <RoomScores
                 players={this.props.players}

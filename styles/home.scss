@@ -1,6 +1,5 @@
-.mainContainer{
+.mainContainer {
   padding-top: 100px;
-  // background: rgba(153, 209, 156, 0.1);
   min-height: 100vh
 }
 
@@ -16,10 +15,10 @@
 
 .join-button {
   color: white !important;
-  background-color: '#fa8072'!important;
-  font-weight: bold !important; 
+  background-color: '#fa8072' !important;
+  font-weight: bold !important;
   margin: auto !important;
-  background: #47cece!important;
+  background: #47cece !important;
   transform: scale(1.25);
   transform: translateZ(1.25);
   vertical-align: middle;
@@ -28,23 +27,24 @@
   -moz-osx-font-smoothing: grayscale;
   transition-duration: 0.5s;
   transition-property: transform;
-    :hover {
-      background: #47cece !important;
-    }
-    .join-text{
-      text-decoration: none;
-      color: rgb(50,50,50);
-      padding-bottom: 10px;
-    }
+  .join-button:hover {
+    background: #47cece !important;
+  }
+  .join-text {
+    text-decoration: none;
+    color: rgb(50, 50, 50);
+    padding-bottom: 10px;
+  }
 }
 
 .join-button:hover {
   transform: scale(1.5);
 }
 
-
 .join-btn-img {
-  height: 50px;;
+  width: 200px !important;
+  height: 50px;
+  ;
 }
 
 #rules-modal-title {
@@ -52,9 +52,9 @@
 }
 
 .rules-button {
-  color: rgb(50,50,50);
+  color: rgb(50, 50, 50);
   background-color: #fac0af !important;
-  font-weight: bold !important; 
+  font-weight: bold !important;
   margin: auto !important;
   transform: scale(1.25);
   height: 80px;
