@@ -333,6 +333,14 @@ MongoClient.connect(MONGODB_URI)
               client.send(JSON.stringify(outgoingMsg))
             })
           break;
+          case 'showStartButton':
+            let startButton = {
+              type: 'showStartButton',
+              content: ''
+            }
+            wss.clients.forEach((client) => {
+              client.send(JSON.stringify(startButton));
+            }) 
         }
       ws.on("close", () => {
         console.log("Client disconnected")

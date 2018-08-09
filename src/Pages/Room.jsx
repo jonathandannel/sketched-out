@@ -48,10 +48,10 @@ export default class Room extends Component {
   displayClue = () => {
     if (this.props.currentUser === this.props.currentlyDrawing) {
       return (
-          <Paper className='clue-paper'>
-            Draw: {this.props.currentClue}
-          </Paper>
-        )
+        <Paper className='clue-paper'>
+          Draw: {this.props.currentClue}
+        </Paper>
+      )
     } else {
       return null;
     }
@@ -119,9 +119,9 @@ export default class Room extends Component {
       return (
         <div>
           <div className="numbers">{this.props.countdownTicks}</div>
-          <CircularProgress 
+          <CircularProgress
             className='circular-progress'
-            variant="static" 
+            variant="static"
             value={this.props.countdownTicks * 3 * 10}>
           </CircularProgress>
         </div>
@@ -190,7 +190,11 @@ export default class Room extends Component {
           </span>
           <div class="spacer"></div>
           <div className='start-button-container'>
-            <StartButton startRound={this.startRound} />
+            <StartButton 
+              startRound={this.startRound} 
+              showStartButton={this.props.showStartButton}
+              sendMessage={this.props.sendMessage}
+                        />
           </div>
         </div>
     </div>

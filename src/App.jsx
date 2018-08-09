@@ -23,7 +23,8 @@ class App extends Component {
       brushSize: 10,
       players: [],
       guesserPoints: 0,
-      countdownTicks: null
+      countdownTicks: null,
+      showStartButton: true,
     }
   }
 
@@ -119,6 +120,10 @@ class App extends Component {
             countdownTicks: null
           })
         break;
+        case 'showStartButton':
+          this.setState({
+            showStartButton: false
+          })
       }
     }
   }
@@ -172,6 +177,7 @@ class App extends Component {
           players={this.state.players}
           guesserPoints={this.state.guesserPoints}
           countdownTicks={this.state.countdownTicks}
+          showStartButton={this.state.showStartButton}
         />
       </div>
     )

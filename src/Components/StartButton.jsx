@@ -14,6 +14,10 @@ export default class StartButton extends Component {
     this.setState({
       shown: false
     })
+    this.props.sendMessage({
+      type: 'showStartButton',
+      content: ''
+    })
   }
 
   showStartButton = () => {
@@ -27,10 +31,14 @@ export default class StartButton extends Component {
   }
 
   render() {
+    if (!this.props.showStartButton){
+      return null
+    } else {
     return (
       <div className='start-button'>
         {this.showStartButton()}
       </div>
     )
+  }
   }
 }

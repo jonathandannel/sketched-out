@@ -9,8 +9,6 @@ export default class MainCanvas extends Component {
     this.handleMouseDown = this.handleMouseDown.bind(this)
     this.handleMouseMove = this.handleMouseMove.bind(this)
     this.stopPainting = this.stopPainting.bind(this)
-    this.onTouchStart = this.onTouchStart.bind(this)
-    this.onTouchMove = this.onTouchMove.bind(this)
   }
 
   isPainting = false;
@@ -75,52 +73,7 @@ export default class MainCanvas extends Component {
       this.sendPaintData()
     }
   }
-  onTouchStart = ({ nativeEvent })=> {
-    // console.log({nativeEvent})
-    // nativeEvent.preventDefault()
-    if (this.props.currentlyDrawing === this.props.currentUser) {
-      const { clientX, clientY } = nativeEvent.targetTouches[0];
-      this.isPainting = true;
-      this.prevPos = { clientX, clientY };
-    }
-  }
 
-  onTouchMove = ({ nativeEvent }) => {
-    if (this.props.currentlyDrawing === this.props.currentUser) {
-      // nativeEvent.preventDefault()
-      if (this.isPainting) {
-        const { clientX, clientY } = nativeEvent.targetTouches[0];
-        const offsetData = { clientX, clientY };
-        const positionData = {
-          start: { ...this.prevPos },
-          stop: {...offsetData}
-        };
-
-        this.line = {
-          prevPos: this.prevPos,
-          currPos: offsetData,
-          strokeStyle: this.userStrokeStyle
-        }
-
-        this.touchPaint(this.prevPos, offsetData, this.userStrokeStyle);
-        this.sendPaintData()
-      }
-    }
-}
-
-  touchPaint = (prevPos, currPos, strokeStyle) => {
-    if (this.props.currentlyDrawing === this.props.currentUser) {
-      const { clientX, clientY } = currPos;
-      const { clientX: x, clientY: y } = prevPos;
-
-      this.ctx.beginPath();
-      this.ctx.strokeStyle = strokeStyle;
-      this.ctx.moveTo(x, y);
-      this.ctx.lineTo(clientX, clientY);
-      this.ctx.stroke();
-      this.prevPos = { clientX, clientY };
-    }
-  }
 
   paint = (prevPos, currPos, strokeStyle) => {
       const { offsetX, offsetY } = currPos;
@@ -207,9 +160,6 @@ export default class MainCanvas extends Component {
             onMouseMove={this.handleMouseMove}
             onMouseUp={this.stopPainting}
             onMouseLeave={this.stopPainting}
-            onTouchStart={this.onTouchStart}
-            onTouchMove={this.onTouchMove}
-            onTouchEnd={this.stopPainting}
           />
           </div>
           <div id='brush-sizes'>
