@@ -1,34 +1,4 @@
-.room-thumbnail-container {
-  margin: auto;
-  display: flex;
-  justify-content: space-around;
-}
-
-.room-thumbnail {
-  height: 30vh;
-  width: 20vh;
-  border: 1px solid purple;
-  border-radius: 5px;
-  float: left;
-  margin: 10px;
-  text-align: center;
-  vertical-align: middle;
-  transform: translateZ(0);
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-  backface-visibility: hidden;
-  -moz-osx-font-smoothing: grayscale;
-  transition-duration: 0.3s;
-  transition-property: transform;
-}
-
-.room-thumbnail:hover,
-.room-thumbnail:focus,
-.room-thumbnail:active {
-  opacity: 0.8;
-  transform: scale(1.1);
-}
-
-.mainContainer{
+.mainContainer {
   padding-top: 100px;
   min-height: 100vh
 }
@@ -45,32 +15,59 @@
 
 .join-button {
   color: white !important;
-  background-color: rgb(170, 223, 223) !important;
+  background-color: '#fa8072' !important;
   font-weight: bold !important;
   margin: auto !important;
-    :hover {
-      background-color: rgb(170, 223, 223) !important;
-    }
-    .join-text{
-      text-decoration: none;
-      color: black;
-      padding-bottom: 10px;
-    }
+  background: #47cece !important;
+  transform: scale(1.25);
+  transform: translateZ(1.25);
+  vertical-align: middle;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  transition-duration: 0.5s;
+  transition-property: transform;
+  .join-button:hover {
+    background: #47cece !important;
+  }
+  .join-text {
+    text-decoration: none;
+    color: rgb(50, 50, 50);
+    padding-bottom: 10px;
+  }
+}
+
+.join-button:hover {
+  transform: scale(1.5);
 }
 
 .join-btn-img {
   width: 200px !important;
-  height: 50px;;
+  height: 50px;
+  ;
 }
 
 #rules-modal-title {
   text-align: center;
 }
 
-#rules-button {
-  color: white !important;
-  background-color: rgb(170, 223, 223) !important;
+.rules-button {
+  color: rgb(50, 50, 50);
+  background-color: #fac0af !important;
   font-weight: bold !important;
   margin: auto !important;
-  width: 200px !important;
+  transform: scale(1.25);
+  height: 80px;
+  transform: scale(1.25);
+  transform: translateZ(1.25);
+  vertical-align: middle;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  transition-duration: 0.5s;
+  transition-property: transform;
+}
+
+.rules-button:hover {
+  transform: scale(1.5);
 }

@@ -53,6 +53,7 @@
   font-size: 1.2rem;
   display: flex;
   flex-direction: column-reverse;
+  box-shadow: 0px 1px 10px rgb(100,100,100);
   margin-bottom: 4px;
   border-radius: 2px;
   height: 450px;
@@ -61,10 +62,11 @@
   input {
     width: 270px;
     font-size: 15px;
+    color: rgb(50,50,50);
   }
   #chat-title{
-    background-color: #6296ea;
-    color:white;
+    background-color: #fac0af;
+    color:rgb(50,50,50);
     border-radius: 2px 2px 0px 0px;
     display: flex;
     justify-content: center;
@@ -82,10 +84,12 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 4px;
+  box-shadow: 0px 1px 10px rgb(100,100,100);
   border-radius: 2px;
+  color: rgb(50,50,50);
   #score-title{
-    background-color: #9c27b0;
-    color:white;
+    background-color: #df744a;
+    color: rgb(50,50,50);
     border-radius: 2px 2px 0px 0px;
     display: flex;
     justify-content: center;
@@ -106,7 +110,7 @@
 }
 
 #canvas {
-  box-shadow: 2px 2px 40px rgb(100,100,100);
+  box-shadow: 2px 2px 10px rgb(100,100,100);
   border-radius: 2px;
   cursor: url(./styles/inkpen.png) 0 50, auto;
 }
@@ -126,12 +130,31 @@
   float: center;
 }
 
-#brush-container {
-  margin-top: 15px;
+#brush-all {
   margin-right: 10px;
   padding: 2px;
-  border-radius: 5px;
-  height: 440px;
+  transform: translateY(-10px);
+  .brushes{
+    margin-right: 10px;
+    background: white;
+  }
+  .MuiButton-fab-55{
+    margin: 10px;
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    transition-duration: 0.1s;
+    transition-property: transform;
+    background: white;
+  }
+
+  #small-brush{
+    margin-left: 0px;
+  }
+  .MuiButton-fab-55:hover {
+  opacity: 1;
+  transform: scale(1.2);
+  background: white;
+}
 }
 
 #drawer-points-display {
@@ -222,6 +245,7 @@
   -webkit-transform: perspective(1px) translateZ(0);
   transform: perspective(1px) translateZ(0);
   box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  background-color:white!important;
 }
 .trash-button:hover {
   -webkit-animation-name: trash-button;
@@ -243,11 +267,10 @@
   height: 100%
 }
 
-.start-button-container{
-  background: #c2a1ea;
-  width: 100%;
-  box-shadow: 2px 2px 40px rgb(100,100,100);
-}
+// .start-button-container{
+//   width: 100%;
+//   box-shadow: 2px 2px 40px rgb(100,100,100);
+// }
 
 .start-button {
   margin-top: 5px;
@@ -255,6 +278,7 @@
   width: 100%;
   display: inline-block;
   vertical-align: middle;
+  border-radius:2px;
   -webkit-transform: perspective(1px) translateZ(0);
   transform: perspective(1px) translateZ(0);
   box-shadow: 0 0 1px rgba(0, 0, 0, 0);
@@ -266,10 +290,11 @@
   animation-timing-function: linear;
   -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
-  background: #9c27b0!important;
+  background-color: #47cece!important;
 }
 
 .start-button:hover {
+  border-radius:2px;
   -webkit-animation-name: start-button;
   animation-name: start-button;
   -webkit-animation-duration: 1s;
@@ -278,7 +303,7 @@
   animation-timing-function: linear;
   -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
-  background: #ffe5ea!important;
+  background-color: #47cece!important;
 }
 
 @keyframes start-button {
@@ -304,6 +329,9 @@
 .circular-timer{
   height: 40px!important
 }
+.circular-progress{
+  color: #47cece!important
+}
 
 .clue-display{
   content: '';
@@ -323,3 +351,16 @@
 .spacer {
   height: 4px;
 }
+
+.display-drawer{
+  color: rgb(50,50,50);
+}
+
+.display-next-drawer{
+  color: rgb(50,50,50);
+}
+
+.circle-picker{
+  margin-top: 10px;
+}
+

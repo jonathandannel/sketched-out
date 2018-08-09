@@ -41,7 +41,7 @@ class SimpleModal extends React.Component {
 
     return (
       <div>
-        <Button id="rules-button" onClick={this.handleOpen}>How to play</Button>
+        <Button className="rules-button" onClick={this.handleOpen}>How to play</Button>
         <Modal
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"

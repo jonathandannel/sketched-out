@@ -48,6 +48,7 @@ class Main extends Component {
                 players={this.props.players}
                 guesserPoints={this.props.guesserPoints}
                 countdownTicks={this.props.countdownTicks}
+                showStartButton={this.props.showStartButton}
               />
             )}
           />
