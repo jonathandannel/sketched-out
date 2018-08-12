@@ -31,11 +31,10 @@ Fight for a spot on the main leaderboard. Every time you exit a game, the points
 - ws
 - express 
 - mongoDB
+- material-ui/core
 - moment 
 - jsonwebtoken
-- material ui core
 - bcrypt
-- moment
 - uuid 
 - body-parser
 - progressbar
