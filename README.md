@@ -4,6 +4,7 @@ Sketched Out is a real-time multiplayer Pictionary-style online drawing game. Pl
 
 ![Sketched Out in action](https://i.imgur.com/DSNxMKv.gif)
 
+
 ## How it Works
 
 Show off your artistic skills by drawing the word you are given when it's your turn to draw. The timer at the top of the canvas lets you know how much time you have left, and you have a variety of colors and brush thicknesses to choose from. Everything you draw is rendered in real time to all other connected clients.
@@ -40,4 +41,7 @@ Fight for a spot on the main leaderboard. Every time you exit a game, the points
 - progressbar
 - rc-progress
 
+
+## Thank you
+Sketched Out was created by Jonathan Dannel, Monique Khoury, Gerry Suwignyo, and Farid Manafov as part of the Lighthouse Labs developer bootcamp, where it landed at first place on the final Demo Day. We sincerely appreciate the support we received before, during, and after its completion! 
 
