@@ -151,6 +151,10 @@ class App extends Component {
     this.socket.send(JSON.stringify(message));
   }
 
+  createNew = () => {
+    return 'asddf'
+  }
+
   render() {
     return (
       <div className='mainContainer'>
