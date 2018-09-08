@@ -2,6 +2,7 @@
 
 Sketched Out is a real-time multiplayer Pictionary-style online drawing game. Players join a room and take turns drawing while the others use the chat to guess what they drew. Sketched Out was built with React, Express, and Websockets. 
 
+![Sketched Out in action](https://i.imgur.com/DSNxMKv.gif)
 
 
 ## Setup
