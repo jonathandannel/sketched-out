@@ -13,7 +13,14 @@ class Main extends Component {
     return (
       <main>
         <Switch>
-          <Route exact path='/' component={Home} />
+          <Route exact path='/' 
+            render=
+              {(props) => (
+                <Home 
+                  sendMessage={this.props.sendMessage}
+                />
+              )}
+          />
           <Route exact path='/home' component={Home} />
           <Route exact path='/login' render=
             {(props) => (

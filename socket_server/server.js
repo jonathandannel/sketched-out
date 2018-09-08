@@ -131,6 +131,7 @@ MongoClient.connect(MONGODB_URI)
 
     const startRound = () => {
       let count = 3;
+      
         countdownInterval = setInterval(() => {
           if (count > - 1) {
             wss.clients.forEach((client) => {
@@ -142,7 +143,8 @@ MongoClient.connect(MONGODB_URI)
             })
             count --;
           }
-        }, 1000)
+        }, 1000);
+
       GAME.secondsLeft = 40;
       GAME.currentlyDrawing = '';
       let outgoing = {
