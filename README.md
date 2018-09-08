@@ -4,7 +4,6 @@ Sketched Out is a real-time multiplayer Pictionary-style online drawing game. Pl
 
 
 
-
 ## Setup
 
 - Clone the repo to your local machine.
@@ -16,13 +15,20 @@ Sketched Out is a real-time multiplayer Pictionary-style online drawing game. Pl
 
 ## How it Works
 
-Show off your art skills by drawing out the keyword you are provided. Everything you draw is rendered in real time to all the other players. It's like magic!
+Show off your artistic skills by drawing the word you are given when it's your turn to draw. The timer at the top of the canvas lets you know how much time you have left, and you have a variety of colors and brush thicknesses to choose from. Everything you draw is rendered in real time to all other connected clients.
+
+If someone can guess what you drew, you are both awarded points! More points are awarded for a quick guess. 
+
+Fight for a spot on the main leaderboard. Every time you exit a game, the points you accumulated are added to your total. Try to end up on top!
 
 
-If someone can guess what you drew, you and they both get points! More points are awarded for a quick guess. 
+## Setup
 
-
-Fight for a spot on our main leaderboard. Every time you exit a game, the points you accumulated are added to your total. Try to end up on top!
+- Clone the repo to your local machine.
+- Run `npm install` in the root directory to install all required dependencies. 
+- Run `npm start` to run the webpack server. 
+- In another terminal, CD into the /socket_server directory  and run `node server.js` to start the socket server. 
+- Visit `localhost:3000` and start playing!
 
 
 ## Dependencies 
@@ -33,14 +39,16 @@ Fight for a spot on our main leaderboard. Every time you exit a game, the points
 - ws
 - express 
 - mongoDB
+- material-ui/core
 - moment 
 - jsonwebtoken
-- material ui core
 - bcrypt
-- moment
 - uuid 
 - body-parser
 - progressbar
 - rc-progress
 
+
+## Thank you
+Sketched Out was created by Jonathan Dannel, Monique Khoury, Gerry Suwignyo, and Farid Manafov as part of the Lighthouse Labs developer bootcamp, where it landed at first place on the final Demo Day. We sincerely appreciate the support we received before, during, and after its completion! 
 
