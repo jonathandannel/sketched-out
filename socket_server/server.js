@@ -52,7 +52,16 @@ MongoClient.connect(MONGODB_URI)
       correctGuesser: '',
       drawerPoints: 0,
       guesserPoints: 0,
-      lastDrawerWin: ''
+      lastDrawerWin: '',
+      allRooms: {
+        'default': {
+          roomName: 'default',
+          roomCreator: 'jonathan',
+          maxPlayers: 5,
+          passwordProtected: false,
+          password: null
+        }
+      }
     }
 
 
@@ -342,8 +351,18 @@ MongoClient.connect(MONGODB_URI)
             }
             wss.clients.forEach((client) => {
               client.send(JSON.stringify(startButton));
-            }) 
+            })
+          break;
+          case 'roomCreate':
+            let newRoom = message.content;
+            GAME.allRooms[newRoom] = newRoom;
+            
+            wss.clients.forEach((client) => {
+              client.send(JSON.stringify(GAME.allRooms[newRoom]))
+            });
+          break;
         }
+
       ws.on("close", () => {
         console.log("Client disconnected")
       })

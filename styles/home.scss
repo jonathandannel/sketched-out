@@ -13,7 +13,7 @@
   margin-top: 0;
 }
 
-.join-button {
+.join-button, .create-room-button {
   color: white !important;
   background-color: '#fa8072' !important;
   font-weight: bold !important;
@@ -38,6 +38,10 @@
 }
 
 .join-button:hover {
+  transform: scale(1.5);
+}
+
+.create-room-button:hover {
   transform: scale(1.5);
 }
 

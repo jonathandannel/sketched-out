@@ -8,7 +8,7 @@ import Card from '@material-ui/core/Card';
 
 export default class Home extends Component {
 
-  
+
 
   render() {
     return (
@@ -20,11 +20,9 @@ export default class Home extends Component {
           <div className="rules-button-div">
             <SimpleModalWrapped />
           </div>
-          <div className="create-room-div">
             <Button className="create-room-button">
-              Create Room
+              <Link className="join-text" to="create">CREATE ROOM</Link>
             </Button>
-          </div>
           </div>
         <Leaderboard />
 

@@ -5,6 +5,7 @@ import Room         from './Pages/Room.jsx';
 import { Button }   from '@material-ui/core/';
 import Login        from './Pages/Login.jsx';
 import Register     from './Pages/Register.jsx';
+import CreateRoomForm from './Components/CreateRoomForm.jsx';
 
 
 class Main extends Component {
@@ -21,14 +22,25 @@ class Main extends Component {
                 />
               )}
           />
+          <Route exact path='/create' 
+            render=
+              {(props) => (
+                <CreateRoomForm 
+                  sendMessage={this.props.sendMessage}
+                  currentUser={this.props.currentUser}
+                />
+              )}
+          />
           <Route exact path='/home' component={Home} />
-          <Route exact path='/login' render=
-            {(props) => (
-              <Login
-                sendMessage={this.props.sendMessage}
-                setUser={this.props.setUser}
-              />
-            )} />
+          <Route exact path='/login' 
+            render=
+              {(props) => (
+                <Login
+                  sendMessage={this.props.sendMessage}
+                  setUser={this.props.setUser}
+                />
+              )} 
+          />
           <Route exact path='/register' render=
             {(props) => (
               <Register
